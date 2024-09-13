@@ -103,7 +103,7 @@ export default function Home() {
                     <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
                   </span>
                 </div>
-                <Typography>Available</Typography>
+                <Typography>Open To Offers</Typography>
               </div>
             </div>
             <Profile />
@@ -169,6 +169,7 @@ export default function Home() {
               </div>
             </div>
           </Container>
+
           {/* This button should not go into production */}
           {process.env.NODE_ENV === "development" && (
             <div className="fixed bottom-5 right-5">
@@ -177,12 +178,15 @@ export default function Home() {
               </Link>
             </div>
           )}
+
+          {/* About section */}
           <div className="mt-10 lg:mt-40 p-2 lg:p-0" ref={aboutRef}>
             <h1 className="md:m-10 text-2xl text-bold">About.</h1>
             <p className="md:m-10 mt-2 text-xl lg:text-3xl w-full lg:w-3/5">
               {data.aboutpara}
             </p>
           </div>
+
           {/* Contact Section */}
           <div ref={contactRef}>
             This is contact section which will be added later

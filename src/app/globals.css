@@ -248,3 +248,26 @@ body {
   stroke-dasharray: 20 300;
   stroke-dashoffset: -32.42;
 }
+
+/* Make the scrollbars absolute and really thin */
+body {
+  overflow-y: scroll;
+}
+
+/* Thin scrollbar track */
+::-webkit-scrollbar {
+  width: 5px;
+  position: absolute;
+}
+
+/* Thin scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #eecf54;
+  border-radius: 5px;
+  transition: all ease-in-out 0.2s;
+}
+
+/* Thin scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #facc15;
+}
