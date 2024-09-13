@@ -1,7 +1,7 @@
 import DoubleSidebar from "@/components/shared/doublesidebar";
 
 interface BlogDetailsPageProps {
-  params: { slug: string };
+  params: { subtitle: string };
 }
 
 const BlogDetailsPage = ({}: BlogDetailsPageProps) => {
