@@ -1,7 +1,8 @@
 import DoubleSidebar from "@/components/shared/doublesidebar";
+import { dummyPosts } from "@/constants";
 
 interface BlogDetailsPageProps {
-  params: { subtitle: string };
+  params: { slug: string };
 }
 
 const BlogDetailsPage = ({}: BlogDetailsPageProps) => {
@@ -9,10 +10,8 @@ const BlogDetailsPage = ({}: BlogDetailsPageProps) => {
 };
 
 export async function generateStaticParams() {
-  const posts = await fetch("https://.../posts").then((res) => res.json());
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return posts.map((post: any) => ({
+  return dummyPosts.map((post: any) => ({
     slug: post.slug,
   }));
 }

@@ -27,3 +27,76 @@ export const socials = [
     icon: Mail,
   },
 ];
+
+export const dummyPosts = [
+  {
+    id: 1,
+    slug: "first-post",
+    title: "First Post",
+    description:
+      "This is the first post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 2,
+    slug: "second-post",
+    title: "Second Post",
+    description:
+      "This is the second post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 3,
+    slug: "third-post",
+    title: "Third Post",
+    description:
+      "This is the third post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 4,
+    slug: "fourth-post",
+    title: "Fourth Post",
+    description:
+      "This is the fourth post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 5,
+    slug: "fifth-post",
+    title: "Fifth Post",
+    description:
+      "This is the fifth post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 6,
+    slug: "sixth-post",
+    title: "Sixth Post",
+    description:
+      "This is the sixth post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 7,
+    slug: "seventh-post",
+    title: "Seventh Post",
+    description:
+      "This is the seventh post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 8,
+    slug: "eighth-post",
+    title: "Eighth Post",
+    description:
+      "This is the eighth post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 9,
+    slug: "ninth-post",
+    title: "Ninth Post",
+    description:
+      "This is the ninth post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+  {
+    id: 10,
+    slug: "tenth-post",
+    title: "Tenth Post",
+    description:
+      "This is the tenth post lorem ipsum dolor sit amet. lorem ipsum",
+  },
+];
