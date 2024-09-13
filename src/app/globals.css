@@ -256,18 +256,22 @@ body {
 
 /* Thin scrollbar track */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
   position: absolute;
 }
 
 /* Thin scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-  background: #eecf54;
+  background-color: #c4c4c2;
   border-radius: 5px;
-  transition: all ease-in-out 0.2s;
 }
 
 /* Thin scrollbar thumb on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #facc15;
+  background-color: #6d6d6c;
 }
+
+/* only show scrollbar on hover */
+/* ::-webkit-scrollbar-thumb {
+  visibility: hidden;
+} */

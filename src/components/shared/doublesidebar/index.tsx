@@ -3,73 +3,96 @@ import { Separator } from "@/components/ui/separator";
 import { CalendarDaysIcon, ClockIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import MenuOptions from "./menuoptions";
 import Header from "../header";
+import { Post } from "@/types";
+import { blogPosts } from "@/constants";
+import { Badge } from "@/components/ui/badge";
 
 interface DoubleSidebarProps {
   children: ReactNode;
   className?: string;
+  selectedPost: Post;
 }
 
-const DoubleSidebar = ({ className }: DoubleSidebarProps) => {
+const SimilarBlogs = ({ similarPosts }: { similarPosts: Post[] }) => {
+  return (
+    <div className="bg-background flex-1 mt-16">
+      <h2 className="text-2xl font-semibold mb-4">Similar Posts</h2>
+      {similarPosts.length > 0 ? (
+        <ul className="space-y-6">
+          {similarPosts.map((post) => (
+            <li key={post.id} className="bg-card">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="text-lg font-normal p-1 hover:underline"
+              >
+                {post.title}
+              </Link>
+              <div className="flex flex-wrap gap-2 my-2">
+                {post.tags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="hover:bg-secondary/50 select-none"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-muted-foreground">No similar posts found.</p>
+      )}
+    </div>
+  );
+};
+
+const DoubleSidebar = ({
+  className,
+  children,
+  selectedPost,
+}: DoubleSidebarProps) => {
+  const similarPosts = useMemo(() => {
+    if (!selectedPost?.category && selectedPost?.tags.length === 0) {
+      return [];
+    }
+    return blogPosts.filter((post) => {
+      if (selectedPost?.category && post.category === selectedPost?.category) {
+        return true;
+      }
+      if (
+        selectedPost?.tags.length > 0 &&
+        selectedPost?.tags.every((tag) => post.tags.includes(tag))
+      ) {
+        return true;
+      }
+      return false;
+    });
+  }, [selectedPost?.category, selectedPost?.tags]);
+
   return (
     <>
       <Header isBlog={true} />
       <Container
         className={`grid lg:grid-cols-[240px_1fr_240px] md:grid-cols-[240px_1fr] grid-cols-1 gap-8 p-8 ${className}`}
       >
-        {/* Left Sidebar */}
-        {/* <div className="hidden lg:block">
-        <div className="sticky top-4 space-y-4">
-          <div className="text-lg font-semibold">Blog Posts</div>
-          <nav className="space-y-2">
-            <Link
-              href="#"
-              className="block text-sm text-muted-foreground hover:text-foreground"
-              prefetch={false}
-            >
-              The Future of Web Development
-            </Link>
-            <Link
-              href="#"
-              className="block text-sm text-muted-foreground hover:text-foreground"
-              prefetch={false}
-            >
-              Mastering React Hooks
-            </Link>
-            <Link
-              href="#"
-              className="block text-sm text-muted-foreground hover:text-foreground"
-              prefetch={false}
-            >
-              Serverless Architecture Explained
-            </Link>
-            <Link
-              href="#"
-              className="block text-sm text-muted-foreground hover:text-foreground"
-              prefetch={false}
-            >
-              Accessibility in Web Design
-            </Link>
-            <Link
-              href="#"
-              className="block text-sm text-muted-foreground hover:text-foreground"
-              prefetch={false}
-            >
-              The Rise of Headless CMS
-            </Link>
-          </nav>
-        </div>
-      </div> */}
         <div>
-          <MenuOptions defaultOpen={true} />
-          <MenuOptions />
+          <MenuOptions className="p-2 pl-4" defaultOpen={true}>
+            <SimilarBlogs similarPosts={similarPosts} />
+          </MenuOptions>
+          <MenuOptions>
+            <SimilarBlogs similarPosts={similarPosts} />
+          </MenuOptions>
         </div>
 
         {/* Blog Content */}
         <div className="space-y-8">
           <div>
+            {children}
             <Image
               src="/projects/task_manager/tasks.jpeg"
               alt="Blog Cover Image"
@@ -86,12 +109,12 @@ const DoubleSidebar = ({ className }: DoubleSidebarProps) => {
                 web development.
               </p>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div>
+                <div className="flex items-center gap-2">
                   <CalendarDaysIcon className="w-4 h-4 mr-1" />
                   <span>May 15, 2023</span>
                 </div>
                 <Separator orientation="vertical" />
-                <div>
+                <div className="flex items-center gap-2">
                   <ClockIcon className="w-4 h-4 mr-1" />
                   <span>10 min read</span>
                 </div>
@@ -186,10 +209,10 @@ const DoubleSidebar = ({ className }: DoubleSidebarProps) => {
           </div>
         </div>
 
-        {/* Related Topics */}
+        {/* Topics */}
         <div className="hidden lg:block">
-          <div className="sticky top-4 space-y-4">
-            <div className="text-lg font-semibold">Related Topics</div>
+          <div className="sticky top-24 space-y-4">
+            <div className="text-lg font-semibold">Topics</div>
             <nav className="space-y-2">
               <Link
                 href="#"

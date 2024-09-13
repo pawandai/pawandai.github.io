@@ -100,3 +100,60 @@ export const dummyPosts = [
       "This is the tenth post lorem ipsum dolor sit amet. lorem ipsum",
   },
 ];
+
+export const blogPosts = [
+  {
+    id: 1,
+    slug: "first-post",
+    title: "The Benefits of Meditation",
+    category: "Wellness",
+    tags: ["meditation", "mental health"],
+    content:
+      "Meditation has been shown to have numerous benefits for both mental and physical health...",
+  },
+  {
+    id: 2,
+    slug: "second-post",
+    title: "Top 10 Hiking Trails in the Pacific Northwest",
+    category: "Travel",
+    tags: ["hiking", "nature"],
+    content:
+      "From the rugged coastlines of Oregon to the snow-capped peaks of Washington, the Pacific Northwest is a hiker's paradise...",
+  },
+  {
+    id: 3,
+    slug: "third-post",
+    title: "5 Easy Vegetarian Recipes for Busy Weeknights",
+    category: "Food",
+    tags: ["vegetarian", "recipes"],
+    content:
+      "Eating a plant-based diet doesn't have to be complicated or time-consuming. These five vegetarian recipes are perfect for busy weeknights...",
+  },
+  {
+    id: 4,
+    slug: "fourth-post",
+    title: "The Importance of Mental Health Awareness",
+    category: "Wellness",
+    tags: ["mental health", "awareness"],
+    content:
+      "Mental health is a critical aspect of overall well-being, yet it is often overlooked or stigmatized. It's time to change that...",
+  },
+  {
+    id: 5,
+    slug: "fifth-post",
+    title: "The Top 5 Destinations for Solo Travelers",
+    category: "Travel",
+    tags: ["solo travel", "destinations"],
+    content:
+      "Traveling solo can be an incredibly rewarding experience, allowing you to explore the world on your own terms...",
+  },
+  {
+    id: 6,
+    slug: "sixth-post",
+    title: "The Science Behind the Perfect Cup of Coffee",
+    category: "Food",
+    tags: ["coffee", "science"],
+    content:
+      "From bean selection to brewing method, there's a lot that goes into creating the perfect cup of coffee. Let's dive into the science behind it...",
+  },
+];

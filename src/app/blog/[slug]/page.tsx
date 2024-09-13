@@ -1,12 +1,14 @@
 import DoubleSidebar from "@/components/shared/doublesidebar";
-import { dummyPosts } from "@/constants";
+import { blogPosts, dummyPosts } from "@/constants";
 
 interface BlogDetailsPageProps {
   params: { slug: string };
 }
 
-const BlogDetailsPage = ({}: BlogDetailsPageProps) => {
-  return <DoubleSidebar>Hello</DoubleSidebar>;
+const BlogDetailsPage = ({ params }: BlogDetailsPageProps) => {
+  return (
+    <DoubleSidebar selectedPost={blogPosts[2]}>{params.slug}</DoubleSidebar>
+  );
 };
 
 export async function generateStaticParams() {
