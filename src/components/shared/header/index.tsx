@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import data from "@/data/index.json";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -33,7 +32,6 @@ const Header = ({
   isBlog,
   className,
 }: HeaderProps) => {
-  const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -99,23 +97,6 @@ const Header = ({
             <Link href="/" className={buttonVariants({ variant: "ghost" })}>
               Home
             </Link>
-            {showBlog && (
-              <Link
-                href="/blog"
-                className={buttonVariants({ variant: "ghost" })}
-              >
-                Blog
-              </Link>
-            )}
-            <Button
-              variant="ghost"
-              onClick={() => {
-                router.push("/");
-                if (handleContactScroll) handleContactScroll();
-              }}
-            >
-              Contact
-            </Button>
             {showResume && (
               <Link
                 href="/resume"
@@ -167,7 +148,7 @@ const Header = ({
             <SheetTrigger asChild>
               <Menu className="h-6 w-6" />
             </SheetTrigger>
-            <SheetContent className="bg-white" side="left">
+            <SheetContent className="bg-white !z-[110]" side="left">
               <SheetHeader>
                 <SheetTitle>{"<pawandai />"}</SheetTitle>
               </SheetHeader>
@@ -229,7 +210,7 @@ const Header = ({
                     )}
                   </div>
                 ) : (
-                  <div className="flex gap-2">
+                  <div className="flex flex-col gap-2">
                     <SheetClose asChild>
                       <Link
                         href="/"
@@ -237,27 +218,6 @@ const Header = ({
                       >
                         Home
                       </Link>
-                    </SheetClose>
-                    {showBlog && (
-                      <SheetClose asChild>
-                        <Link
-                          href="/blog"
-                          className={buttonVariants({ variant: "ghost" })}
-                        >
-                          Blog
-                        </Link>
-                      </SheetClose>
-                    )}
-                    <SheetClose asChild>
-                      <Button
-                        variant="ghost"
-                        onClick={() => {
-                          router.push("/");
-                          if (handleContactScroll) handleContactScroll();
-                        }}
-                      >
-                        Contact
-                      </Button>
                     </SheetClose>
                     {showResume && (
                       <SheetClose asChild>

@@ -1,7 +1,4 @@
-"use client";
-
 import { clsx, type ClassValue } from "clsx";
-import { useEffect, useLayoutEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -20,9 +17,6 @@ export function ISOToDate(date: string) {
     );
   }
 }
-
-export const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export const copyTextToClipboard = async (text: string) => {
   if ("clipboard" in navigator) {

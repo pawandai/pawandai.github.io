@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { ReactNode, forwardRef } from "react";
 
 interface ContainerProps {
@@ -11,7 +10,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex flex-col gap-8 max-w-7xl mx-auto", className)}
+        className={`flex flex-col gap-8 max-w-7xl mx-auto ${className}`}
       >
         {children}
       </div>

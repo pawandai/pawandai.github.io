@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import Link from "next/link";
 import data from "@/data/index.json";
-import { useIsomorphicLayoutEffect } from "@/lib/utils";
 import Header from "@/components/shared/header";
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
@@ -12,6 +11,7 @@ import Container from "@/components/ui/container";
 import Socials from "@/components/shared/socials";
 import Profile from "@/components/shared/image/profile";
 import Typography from "@/components/ui/typography";
+import { useIsomorphicLayoutEffect } from "@/lib/lib";
 
 export default function Home() {
   // Refs
