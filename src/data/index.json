@@ -67,33 +67,5 @@
       "url": "http://chetanverma.com/"
     }
   ],
-  "aboutpara": "As a software engineer, developer, designer, and content writer, I bring a unique blend of technical expertise and creative skills to each project I undertake. With a strong background in programming languages such as JavaScript, Python, and C#, I am able to design and develop innovative software solutions that meet the specific needs of my clients. Additionally, my eye for design allows me to create visually appealing user interfaces that enhance the overall user experience. As a content writer, I possess excellent writing skills and the ability to produce engaging and informative content across a variety of topics. My diverse skill set allows me to tackle projects from various angles, ensuring that all aspects are thoroughly considered and executed with precision.",
-  "resume": {
-    "tagline": "👋  I'm an engineer and designer",
-    "description": "I have delivered world-class user experiences to millions of people. Well-versed with React, Javascript, and most of the Web frameworks.",
-    "experiences": [
-      {
-        "id": "1",
-        "dates": "March 2022 - Present",
-        "type": "Full Time",
-        "position": "Frontend Engineer at X",
-        "bullets": "Bullet One, Bullet Two"
-      },
-      {
-        "id": "d495c23b-4f65-479a-9b8a-cfbc1c089725",
-        "dates": "July 2020 - March 2022",
-        "type": "Full Time",
-        "position": "Frontend Engineer at X",
-        "bullets": "Worked on the frontend of a React application, Worked on the frontend of a React application"
-      }
-    ],
-    "education": {
-      "universityName": "University X",
-      "universityDate": "2016-2020",
-      "universityPara": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
-    },
-    "languages": ["Javascript", "HTML5", "CSS", "Python", "Go"],
-    "frameworks": ["React", "Typescript", "NodeJs"],
-    "others": ["Figma", "AdobeXD", "AWS"]
-  }
+  "aboutpara": "I'm an engineering student with a strong focus on building secure, efficient systems, particularly in Python, JavaScript, and C#. My recent project shows my strength in database management (MySQL) and understanding of user roles and permissions, as well as secure authentication methods."
 }

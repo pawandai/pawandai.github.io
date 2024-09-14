@@ -1,128 +1,107 @@
-"use client";
+import { FC } from "react";
+import ResumeHeader from "./header";
+import Education from "./education";
+import Skills from "./skills";
+import Courses from "./courses";
+import ExtraCurricular from "./extraCurricular";
+import Hobbies from "./hobbies";
+import Languages from "./languages";
+import Profile from "./profile";
+import EmploymentHistory from "./employment";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
-import data from "@/data/index.json";
-import { Button } from "@/components/ui/button";
-import Header from "../header";
-import Socials from "../socials";
-import ProjectResume from "./projectResume";
+const Resume: FC = () => {
+  const personalInfo = {
+    name: "Pawan Awasthi",
+    title: "Software Engineer",
+  };
 
-const Resume = () => {
-  const router = useRouter();
-  const theme = useTheme();
-  const [mount, setMount] = useState(false);
+  const hobbies = [
+    "Making Videos",
+    "Traveling",
+    "Playing Guitar",
+    "Building PCs",
+  ];
 
-  useEffect(() => {
-    setMount(true);
-  }, []);
+  const languages = [
+    { name: "English", level: 5 },
+    { name: "Nepali", level: 5 },
+    { name: "Hindi", level: 4 },
+  ];
 
-  if (!data.showResume) {
-    router.push("/");
-  }
+  const jobs = [
+    {
+      title: "Front-end React Developer",
+      company: "Native Plug",
+      duration: "Oct 2023 - Jan 2024",
+      responsibilities: [
+        "Developing reusable UI components in React.",
+        "Collaborating with design and backend teams to create seamless user experiences.",
+        "Ensuring responsiveness and performance of web applications.",
+        "Participating in code reviews and improvements.",
+      ],
+    },
+    {
+      title: "React Native Developer",
+      company: "Startek",
+      duration: "Jul 2023 - Aug 2024",
+      responsibilities: [
+        "Developing and implementing mobile applications using React Native.",
+        "Ensuring smooth user experiences and performance.",
+        "Utilizing Firebase for database and authentication.",
+        "Staying updated with modern technologies.",
+      ],
+    },
+  ];
+
+  const schools = [
+    {
+      degree: "Bachelors in Engineering",
+      institution: "IOE Purwanchal Campus",
+      duration: "Apr 2022 — Present",
+    },
+    {
+      degree: "High School",
+      institution: "National Academy of Science and Technology",
+      duration: "Jan 2018 — Jan 2020",
+    },
+  ];
+
+  const skills = [
+    { name: "Time Management", level: 5 },
+    { name: "Problem Solving", level: 4 },
+    { name: "Software Architecture", level: 3 },
+    { name: "Communication", level: 4 },
+    { name: "Database Design", level: 5 },
+  ];
 
   return (
-    <>
-      {process.env.NODE_ENV === "development" && (
-        <div className="fixed bottom-6 right-6">
-          <Button onClick={() => router.push("/edit")}>Edit Resume</Button>
-        </div>
-      )}
-      <div className="container mx-auto mb-10">
-        <Header isBlog />
-        {mount && (
-          <div className="mt-10 w-full flex flex-col items-center">
-            <div
-              className={`w-full ${
-                mount && theme.theme === "dark" ? "bg-slate-800" : "bg-gray-50"
-              } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
-            >
-              <h1 className="text-3xl font-bold">{data.name}</h1>
-              <h2 className="text-xl mt-5">{data.resume.tagline}</h2>
-              <h2 className="w-4/5 text-xl mt-5 opacity-50">
-                {data.resume.description}
-              </h2>
-              <div className="mt-2">
-                <Socials />
-              </div>
-              <div className="mt-5">
-                <h1 className="text-2xl font-bold">Experience</h1>
+    <div className="relative">
+      <ResumeHeader {...personalInfo} />
 
-                {data.resume.experiences.map(
-                  ({ id, dates, type, position, bullets }) => (
-                    <ProjectResume
-                      key={id}
-                      dates={dates}
-                      type={type}
-                      position={position}
-                      bullets={bullets}
-                    />
-                  )
-                )}
-              </div>
-              <div className="mt-5">
-                <h1 className="text-2xl font-bold">Education</h1>
-                <div className="mt-2">
-                  <h2 className="text-lg">
-                    {data.resume.education.universityName}
-                  </h2>
-                  <h3 className="text-sm opacity-75">
-                    {data.resume.education.universityDate}
-                  </h3>
-                  <p className="text-sm mt-2 opacity-50">
-                    {data.resume.education.universityPara}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-5">
-                <h1 className="text-2xl font-bold">Skills</h1>
-                <div className="flex mob:flex-col desktop:flex-row justify-between">
-                  {data.resume.languages && (
-                    <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Languages</h2>
-                      <ul className="list-disc">
-                        {data.resume.languages.map((language, index) => (
-                          <li key={index} className="ml-5 py-2">
-                            {language}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {data.resume.frameworks && (
-                    <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Frameworks</h2>
-                      <ul className="list-disc">
-                        {data.resume.frameworks.map((framework, index) => (
-                          <li key={index} className="ml-5 py-2">
-                            {framework}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {data.resume.others && (
-                    <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Others</h2>
-                      <ul className="list-disc">
-                        {data.resume.others.map((other, index) => (
-                          <li key={index} className="ml-5 py-2">
-                            {other}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
+      <div className="container mx-auto px-4 py-32">
+        {" "}
+        {/* Added padding top here */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div className="md:col-span-1">
+            <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
+              <Profile />
+              <Skills skills={skills} />
+              <Languages languages={languages} />
+              <Hobbies hobbies={hobbies} />
             </div>
           </div>
-        )}
+
+          {/* Right Column */}
+          <div className="md:col-span-2">
+            <EmploymentHistory jobs={jobs} />
+            <Education schools={schools} />
+            <ExtraCurricular />
+            <Courses />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

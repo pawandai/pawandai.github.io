@@ -45,12 +45,15 @@ const Header = ({
     <div
       className={`mt-6 py-4 backdrop-blur-md bg-transparent sticky ${
         theme === "light" && "bg-white/90"
-      } dark:text-white top-0 z-10 ${className} border-b`}
+      } dark:text-white top-0 z-20 ${className} border-b`}
     >
       {/* Desktop Navbar */}
       <div className="hidden md:flex items-center justify-center mx-auto">
         {!isBlog ? (
           <div className="flex gap-2">
+            <Link href="/" className={buttonVariants({ variant: "ghost" })}>
+              Home
+            </Link>
             <Button variant="ghost" onClick={handleWorkScroll}>
               Work
             </Button>
