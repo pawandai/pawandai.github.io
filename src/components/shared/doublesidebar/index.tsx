@@ -1,9 +1,16 @@
+"use client";
+
 import Container from "@/components/ui/container";
-import { Separator } from "@/components/ui/separator";
-import { CalendarDaysIcon, ClockIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode, useMemo } from "react";
+import {
+  ReactNode,
+  RefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import MenuOptions from "./menuoptions";
 import Header from "../header";
 import { Post } from "@/types";
@@ -15,6 +22,10 @@ interface DoubleSidebarProps {
   className?: string;
   selectedPost: Post;
 }
+
+type SectionRefs = {
+  [key: string]: RefObject<HTMLDivElement>;
+};
 
 const SimilarBlogs = ({ similarPosts }: { similarPosts: Post[] }) => {
   return (
@@ -56,6 +67,63 @@ const DoubleSidebar = ({
   children,
   selectedPost,
 }: DoubleSidebarProps) => {
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  const introductionRef = useRef<HTMLDivElement>(null);
+  const characterDevelopmentRef = useRef<HTMLDivElement>(null);
+  const narrativeStructureRef = useRef<HTMLDivElement>(null);
+  const sensoryDetailsRef = useRef<HTMLDivElement>(null);
+  const emotionalConnectionRef = useRef<HTMLDivElement>(null);
+  const conclusionRef = useRef<HTMLDivElement>(null);
+
+  const sectionsRef: SectionRefs = useMemo(
+    () => ({
+      introduction: introductionRef,
+      "character-development": characterDevelopmentRef,
+      "narrative-structure": narrativeStructureRef,
+      "sensory-details": sensoryDetailsRef,
+      "emotional-connection": emotionalConnectionRef,
+      conclusion: conclusionRef,
+    }),
+    []
+  );
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 150; // Adjust the offset as needed
+      let currentSection = "";
+
+      for (const [id, ref] of Object.entries(sectionsRef)) {
+        if (ref.current) {
+          const sectionTop = ref.current.offsetTop;
+          const sectionBottom = sectionTop + ref.current.offsetHeight;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSection = id;
+            break;
+          }
+        }
+      }
+
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection);
+        window.history.replaceState(null, "", `#${currentSection}`);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [activeSection, sectionsRef]);
+
+  const scrollToSection = (id: string) => {
+    sectionsRef[id]?.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Find similar posts based on category and tags
   const similarPosts = useMemo(() => {
     if (!selectedPost?.category && selectedPost?.tags.length === 0) {
       return [];
@@ -80,6 +148,7 @@ const DoubleSidebar = ({
       <Container
         className={`grid lg:grid-cols-[240px_1fr_240px] md:grid-cols-[240px_1fr] grid-cols-1 gap-8 p-8 ${className}`}
       >
+        {/* Left Sidebar */}
         <div>
           <MenuOptions className="p-2 pl-4" defaultOpen={true}>
             <SimilarBlogs similarPosts={similarPosts} />
@@ -90,164 +159,223 @@ const DoubleSidebar = ({
         </div>
 
         {/* Blog Content */}
-        <div className="space-y-8">
-          <div>
-            {children}
-            <Image
-              src="/projects/task_manager/tasks.jpeg"
-              alt="Blog Cover Image"
-              width={1200}
-              height={600}
-              className="rounded-lg object-cover w-full aspect-[4/2]"
-            />
-            <div className="mt-4 space-y-2">
-              <div className="text-2xl font-bold">
-                The Future of Web Development
-              </div>
-              <p className="text-muted-foreground">
-                Explore the latest trends and technologies shaping the future of
-                web development.
-              </p>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CalendarDaysIcon className="w-4 h-4 mr-1" />
-                  <span>May 15, 2023</span>
-                </div>
-                <Separator orientation="vertical" />
-                <div className="flex items-center gap-2">
-                  <ClockIcon className="w-4 h-4 mr-1" />
-                  <span>10 min read</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="prose prose-lg">
-            <h2>The Evolving Landscape of Web Development</h2>
+        <article className="prose prose-gray dark:prose-invert">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+            The Art of Storytelling: Crafting Captivating Blog Posts
+          </h1>
+          {children}
+          <Image
+            src="/projects/task_manager/tasks.jpeg"
+            alt="Blog Cover Image"
+            width={1200}
+            height={600}
+            className="rounded-lg object-cover w-full aspect-[4/2]"
+          />
+          <p className="text-muted-foreground">
+            Unlock the power of words and captivate your audience with these
+            expert tips.
+          </p>
+          <section
+            id="introduction"
+            ref={sectionsRef.introduction}
+            className="scroll-mt-20 h-[80vh]"
+          >
+            <h2>Introduction</h2>
             <p>
-              In the ever-changing world of technology, the field of web
-              development has undergone a remarkable transformation. From the
-              early days of static websites to the rise of dynamic, interactive
-              applications, the landscape of web development has continuously
-              evolved, driven by advancements in programming languages,
-              frameworks, and user expectations.
+              Storytelling is a timeless art form that has the power to
+              captivate, inspire, and connect us. In the world of blogging, the
+              ability to craft compelling narratives can be the difference
+              between a forgettable post and one that leaves a lasting
+              impression on your readers.
             </p>
             <p>
-              One of the most significant trends in web development is the
-              increasing focus on responsive design and mobile-first approaches.
-              As more users access the web through their smartphones and
-              tablets, developers must ensure that their applications provide a
-              seamless and optimized experience across various devices and
-              screen sizes.
+              In this blog post, we&apos;ll explore the essential elements of
+              storytelling and how you can leverage them to create unforgettable
+              blog content.
             </p>
-            <h2>The Rise of JavaScript Frameworks and Libraries</h2>
+          </section>
+          <section
+            id="character-development"
+            ref={sectionsRef["character-development"]}
+            className="scroll-mt-20 h-[80vh]"
+          >
+            <h2>Character Development</h2>
             <p>
-              The popularity of JavaScript has skyrocketed in recent years, with
-              the emergence of powerful frameworks and libraries that have
-              transformed the way web applications are built. Frameworks like
-              React, Angular, and Vue.js have become essential tools in the web
-              arsenal, providing a structured and efficient way to build complex
-              user interfaces.
-            </p>
-            <p>
-              These frameworks not only simplify the development process but
-              also promote the adoption of best practices, such as
-              component-based architecture and state management. As a result,
-              web applications have become more modular, scalable, and
-              maintainable, allowing developers to focus on delivering
-              innovative features and functionalities.
-            </p>
-            <h2>The Emergence of Serverless and Headless Architectures</h2>
-            <p>
-              Another significant trend in web development is the rise of
-              serverless and headless architectures. Serverless computing,
-              enabled by platforms like AWS Lambda and Google Cloud Functions,
-              allows developers to focus on writing application logic without
-              worrying about the underlying infrastructure.
+              Memorable stories are often driven by well-developed characters.
+              Whether you&apos;re writing a personal narrative or covering a
+              topic, introducing relatable characters can help your readers
+              connect with the content on a deeper level.
             </p>
             <p>
-              Headless content management systems (CMS), on the other hand,
-              decouple the content from the presentation layer, providing a more
-              flexible and scalable approach to building web applications. This
-              separation allows developers to choose the most appropriate
-              technologies for the front-end and back-end, leading to increased
-              efficiency and faster time-to-market.
+              Consider introducing a protagonist, antagonist, or even supporting
+              characters that your readers can empathize with. Provide insights
+              into their motivations, struggles, and personal growth, allowing
+              your audience to feel invested in their journey.
             </p>
-            <h2>The Importance of Accessibility and Inclusivity</h2>
+          </section>
+          <section
+            id="narrative-structure"
+            ref={sectionsRef["narrative-structure"]}
+            className="scroll-mt-20 h-[80vh]"
+          >
+            <h2>Narrative Structure</h2>
             <p>
-              As the web becomes more ubiquitous, the importance of
-              accessibility and inclusivity in web development has become
-              increasingly crucial. Developers must ensure that their
-              applications are designed with the needs of all users in mind,
-              including those with disabilities or other accessibility
-              requirements.
-            </p>
-            <p>
-              By adhering to web accessibility standards and guidelines, such as
-              WCAG (Web Content Accessibility Guidelines), developers can create
-              inclusive experiences that cater to a diverse user base. This not
-              only benefits individuals with disabilities but also improves the
-              overall usability and user experience for all users.
-            </p>
-            <h2>The Future of Web Development</h2>
-            <p>
-              As we look to the future, the web development landscape will
-              continue to evolve, driven by emerging technologies, changing user
-              behaviors, and the ever-increasing demand for innovative and
-              engaging web experiences. Developers will need to stay informed
-              about the latest trends, tools, and best practices to ensure that
-              their web applications remain competitive and relevant.
+              A well-crafted narrative structure can guide your readers through
+              a seamless and engaging experience. Incorporate elements of a
+              classic story arc, such as an engaging introduction, rising
+              action, a climactic moment, and a satisfying resolution.
             </p>
             <p>
-              Whether the rise of WebAssembly, the integration of artificial
-              intelligence and machine learning, or the advancements in edge
-              computing and the Internet of Things, the future of web
-              development promises to be both exciting and challenging. By
-              embracing these changes and continuously learning, web developers
-              can position themselves at the forefront of this dynamic and
-              ever-evolving field.
+              Experiment with different narrative techniques, such as
+              flashbacks, foreshadowing, or even a non-linear timeline, to keep
+              your readers on the edge of their seats.
             </p>
-          </div>
-        </div>
+          </section>
+          <section
+            id="sensory-details"
+            ref={sectionsRef["sensory-details"]}
+            className="scroll-mt-20 h-[80vh]"
+          >
+            <h2>Sensory Details</h2>
+            <p>
+              Bring your blog posts to life by incorporating vivid sensory
+              details. Describe the sights, sounds, smells, tastes, and textures
+              that your characters experience, allowing your readers to immerse
+              themselves in the story.
+            </p>
+            <p>
+              These sensory details can help to create a more immersive and
+              memorable reading experience, transporting your audience to the
+              world you&apos;ve created.
+            </p>
+          </section>
+          <section
+            id="emotional-connection"
+            ref={sectionsRef["emotional-connection"]}
+            className="scroll-mt-20 h-[80vh]"
+          >
+            <h2>Emotional Connection</h2>
+            <p>
+              The most powerful stories are those that evoke a strong emotional
+              response from the reader. Tap into universal human emotions, such
+              as joy, fear, sadness, or wonder, to create a deeper connection
+              with your audience.
+            </p>
+            <p>
+              By eliciting an emotional response, you can leave a lasting
+              impression and inspire your readers to reflect on the message or
+              takeaway of your blog post.
+            </p>
+          </section>
+          <section
+            id="conclusion"
+            ref={sectionsRef.conclusion}
+            className="scroll-mt-20 h-[80vh]"
+          >
+            <h2>Conclusion</h2>
+            <p>
+              Storytelling is a powerful tool that can elevate your blog content
+              and captivate your audience. By incorporating character
+              development, narrative structure, sensory details, and emotional
+              connection, you can craft blog posts that inspire, educate, and
+              entertain your readers.
+            </p>
+            <p>
+              Remember, the art of storytelling is a journey, and with practice
+              and dedication, you can hone your skills to become a master of the
+              craft.
+            </p>
+          </section>
+        </article>
 
-        {/* Topics */}
+        {/* Topics (Right Sidebar) */}
         <div className="hidden lg:block">
           <div className="sticky top-24 space-y-4">
-            <div className="text-lg font-semibold">Topics</div>
+            <h3 className="text-lg font-semibold mb-4">Topics</h3>
             <nav className="space-y-2">
               <Link
-                href="#"
-                className="block text-sm text-muted-foreground hover:text-foreground"
-                prefetch={false}
+                href="#introduction"
+                className={`block ${
+                  activeSection === "introduction"
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("introduction");
+                }}
               >
-                Web Development Trends
+                Introduction
               </Link>
               <Link
-                href="#"
-                className="block text-sm text-muted-foreground hover:text-foreground"
-                prefetch={false}
+                href="#character-development"
+                className={`block ${
+                  activeSection === "character-development"
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("character-development");
+                }}
               >
-                JavaScript Frameworks
+                Character Development
               </Link>
               <Link
-                href="#"
-                className="block text-sm text-muted-foreground hover:text-foreground"
-                prefetch={false}
+                href="#narrative-structure"
+                className={`block ${
+                  activeSection === "narrative-structure"
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("narrative-structure");
+                }}
               >
-                Serverless Architecture
+                Narrative Structure
               </Link>
               <Link
-                href="#"
-                className="block text-sm text-muted-foreground hover:text-foreground"
-                prefetch={false}
+                href="#sensory-details"
+                className={`block ${
+                  activeSection === "sensory-details"
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("sensory-details");
+                }}
               >
-                Headless CMS
+                Sensory Details
               </Link>
               <Link
-                href="#"
-                className="block text-sm text-muted-foreground hover:text-foreground"
-                prefetch={false}
+                href="#emotional-connection"
+                className={`block ${
+                  activeSection === "emotional-connection"
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("emotional-connection");
+                }}
               >
-                Web Accessibility
+                Emotional Connection
+              </Link>
+              <Link
+                href="#conclusion"
+                className={`block ${
+                  activeSection === "conclusion"
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("conclusion");
+                }}
+              >
+                Conclusion
               </Link>
             </nav>
           </div>

@@ -43,8 +43,8 @@ const Header = ({
 
   return (
     <div
-      className={`mt-6 py-4 backdrop-blur-3xl bg-transparent sticky ${
-        theme === "light" && "bg-white/80"
+      className={`mt-6 py-4 backdrop-blur-md bg-transparent sticky ${
+        theme === "light" && "bg-white/90"
       } dark:text-white top-0 z-10 ${className} border-b`}
     >
       {/* Desktop Navbar */}
