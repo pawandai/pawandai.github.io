@@ -31,10 +31,16 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
 
 export async function generateStaticParams() {
   const posts = await getAllPosts(["slug"]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return posts.map((post: any) => ({
-    slug: post.slug,
-  }));
+  return {
+    paths: posts.map((post) => {
+      return {
+        params: {
+          slug: post.slug,
+        },
+      };
+    }),
+    fallback: false,
+  };
 }
 
 export default BlogDetailsPage;
