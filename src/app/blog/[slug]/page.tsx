@@ -1,8 +1,9 @@
 "use server";
 
-import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
+import { getPostBySlug } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
+import { dummyPosts } from "@/constants";
 
 interface BlogDetailsPageProps {
   params: { slug: string };
@@ -30,8 +31,11 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
 };
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts(["slug"]);
-  return posts.map((post) => ({ params: { slug: post.slug } }));
+  //   const posts = await getAllPosts(["slug"]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return dummyPosts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export default BlogDetailsPage;
