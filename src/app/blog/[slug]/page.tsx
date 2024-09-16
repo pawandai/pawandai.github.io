@@ -31,16 +31,7 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
 
 export async function generateStaticParams() {
   const posts = await getAllPosts(["slug"]);
-  return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          slug: post.slug,
-        },
-      };
-    }),
-    fallback: false,
-  };
+  return posts.map((post) => ({ params: { slug: post.slug } }));
 }
 
 export default BlogDetailsPage;
