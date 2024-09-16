@@ -31,9 +31,7 @@ export async function generateStaticParams() {
   const posts = await getAllPosts(["slug"]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return posts.map((post: any) => ({
-    params: {
-      slug: post.slug,
-    },
+    slug: post.slug,
   }));
 }
 
