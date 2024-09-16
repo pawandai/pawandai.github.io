@@ -37,7 +37,7 @@ const ContentSection = ({ content }: ContentSectionProps) => {
   return (
     <ReactMarkdown
       components={CodeBlock as Partial<Components>}
-      className="markdown-class"
+      className="markdown-body"
     >
       {content}
     </ReactMarkdown>

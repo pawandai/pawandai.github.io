@@ -1,11 +1,12 @@
 export interface Post {
-  id: number;
+  id: string;
   title: string;
-  topics: string[];
+  topics: string;
   slug: string;
   category: string;
-  tags: string[];
+  tags: string;
   content: string;
   createdAt: Date | string;
-  timeToRead: number;
+  timeToRead: string;
+  [key: string]: string | Date | number | string[];
 }

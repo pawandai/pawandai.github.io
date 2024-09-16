@@ -1,19 +1,36 @@
+import { getPostBySlug, getPostSlugs } from "@/actions/blog.action";
+import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
-import { blogPosts, dummyPosts } from "@/constants";
 
 interface BlogDetailsPageProps {
   params: { slug: string };
 }
 
-const BlogDetailsPage = ({ params }: BlogDetailsPageProps) => {
+const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
+  const post = await getPostBySlug(params.slug, [
+    "date",
+    "slug",
+    "preview",
+    "title",
+    "tags",
+    "timeToRead",
+    "topics",
+    "preview",
+    "image",
+    "content",
+  ]);
+
   return (
-    <DoubleSidebar selectedPost={blogPosts[2]}>{params.slug}</DoubleSidebar>
+    <DoubleSidebar selectedPost={post}>
+      <ContentSection content={post.content} />
+    </DoubleSidebar>
   );
 };
 
 export async function generateStaticParams() {
+  const posts = await getPostSlugs();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return dummyPosts.map((post: any) => ({
+  return posts.map((post: any) => ({
     slug: post.slug,
   }));
 }

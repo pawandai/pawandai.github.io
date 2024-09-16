@@ -1,13 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MenuOptions from "../doublesidebar/menuoptions";
-import { blogPosts } from "@/constants";
-import { SearchIcon } from "lucide-react";
+import { Glasses, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "./card";
 import Container from "@/components/ui/container";
+import { getAllPosts } from "@/actions/blog.action";
+import { Post } from "@/types";
 
 interface BlogFilterProps {
   searchTerm: string;
@@ -106,6 +107,7 @@ const BlogLayout = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [blogPosts, setBlogPosts] = useState<Post[]>([]);
 
   const filteredPosts = useMemo(
     () =>
@@ -124,15 +126,61 @@ const BlogLayout = () => {
           post.content.toLowerCase().includes(searchTerm.toLowerCase())
         );
       }),
-    [searchTerm, selectedCategory, selectedTags]
+    [blogPosts, searchTerm, selectedCategory, selectedTags]
   );
 
+  // Most popular categories
   const categories = useMemo(() => {
-    return Array.from(new Set(blogPosts.map((post) => post.category)));
-  }, []);
+    const categoryCounts = blogPosts.reduce<Record<string, number>>(
+      (counts, post) => {
+        counts[post.category] = (counts[post.category] || 0) + 1;
+        return counts;
+      },
+      {}
+    );
 
+    const popularCategories = Object.entries(categoryCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map((entry) => entry[0]);
+
+    return popularCategories;
+  }, [blogPosts]);
+
+  // Most popular tags
   const tags = useMemo(() => {
-    return Array.from(new Set(blogPosts.flatMap((post) => post.tags)));
+    const allTags = blogPosts
+      .map((post) => post.tags.split(",").map((tag) => tag.trim()))
+      .flat();
+
+    const tagCounts = allTags.reduce<Record<string, number>>((counts, tag) => {
+      counts[tag] = (counts[tag] || 0) + 1;
+      return counts;
+    }, {});
+
+    const popularTags = Object.entries(tagCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 20)
+      .map((entry) => entry[0]);
+
+    return popularTags;
+  }, [blogPosts]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const response = await getAllPosts([
+        "slug",
+        "title",
+        "image",
+        "preview",
+        "tags",
+        "author",
+        "date",
+      ]);
+      setBlogPosts(response);
+    };
+
+    fetchBlogs();
   }, []);
 
   return (
@@ -163,20 +211,26 @@ const BlogLayout = () => {
           />
         </MenuOptions>
       </aside>
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4 align-middle items-center">
+      <section
+        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 ${
+          filteredPosts.length > 0 ? "lg:grid-cols-2" : ""
+        } gap-4 align-middle items-center`}
+      >
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <BlogCard
               key={post.id}
-              preview="this is the preview"
-              slug="first-post"
-              thumbnail="/projects/task_manager/tasks.jpeg"
+              preview={post.preview as string}
+              slug={post.slug}
+              thumbnail={post.image as string}
               title={post.title}
-              tags={post.tags}
             />
           ))
         ) : (
-          <p className="text-muted-foreground">No blog posts found.</p>
+          <div className="text-muted-foreground flex flex-col gap-2 items-center justify-center h-[60vh] text-center">
+            <Glasses className="h-12 w-12" />
+            <span>No blog posts found.</span>
+          </div>
         )}
       </section>
     </Container>

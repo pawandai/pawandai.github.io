@@ -11,7 +11,6 @@ type BlogCardProps = {
   title: string;
   slug: string;
   preview: string;
-  tags: string[];
 };
 
 export function BlogCard({ thumbnail, title, slug, preview }: BlogCardProps) {

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { v4 as uuidv4 } from "uuid";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,7 +11,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { ContentLayout } from "@/components/shared/admin/contentLayout";
-import PlaceholderContent from "@/components/shared/demo";
+import BlogEditor from "@/components/shared/blog/editor";
 
 export default function NewPostPage() {
   return (
@@ -32,7 +35,22 @@ export default function NewPostPage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <PlaceholderContent />
+      <BlogEditor
+        post={{
+          category: "",
+          content: "",
+          date: "",
+          id: uuidv4(),
+          image: "",
+          preview: "",
+          slug: "",
+          tags: "",
+          title: "",
+          topics: "",
+          createdAt: new Date(),
+          timeToRead: "",
+        }}
+      />
     </ContentLayout>
   );
 }
