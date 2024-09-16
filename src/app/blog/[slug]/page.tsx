@@ -35,4 +35,6 @@ export async function generateStaticParams() {
   }));
 }
 
+BlogDetailsPage.generateStaticParams = generateStaticParams;
+
 export default BlogDetailsPage;
