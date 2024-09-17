@@ -2,7 +2,7 @@ import { join } from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import { NextResponse } from "next/server";
-import { getAllPosts } from "@/actions/blog.action";
+import { Post } from "@/types";
 
 export async function GET(
   request: Request,
@@ -19,7 +19,9 @@ export async function GET(
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts: Post[] = await fetch("https://pawandai.com.np/api/blog").then(
+    (res) => res.json()
+  );
 
   return posts.map((post) => ({
     slug: post.slug,
