@@ -1,9 +1,15 @@
-import { getPostBySlug, getPostSlugs } from "@/actions/blog.action";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const slugs = await getPostSlugs();
-  const response = slugs.map(async (slug) => await getPostBySlug(slug));
+  const slugs = await fetch(
+    "https://pawandai-github.vercel.app/api/blog/slugs"
+  ).then((res) => res.json());
+  const response = slugs.map(
+    async (slug: string) =>
+      await fetch(
+        "https://pawandai-github.vercel.app/api/blog/slugs/" + slug
+      ).then((res) => res.json())
+  );
   // sort posts by date in descending order
   const posts = await Promise.all(response);
   const sortedPosts = posts.sort((post1, post2) =>
