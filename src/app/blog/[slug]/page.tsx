@@ -27,7 +27,11 @@ export async function generateMetadata({
 
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   const { slug } = params;
-  const response = await fetch(`http://localhost:3000/api/blog/${slug}`);
+  let baseUrl;
+  if (process.env.NODE_ENV === "development") baseUrl = "http://localhost:3000";
+  else baseUrl = "https://pawandai.com.np";
+
+  const response = await fetch(`${baseUrl}/api/blog/${slug}`);
   const post: Post = await response.json();
 
   return (
