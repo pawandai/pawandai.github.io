@@ -1,6 +1,5 @@
-"use client";
+"use server";
 
-import { useEffect, useState } from "react";
 import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
@@ -10,25 +9,19 @@ interface BlogDetailsPageProps {
   params: { slug: string };
 }
 
-const BlogDetailsPage = ({ params }: BlogDetailsPageProps) => {
-  const [post, setPost] = useState<Post | null>(null);
-
-  useEffect(() => {
-    getPostBySlug(params.slug, [
-      "createdAt",
-      "slug",
-      "preview",
-      "title",
-      "tags",
-      "topics",
-      "image",
-      "content",
-      "category",
-      "timeToRead",
-    ]).then((data) => {
-      setPost(data as Post);
-    });
-  }, [params.slug]);
+const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
+  const post = (await getPostBySlug(params.slug, [
+    "createdAt",
+    "slug",
+    "preview",
+    "title",
+    "tags",
+    "topics",
+    "image",
+    "content",
+    "category",
+    "timeToRead",
+  ])) as Post;
 
   return (
     <DoubleSidebar selectedPost={post!}>
