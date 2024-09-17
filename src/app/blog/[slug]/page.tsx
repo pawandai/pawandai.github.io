@@ -12,10 +12,11 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const post = await fetch(
-    `https://pawandai-github.vercel.app/blog/${params.slug}`,
+    `https://pawandai-github.vercel.app/api/blog/${params.slug}`,
     {
       headers: {
         "Content-Type": "application/json",
+        accept: "application/json",
       },
     }
   ).then((res) => res.json());
@@ -31,12 +32,12 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const response = await fetch("https://pawandai-github.vercel.app/blog", {
+  const posts = await fetch("https://pawandai-github.vercel.app/api/blog", {
     headers: {
       "Content-Type": "application/json",
+      accept: "application/json",
     },
-  });
-  const posts = await response.json();
+  }).then((res) => res.json());
 
   return posts.map((post: Post) => ({
     slug: post.slug,
@@ -45,16 +46,19 @@ export async function generateStaticParams() {
 
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   const { slug } = params;
-  let baseUrl;
-  if (process.env.NODE_ENV === "development") baseUrl = "http://localhost:3000";
-  else baseUrl = "https://pawandai-github.vercel.app";
+  // let baseUrl;
+  // if (process.env.NODE_ENV === "development") baseUrl = "http://localhost:3000";
+  // else baseUrl = "https://pawandai-github.vercel.app";
 
-  const response = await fetch(`${baseUrl}/api/blog/${slug}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const post: Post = await response.json();
+  const post = await fetch(
+    `https://pawandai-github.vercel.app/api/blog/${slug}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+      },
+    }
+  ).then((res) => res.json());
 
   return (
     <DoubleSidebar selectedPost={post}>

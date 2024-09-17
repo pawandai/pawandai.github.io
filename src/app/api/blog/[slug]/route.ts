@@ -1,7 +1,6 @@
 import { join } from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
-import { NextResponse } from "next/server";
 import { Post } from "@/types";
 
 export async function GET(
@@ -15,17 +14,16 @@ export async function GET(
   const fileContents = await fs.readFile(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  return NextResponse.json({ ...data, content });
+  return JSON.stringify({ ...data, content });
 }
 
 export async function generateStaticParams() {
-  const response = await fetch("https://pawandai-github.vercel.app/api/blog", {
+  const posts = await fetch("https://pawandai-github.vercel.app/api/blog", {
     headers: {
       "Content-Type": "application/json",
+      accept: "application/json",
     },
-  });
-
-  const posts = await response.json();
+  }).then((res) => res.json());
 
   return posts.map((post: Post) => ({
     slug: post.slug,
