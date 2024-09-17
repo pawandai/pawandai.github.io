@@ -21,7 +21,7 @@ export async function GET(
 
 export async function generateStaticParams() {
   const posts: Post[] = await fetch(
-    "https://pawandai-github-ghtb5ld2q-pawandais-projects.vercel.app/api/blog"
+    "https://pawandai-github.vercel.app/api/blog"
   ).then((res) => res.json());
 
   return posts.map((post) => ({

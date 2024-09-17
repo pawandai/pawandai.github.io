@@ -37,7 +37,7 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   const { slug } = params;
   let baseUrl;
   if (process.env.NODE_ENV === "development") baseUrl = "http://localhost:3000";
-  else baseUrl = "https://pawandai.com.np";
+  else baseUrl = "https://pawandai-github.vercel.app";
 
   const response = await fetch(`${baseUrl}/api/blog/${slug}`);
   const post: Post = await response.json();
