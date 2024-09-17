@@ -1,4 +1,5 @@
 // import { getPostBySlug } from "@/actions/blog.action";
+import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
 import { Post } from "@/types";
@@ -7,30 +8,30 @@ interface BlogDetailsPageProps {
   params: { slug: string };
 }
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { slug: string };
-// }) {
-//   const post = await getPostBySlug(params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await getPostBySlug(params.slug);
 
-//   if (!post) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-//   return {
-//     title: post.title,
-//   };
-// }
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    title: post.title,
+  };
+}
 
-// export async function generateStaticParams() {
-//   const posts = await getAllPosts();
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
 
-//   return posts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// }
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   const { slug } = params;
