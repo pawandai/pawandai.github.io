@@ -30,7 +30,7 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   );
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const posts = getAllPosts();
   return posts.then((post) =>
     post.map((p) => ({
