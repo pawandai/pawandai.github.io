@@ -1,5 +1,3 @@
-"use server";
-
 import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
@@ -9,8 +7,8 @@ interface BlogDetailsPageProps {
   params: { slug: string };
 }
 
-const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
-  const post = (await getPostBySlug(params.slug, [
+const BlogDetailsPage = ({ params }: BlogDetailsPageProps) => {
+  const post = getPostBySlug(params.slug, [
     "createdAt",
     "slug",
     "preview",
@@ -21,7 +19,7 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
     "content",
     "category",
     "timeToRead",
-  ])) as Post;
+  ]) as Post;
 
   return (
     <DoubleSidebar selectedPost={post!}>
@@ -32,11 +30,9 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
-  return posts.then((post) =>
-    post.map((p) => ({
-      slug: p.slug,
-    }))
-  );
+  return posts.map((p) => ({
+    slug: p.slug,
+  }));
 }
 
 export default BlogDetailsPage;

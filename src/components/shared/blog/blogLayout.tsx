@@ -168,7 +168,7 @@ const BlogLayout = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await getAllPosts([
+      const response = getAllPosts([
         "slug",
         "title",
         "image",

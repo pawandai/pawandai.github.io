@@ -29,9 +29,9 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
     image: post.image,
   });
 
-  const savePost = async () => {
+  const savePost = () => {
     if (process.env.NODE_ENV === "development") {
-      await upsertBlog({
+      upsertBlog({
         slug: post.slug,
         content: blogContent,
         variables: blogVariables,
