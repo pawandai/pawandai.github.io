@@ -6,9 +6,9 @@ export async function GET() {
   ).then((res) => res.json());
   const response = slugs.map(
     async (slug: string) =>
-      await fetch(
-        "https://pawandai-github.vercel.app/api/blog/slugs/" + slug
-      ).then((res) => res.json())
+      await fetch("https://pawandai-github.vercel.app/api/blog/" + slug).then(
+        (res) => res.json()
+      )
   );
   // sort posts by date in descending order
   const posts = await Promise.all(response);
