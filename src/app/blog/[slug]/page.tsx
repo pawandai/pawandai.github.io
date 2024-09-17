@@ -4,7 +4,6 @@ import DoubleSidebar from "@/components/shared/doublesidebar";
 import { Post } from "@/types";
 
 interface BlogDetailsPageProps {
-  description: string;
   params: { slug: string };
 }
 
@@ -25,6 +24,14 @@ export async function generateMetadata({
   };
 }
 
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   const { slug } = params;
   let baseUrl;
@@ -40,13 +47,5 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
     </DoubleSidebar>
   );
 };
-
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
 
 export default BlogDetailsPage;
