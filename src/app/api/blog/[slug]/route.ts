@@ -2,7 +2,7 @@ import { join } from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import { NextResponse } from "next/server";
-import { Post } from "@/types";
+// import { Post } from "@/types";
 
 export async function GET(
   request: Request,
@@ -18,12 +18,12 @@ export async function GET(
   return NextResponse.json({ ...data, content });
 }
 
-export async function generateStaticParams() {
-  const posts: Post[] = await fetch("https://pawandai.com.np/api/blog").then(
-    (res) => res.json()
-  );
+// export async function generateStaticParams() {
+//   const posts: Post[] = await fetch("https://pawandai.com.np/api/blog").then(
+//     (res) => res.json()
+//   );
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }
