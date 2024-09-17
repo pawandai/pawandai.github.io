@@ -1,4 +1,5 @@
 import { getPostBySlug, getPostSlugs } from "@/actions/blog.action";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   const slugs = await getPostSlugs();
@@ -8,5 +9,5 @@ export async function GET() {
   const sortedPosts = posts.sort((post1, post2) =>
     post1.createdAt > post2.createdAt ? -1 : 1
   );
-  return JSON.stringify(sortedPosts);
+  return NextResponse.json(sortedPosts);
 }

@@ -2,6 +2,7 @@ import { join } from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import { Post } from "@/types";
+import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
@@ -14,7 +15,7 @@ export async function GET(
   const fileContents = await fs.readFile(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  return JSON.stringify({ ...data, content });
+  return NextResponse.json({ ...data, content });
 }
 
 export async function generateStaticParams() {
