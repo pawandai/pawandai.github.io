@@ -2,6 +2,7 @@ import { join } from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import { NextResponse } from "next/server";
+import { getAllPosts } from "@/actions/blog.action";
 
 export async function GET(
   request: Request,
@@ -15,4 +16,12 @@ export async function GET(
   const { data, content } = matter(fileContents);
 
   return NextResponse.json({ ...data, content });
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
