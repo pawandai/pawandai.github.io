@@ -19,7 +19,11 @@ export async function GET(
 }
 
 export async function generateStaticParams() {
-  const response = await fetch("https://pawandai-github.vercel.app/api/blog");
+  const response = await fetch("https://pawandai-github.vercel.app/api/blog", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const posts = await response.json();
 

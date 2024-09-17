@@ -12,7 +12,12 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const post = await fetch(
-    `https://pawandai-github.vercel.app/blog/${params.slug}`
+    `https://pawandai-github.vercel.app/blog/${params.slug}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   ).then((res) => res.json());
 
   if (!post) {
@@ -26,7 +31,11 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const response = await fetch("https://pawandai-github.vercel.app/blog");
+  const response = await fetch("https://pawandai-github.vercel.app/blog", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const posts = await response.json();
 
   return posts.map((post: Post) => ({
@@ -40,7 +49,11 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   if (process.env.NODE_ENV === "development") baseUrl = "http://localhost:3000";
   else baseUrl = "https://pawandai-github.vercel.app";
 
-  const response = await fetch(`${baseUrl}/api/blog/${slug}`);
+  const response = await fetch(`${baseUrl}/api/blog/${slug}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const post: Post = await response.json();
 
   return (
