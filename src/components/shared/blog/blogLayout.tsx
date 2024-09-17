@@ -168,15 +168,7 @@ const BlogLayout = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = getAllPosts([
-        "slug",
-        "title",
-        "image",
-        "preview",
-        "tags",
-        "author",
-        "date",
-      ]);
+      const response = await getAllPosts();
       setBlogPosts(response);
     };
 

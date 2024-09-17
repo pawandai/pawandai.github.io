@@ -33,7 +33,7 @@ interface ContentSectionProps {
   content: string;
 }
 
-const ContentSection = ({ content }: ContentSectionProps) => {
+const ContentSection = async ({ content }: ContentSectionProps) => {
   return (
     <ReactMarkdown
       components={CodeBlock as Partial<Components>}

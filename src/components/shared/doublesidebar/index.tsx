@@ -81,15 +81,7 @@ const DoubleSidebar = ({
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await getAllPosts([
-        "slug",
-        "title",
-        "image",
-        "preview",
-        "tags",
-        "author",
-        "date",
-      ]);
+      const response = await getAllPosts();
       setBlogPosts(response);
     };
 
@@ -100,7 +92,10 @@ const DoubleSidebar = ({
 
   // Find similar posts based on category and tags
   const similarPosts = useMemo(() => {
-    if (!selectedPost?.category && selectedPost?.tags.length === 0) {
+    if (
+      !selectedPost?.category &&
+      selectedPost?.tags?.split(",").map((tag) => tag.trim()).length === 0
+    ) {
       return [];
     }
     return blogPosts.filter((post) => {
@@ -111,10 +106,10 @@ const DoubleSidebar = ({
         return true;
       }
       const selectedPostTags = selectedPost?.tags
-        .split(",")
+        ?.split(",")
         .map((tag) => tag.trim());
       if (
-        selectedPost?.tags.length > 0 &&
+        selectedPost?.tags?.split(",").map((tag) => tag.trim()).length > 0 &&
         selectedPostTags.every((tag) => post.tags.includes(tag))
       ) {
         return true;
