@@ -18,12 +18,13 @@ const BlogDetailsPage = ({ params }: BlogDetailsPageProps) => {
   );
 };
 
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+export function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.then((post) =>
+    post.map((p) => ({
+      slug: p.slug,
+    }))
+  );
 }
 
 export default BlogDetailsPage;
