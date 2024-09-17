@@ -211,6 +211,7 @@ const BlogLayout = () => {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <BlogCard
+              post={post}
               key={post.id}
               preview={post.preview as string}
               slug={post.slug}

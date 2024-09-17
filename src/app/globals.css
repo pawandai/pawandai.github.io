@@ -256,7 +256,7 @@ body {
 /* Thin scrollbar track */
 ::-webkit-scrollbar {
   width: 4px;
-  position: absolute;
+  position: fixed;
 }
 
 /* Thin scrollbar thumb */

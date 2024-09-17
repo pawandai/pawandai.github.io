@@ -1,5 +1,5 @@
 ---
-category: blog
+category: art
 title: 'Art of Storytelling: Crafting Captivating Blog Posts'
 slug: art-of-storytelling
 tags: >-

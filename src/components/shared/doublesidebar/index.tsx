@@ -13,6 +13,7 @@ import { ArrowRight, Edit, NotebookPen, SearchX } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import BlogEditor from "../blog/editor";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Tag from "@/components/ui/tag";
 
 interface DoubleSidebarProps {
   children: ReactNode;
@@ -88,8 +89,6 @@ const DoubleSidebar = ({
     fetchBlogs();
   }, []);
 
-  // Handle scroll event
-
   // Find similar posts based on category and tags
   const similarPosts = useMemo(() => {
     if (
@@ -135,8 +134,19 @@ const DoubleSidebar = ({
         </div>
 
         {/* Blog Content */}
-        <article className="prose prose-gray dark:prose-invert">
+        <article className="prose prose-gray dark:prose-invert mb-8">
+          <div className="flex gap-2 items-center justify-center mb-4">
+            Category: <Tag label={selectedPost.category} className="w-fit" />
+          </div>
           {children}
+          <div className="flex gap-2 items-center justify-center my-4 flex-wrap">
+            {selectedPost.tags
+              .split(",")
+              .map((tag) => tag.trim())
+              .map((tag) => (
+                <Tag key={selectedPost.slug} label={tag} className="w-fit" />
+              ))}
+          </div>
         </article>
 
         {/* Topics (Right Sidebar) */}

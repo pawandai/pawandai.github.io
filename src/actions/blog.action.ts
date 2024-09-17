@@ -43,7 +43,7 @@ export async function getAllPosts() {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const deleteBlog = (slug: string) => {
+export const deleteBlog = async (slug: string) => {
   const deletedFile = join(process.cwd(), "src", "_blogs", `${slug}.md`);
   fs.unlink(deletedFile);
 };

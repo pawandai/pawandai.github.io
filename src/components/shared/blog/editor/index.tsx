@@ -92,6 +92,7 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
               onChange={(e) =>
                 setBlogVariables({ ...blogVariables, slug: e.target.value })
               }
+              disabled={blogVariables.slug.length > 0}
               className="w-full mt-2 p-4 rounded-md border-2"
               type="text"
             />
