@@ -1,5 +1,3 @@
-"use client";
-
 import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import { Post } from "@/types";
 import { useEffect, useState } from "react";

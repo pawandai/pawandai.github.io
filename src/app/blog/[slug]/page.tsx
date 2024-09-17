@@ -1,5 +1,3 @@
-"use server";
-
 import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
@@ -18,11 +16,11 @@ const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   );
 };
 
-// Static params generation for SSG (static site generation)
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-  return posts.map((p) => ({
-    slug: p.slug,
+
+  return posts.map((post) => ({
+    slug: post.slug,
   }));
 }
 
