@@ -26,11 +26,10 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const posts: Post[] = await fetch(
-    "https://pawandai-github.vercel.app/blog"
-  ).then((res) => res.json());
+  const response = await fetch("https://pawandai-github.vercel.app/blog");
+  const posts = await response.json();
 
-  return posts.map((post) => ({
+  return posts.map((post: Post) => ({
     slug: post.slug,
   }));
 }

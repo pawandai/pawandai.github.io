@@ -3,7 +3,6 @@ import fs from "fs/promises";
 import matter from "gray-matter";
 import { NextResponse } from "next/server";
 import { Post } from "@/types";
-// import { Post } from "@/types";
 
 export async function GET(
   request: Request,
@@ -20,11 +19,11 @@ export async function GET(
 }
 
 export async function generateStaticParams() {
-  const posts: Post[] = await fetch(
-    "https://pawandai-github.vercel.app/api/blog"
-  ).then((res) => res.json());
+  const response = await fetch("https://pawandai-github.vercel.app/api/blog");
 
-  return posts.map((post) => ({
+  const posts = await response.json();
+
+  return posts.map((post: Post) => ({
     slug: post.slug,
   }));
 }
