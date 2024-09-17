@@ -1,5 +1,3 @@
-// import { getPostBySlug } from "@/actions/blog.action";
-import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
 import { Post } from "@/types";
@@ -13,7 +11,9 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }) {
-  const post = await getPostBySlug(params.slug);
+  const post = await fetch(
+    `https://pawandai-github.vercel.app/blog/${params.slug}`
+  ).then((res) => res.json());
 
   if (!post) {
     return {
@@ -26,7 +26,9 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts: Post[] = await fetch(
+    "https://pawandai-github.vercel.app/blog"
+  ).then((res) => res.json());
 
   return posts.map((post) => ({
     slug: post.slug,
