@@ -5,16 +5,8 @@ import DoubleSidebar from "@/components/shared/doublesidebar";
 interface BlogDetailsPageProps {
   params: { slug: string };
 }
-
-const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
-  const selectedPost = await getPostBySlug(params.slug);
-
-  return (
-    <DoubleSidebar selectedPost={selectedPost}>
-      <ContentSection content={selectedPost.content} />
-    </DoubleSidebar>
-  );
-};
+export const dynamicParams = true;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -24,4 +16,14 @@ export async function generateStaticParams() {
   }));
 }
 
-export default BlogDetailsPage;
+export default async function BlogDetailsPage({
+  params,
+}: BlogDetailsPageProps) {
+  const selectedPost = await getPostBySlug(params.slug);
+
+  return (
+    <DoubleSidebar selectedPost={selectedPost}>
+      <ContentSection content={selectedPost.content} />
+    </DoubleSidebar>
+  );
+}
