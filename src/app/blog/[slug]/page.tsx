@@ -1,3 +1,5 @@
+"use client";
+
 import { getAllPosts } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
