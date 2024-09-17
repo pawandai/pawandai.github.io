@@ -9,18 +9,7 @@ export const useGetAllPosts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = (await getAllPosts([
-        "createdAt",
-        "slug",
-        "preview",
-        "title",
-        "tags",
-        "topics",
-        "image",
-        "content",
-        "category",
-        "timeToRead",
-      ])) as Post[];
+      const response = (await getAllPosts()) as Post[];
       setData(response);
     };
     fetchData();
@@ -34,18 +23,7 @@ export const useGetPostBySlug = (slug: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = (await getPostBySlug(slug, [
-        "createdAt",
-        "slug",
-        "preview",
-        "title",
-        "tags",
-        "topics",
-        "image",
-        "content",
-        "category",
-        "timeToRead",
-      ])) as Post;
+      const response = (await getPostBySlug(slug)) as Post;
       setData(response);
     };
     fetchData();
