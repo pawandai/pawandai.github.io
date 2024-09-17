@@ -1,12 +1,41 @@
 import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
+import { Post } from "@/types";
 
 interface BlogDetailsPageProps {
+  description: string;
   params: { slug: string };
 }
-export const dynamicParams = true;
-export const revalidate = 60;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await getPostBySlug(params.slug);
+
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    title: post.title,
+  };
+}
+
+const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
+  const { slug } = params;
+  const response = await fetch(`http://localhost:3000/api/blog/${slug}`);
+  const post: Post = await response.json();
+
+  return (
+    <DoubleSidebar selectedPost={post}>
+      <ContentSection content={post.content} />
+    </DoubleSidebar>
+  );
+};
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -16,14 +45,4 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogDetailsPage({
-  params,
-}: BlogDetailsPageProps) {
-  const selectedPost = await getPostBySlug(params.slug);
-
-  return (
-    <DoubleSidebar selectedPost={selectedPost}>
-      <ContentSection content={selectedPost.content} />
-    </DoubleSidebar>
-  );
-}
+export default BlogDetailsPage;
