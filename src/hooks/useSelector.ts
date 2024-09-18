@@ -1,4 +1,3 @@
-import { getAllPosts, getPostBySlug } from "@/actions/blog.action";
 import { Post } from "@/types";
 import { useEffect, useState } from "react";
 
@@ -7,7 +6,9 @@ export const useGetAllPosts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = (await getAllPosts()) as Post[];
+      const response = (await fetch(
+        "https://pawandai-github.vercel.app/api/blog"
+      ).then((res) => res.json())) as Post[];
       setData(response);
     };
     fetchData();
@@ -21,7 +22,9 @@ export const useGetPostBySlug = (slug: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = (await getPostBySlug(slug)) as Post;
+      const response = (await fetch(
+        `https://pawandai-github.vercel.app/api/blog${slug}`
+      ).then((res) => res.json())) as Post;
       setData(response);
     };
     fetchData();
