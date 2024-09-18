@@ -35,12 +35,16 @@ export async function POST(req: any) {
       req.body.data.variables
     );
     fs.writeFile(postsfolder, dataToBeWritten);
+    return NextResponse.json({ message: "Post saved successfully" });
   } else {
-    return { name: "This route works in development mode only" };
+    return NextResponse.json({
+      name: "This route works in development mode only",
+    });
   }
 }
 
 export async function DELETE(req: Request) {
   const deletedFile = join(process.cwd(), "src", "_blogs", `${req.body}.md`);
   fs.unlink(deletedFile);
+  return NextResponse.json({ message: "Post deleted successfully" });
 }
