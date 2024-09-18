@@ -4,7 +4,6 @@ import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 import { Button } from "@/components/ui/button";
-import { upsertBlog } from "@/actions/blog.action";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types";
@@ -29,12 +28,16 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
     image: post.image,
   });
 
-  const savePost = () => {
+  const savePost = async () => {
     if (process.env.NODE_ENV === "development") {
-      upsertBlog({
-        slug: post.slug,
-        content: blogContent,
-        variables: blogVariables,
+      await fetch("https://pawandai-github.vercel.app/api/blog", {
+        method: "POST",
+        body: JSON.stringify({
+          data: {
+            content: blogContent,
+            variables: blogVariables,
+          },
+        }),
       });
       router.push(`/blog/${post.slug}`);
     } else {

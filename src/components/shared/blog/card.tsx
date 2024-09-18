@@ -8,7 +8,6 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Post } from "@/types";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import BlogEditor from "./editor";
-import { deleteBlog } from "@/actions/blog.action";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -40,7 +39,10 @@ export function BlogCard({
 }: BlogCardProps) {
   async function handleDeletePost() {
     try {
-      await deleteBlog(slug);
+      await fetch("https://pawandai-github.vercel.app/api/blog", {
+        method: "DELETE",
+        body: JSON.stringify(slug),
+      });
       if (refresh) refresh();
     } catch (error) {
       console.error(error);

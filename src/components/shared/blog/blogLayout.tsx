@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "./card";
 import Container from "@/components/ui/container";
-import { getAllPosts } from "@/actions/blog.action";
 import { Post } from "@/types";
 
 interface BlogFilterProps {
@@ -168,7 +167,9 @@ const BlogLayout = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await getAllPosts();
+      const response = await fetch(
+        "https://pawandai-github.vercel.app/api/blog"
+      ).then((res) => res.json());
       setBlogPosts(response);
     };
 

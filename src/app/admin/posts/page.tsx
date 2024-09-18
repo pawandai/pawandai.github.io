@@ -12,7 +12,6 @@ import {
 import { ContentLayout } from "@/components/shared/admin/contentLayout";
 import { Glasses, SearchIcon } from "lucide-react";
 import { BlogCard } from "@/components/shared/blog/card";
-import { getAllPosts } from "@/actions/blog.action";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Post } from "@/types";
 import { Input } from "@/components/ui/input";
@@ -23,7 +22,9 @@ export default function PostsPage() {
   const [blogPosts, setBlogPosts] = useState<Post[]>([]);
 
   async function fetchPosts() {
-    const response = await getAllPosts();
+    const response = await fetch(
+      "https://pawandai-github.vercel.app/api/blog"
+    ).then((res) => res.json());
     setBlogPosts(response);
   }
 

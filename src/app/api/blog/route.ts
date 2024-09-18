@@ -1,4 +1,7 @@
+import matter from "gray-matter";
 import { NextResponse } from "next/server";
+import { join } from "path";
+import fs from "fs/promises";
 
 export async function GET() {
   const slugs = await fetch(
@@ -16,4 +19,28 @@ export async function GET() {
     post1.createdAt > post2.createdAt ? -1 : 1
   );
   return NextResponse.json(sortedPosts);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function POST(req: any) {
+  const postsfolder = join(
+    process.cwd(),
+    "src",
+    "_blogs",
+    `${req.body.data.slug}.md`
+  );
+  if (process.env.NODE_ENV === "development") {
+    const dataToBeWritten = matter.stringify(
+      req.body.data?.content,
+      req.body.data.variables
+    );
+    fs.writeFile(postsfolder, dataToBeWritten);
+  } else {
+    return { name: "This route works in development mode only" };
+  }
+}
+
+export async function DELETE(req: Request) {
+  const deletedFile = join(process.cwd(), "src", "_blogs", `${req.body}.md`);
+  fs.unlink(deletedFile);
 }

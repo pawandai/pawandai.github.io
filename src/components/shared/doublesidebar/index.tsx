@@ -7,7 +7,6 @@ import MenuOptions from "./menuoptions";
 import Header from "../header";
 import { Post } from "@/types";
 import { Badge } from "@/components/ui/badge";
-import { getAllPosts } from "@/actions/blog.action";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight, Edit, NotebookPen, SearchX } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -82,7 +81,9 @@ const DoubleSidebar = ({
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await getAllPosts();
+      const response = await fetch(
+        "https://pawandai-github.vercel.app/api/blog"
+      ).then((res) => res.json());
       setBlogPosts(response);
     };
 
