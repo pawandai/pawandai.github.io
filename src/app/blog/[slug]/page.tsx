@@ -9,7 +9,7 @@ interface BlogDetailsPageProps {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; post: Post };
 }) {
   const post = await fetch(
     `https://pawandai-github.vercel.app/api/blog/${params.slug}`,
@@ -28,6 +28,9 @@ export async function generateMetadata({
   }
   return {
     title: post.title,
+    props: {
+      post: post,
+    },
   };
 }
 
@@ -45,21 +48,9 @@ export async function generateStaticParams() {
 }
 
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
-  const { slug } = params;
-  // let baseUrl;
-  // if (process.env.NODE_ENV === "development") baseUrl = "http://localhost:3000";
-  // else baseUrl = "https://pawandai-github.vercel.app";
-
   const post = await fetch(
-    `https://pawandai-github.vercel.app/api/blog/${slug}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        accept: "application/json",
-      },
-    }
+    `https://pawandai-github.vercel.app/api/blog/${params.slug}`
   ).then((res) => res.json());
-
   return (
     <DoubleSidebar selectedPost={post}>
       <ContentSection content={post.content} />
