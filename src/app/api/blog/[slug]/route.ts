@@ -2,7 +2,7 @@ import { join } from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import { NextApiResponse } from "next";
-// import { getApiUrl } from "@/lib/utils";
+import { getApiUrl } from "@/lib/utils";
 
 export async function GET(
   request: Request,
@@ -25,33 +25,33 @@ export async function GET(
   }
 }
 
-// export async function generateStaticParams() {
-//   // const url = getApiUrl();
-//   try {
-//     const response = await fetch(`/api/blog`);
-//     console.error("here is the response ", response);
+export async function generateStaticParams() {
+  const url = getApiUrl();
+  try {
+    const response = await fetch(`${url}/api/blog`);
+    console.error("here is the response ", response);
 
-//     if (!response.ok) {
-//       if (response.status === 404) {
-//         console.error("API endpoint not found (404)");
-//       } else {
-//         console.error(`HTTP error! status: ${response.status}`);
-//       }
-//       return [];
-//     }
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.error("API endpoint not found (404)");
+      } else {
+        console.error(`HTTP error! status: ${response.status}`);
+      }
+      return [];
+    }
 
-//     const contentType = response.headers.get("content-type");
-//     if (!contentType || !contentType.includes("application/json")) {
-//       console.error("Received non-JSON response");
-//       return [];
-//     }
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      console.error("Received non-JSON response");
+      return [];
+    }
 
-//     const posts = await response.json();
-//     return posts.map((post: { slug: string }) => ({
-//       params: { slug: post.slug },
-//     }));
-//   } catch (error) {
-//     console.error("Failed to fetch blog data:", error);
-//     return [];
-//   }
-// }
+    const posts = await response.json();
+    return posts.map((post: { slug: string }) => ({
+      params: { slug: post.slug },
+    }));
+  } catch (error) {
+    console.error("Failed to fetch blog data:", error);
+    return [];
+  }
+}

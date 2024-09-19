@@ -2,12 +2,12 @@ import matter from "gray-matter";
 import { NextResponse } from "next/server";
 import { join } from "path";
 import fs from "fs/promises";
-// import { getApiUrl } from "@/lib/utils";
+import { getApiUrl } from "@/lib/utils";
 import { fetchApi } from "@/lib/fetchApi";
 
 export async function GET() {
-  // const url = getApiUrl();
-  const slugs = await fetchApi(`/api/slugs`);
+  const url = getApiUrl();
+  const slugs = await fetchApi(`${url}/api/slugs`);
   const response = slugs.map(async (slug: string) => {
     const postsDirectory = join(process.cwd(), "src", "_blogs");
     const realSlug = slug.replace(/\.md$/, "");
