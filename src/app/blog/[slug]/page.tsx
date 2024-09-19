@@ -1,7 +1,6 @@
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
-import { useGetPostBySlug } from "@/hooks/useSelector";
-import { fetchApi } from "@/lib/fetchApi";
+import { getApi } from "@/lib/api";
 import { getApiUrl } from "@/lib/utils";
 import { Post } from "@/types";
 
@@ -15,7 +14,7 @@ export async function generateMetadata({
   params: { slug: string; post: Post };
 }) {
   const url = getApiUrl();
-  const post = await fetchApi(`${url}/api/blog/${params.slug}`);
+  const post = await getApi(`${url}/api/blog/${params.slug}`);
 
   if (!post) {
     return {
@@ -32,7 +31,7 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const url = getApiUrl();
-  const posts = await fetchApi(`${url}/api/blog`);
+  const posts = await getApi(`${url}/api/blog`);
 
   return posts.map((post: Post) => ({
     slug: post.slug,
@@ -40,7 +39,8 @@ export async function generateStaticParams() {
 }
 
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
-  const post = useGetPostBySlug(params.slug);
+  const url = getApiUrl();
+  const post = await getApi(`${url}/api/blog/${params.slug}`);
   return (
     <DoubleSidebar selectedPost={post}>
       <ContentSection content={post.content} />
