@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import MenuOptions from "../doublesidebar/menuoptions";
 import { Glasses, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "./card";
 import Container from "@/components/ui/container";
-import { Post } from "@/types";
-import { getApiUrl } from "@/lib/utils";
-import { fetchApi } from "@/lib/fetchApi";
+import { useGetAllPosts } from "@/hooks/useSelector";
 
 interface BlogFilterProps {
   searchTerm: string;
@@ -108,7 +106,7 @@ const BlogLayout = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [blogPosts, setBlogPosts] = useState<Post[]>([]);
+  const blogPosts = useGetAllPosts();
 
   const filteredPosts = useMemo(
     () =>
@@ -166,18 +164,6 @@ const BlogLayout = () => {
 
     return popularTags;
   }, [blogPosts]);
-
-  const url = getApiUrl();
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      console.log("this is the server response");
-      const response = await fetchApi(`${url}/api/blog`);
-      console.log("this is the server response", response);
-      setBlogPosts(response);
-    };
-
-    fetchBlogs();
-  }, []);
 
   return (
     <Container className="grid md:grid-cols-[240px_1fr] grid-cols-1 gap-8 p-4 sm:p-8">

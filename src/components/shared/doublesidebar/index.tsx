@@ -2,7 +2,7 @@
 
 import Container from "@/components/ui/container";
 import Link from "next/link";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import MenuOptions from "./menuoptions";
 import Header from "../header";
 import { Post } from "@/types";
@@ -13,7 +13,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import BlogEditor from "../blog/editor";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Tag from "@/components/ui/tag";
-import { getApiUrl } from "@/lib/utils";
+import { useGetAllPosts } from "@/hooks/useSelector";
 
 interface DoubleSidebarProps {
   children: ReactNode;
@@ -78,17 +78,8 @@ const DoubleSidebar = ({
   selectedPost,
 }: DoubleSidebarProps) => {
   const [activeSection, setActiveSection] = useState<string>("");
-  const [blogPosts, setBlogPosts] = useState<Post[]>([]);
 
-  const url = getApiUrl();
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      const response = await fetch(`${url}/api/blog`).then((res) => res.json());
-      setBlogPosts(response);
-    };
-
-    fetchBlogs();
-  }, []);
+  const blogPosts = useGetAllPosts();
 
   // Find similar posts based on category and tags
   const similarPosts = useMemo(() => {

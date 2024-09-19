@@ -2,12 +2,12 @@ import matter from "gray-matter";
 import { NextResponse } from "next/server";
 import { join } from "path";
 import fs from "fs/promises";
-import { getApiUrl } from "@/lib/utils";
+// import { getApiUrl } from "@/lib/utils";
 import { fetchApi } from "@/lib/fetchApi";
 
 export async function GET() {
-  const url = getApiUrl();
-  const slugs = await fetchApi(`${url}/api/slugs`);
+  // const url = getApiUrl();
+  const slugs = await fetchApi(`/api/slugs`);
   const response = slugs.map(async (slug: string) => {
     const postsDirectory = join(process.cwd(), "src", "_blogs");
     const realSlug = slug.replace(/\.md$/, "");
@@ -19,11 +19,9 @@ export async function GET() {
   });
   // sort posts by date in descending order
   const posts = await Promise.all(response);
-  console.log("this is the server response", posts);
   const sortedPosts = posts.sort((post1, post2) =>
     post1.createdAt > post2.createdAt ? -1 : 1
   );
-  console.log("this is the server response", sortedPosts);
   return NextResponse.json(sortedPosts);
 }
 

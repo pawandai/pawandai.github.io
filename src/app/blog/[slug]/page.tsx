@@ -1,7 +1,8 @@
 import ContentSection from "@/components/shared/blog/content";
 import DoubleSidebar from "@/components/shared/doublesidebar";
+import { useGetPostBySlug } from "@/hooks/useSelector";
 import { fetchApi } from "@/lib/fetchApi";
-import { getApiUrl } from "@/lib/utils";
+// import { getApiUrl } from "@/lib/utils";
 import { Post } from "@/types";
 
 interface BlogDetailsPageProps {
@@ -13,13 +14,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string; post: Post };
 }) {
-  const url = getApiUrl();
-  const post = await fetch(`${url}/api/blog/${params.slug}`, {
-    headers: {
-      "Content-Type": "application/json",
-      accept: "application/json",
-    },
-  }).then((res) => res.json());
+  // const url = getApiUrl();
+  const post = await fetchApi(`/api/blog/${params.slug}`);
 
   if (!post) {
     return {
@@ -35,13 +31,8 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const url = getApiUrl();
-  const posts = await fetch(`${url}/api/blog`, {
-    headers: {
-      "Content-Type": "application/json",
-      accept: "application/json",
-    },
-  }).then((res) => res.json());
+  // const url = getApiUrl();
+  const posts = await fetchApi(`/api/blog`);
 
   return posts.map((post: Post) => ({
     slug: post.slug,
@@ -49,8 +40,7 @@ export async function generateStaticParams() {
 }
 
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
-  const url = getApiUrl();
-  const post = await fetchApi(`${url}/api/blog/${params.slug}`);
+  const post = useGetPostBySlug(params.slug);
   return (
     <DoubleSidebar selectedPost={post}>
       <ContentSection content={post.content} />

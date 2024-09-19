@@ -1,16 +1,17 @@
-import { getApiUrl } from "@/lib/utils";
+"use client";
+
+import { fetchApi } from "@/lib/fetchApi";
+// import { getApiUrl } from "@/lib/utils";
 import { Post } from "@/types";
 import { useEffect, useState } from "react";
 
 export const useGetAllPosts = () => {
-  const [data, setData] = useState<Post[]>();
+  const [data, setData] = useState<Post[]>([]);
 
-  const url = getApiUrl();
+  // const url = getApiUrl();
   useEffect(() => {
     const fetchData = async () => {
-      const response = (await fetch(`${url}/api/blog`).then((res) =>
-        res.json()
-      )) as Post[];
+      const response = (await fetchApi(`/api/blog`)) as Post[];
       setData(response);
     };
     fetchData();
@@ -20,14 +21,22 @@ export const useGetAllPosts = () => {
 };
 
 export const useGetPostBySlug = (slug: string) => {
-  const [data, setData] = useState<Post>();
+  const [data, setData] = useState<Post>({
+    category: "",
+    content: "",
+    createdAt: "",
+    id: "",
+    slug: "",
+    tags: "",
+    timeToRead: "",
+    title: "",
+    topics: "",
+  });
 
-  const url = getApiUrl();
+  // const url = getApiUrl();
   useEffect(() => {
     const fetchData = async () => {
-      const response = (await fetch(`${url}/api/blog/${slug}`).then((res) =>
-        res.json()
-      )) as Post;
+      const response = (await fetchApi(`/api/blog/${slug}`)) as Post;
       setData(response);
     };
     fetchData();

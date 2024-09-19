@@ -12,29 +12,16 @@ import {
 import { ContentLayout } from "@/components/shared/admin/contentLayout";
 import { Glasses, SearchIcon } from "lucide-react";
 import { BlogCard } from "@/components/shared/blog/card";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Post } from "@/types";
+import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import Container from "@/components/ui/container";
-import { getApiUrl } from "@/lib/utils";
+import { useGetAllPosts } from "@/hooks/useSelector";
+import { useRouter } from "next/navigation";
 
 export default function PostsPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [blogPosts, setBlogPosts] = useState<Post[]>([]);
-
-  async function fetchPosts() {
-    const url = getApiUrl();
-    const response = await fetch(`${url}/api/blog`).then((res) => res.json());
-    setBlogPosts(response);
-  }
-
-  const refresh = useCallback(() => {
-    fetchPosts();
-  }, []);
-
-  useEffect(() => {
-    fetchPosts();
-  }, [refresh]);
+  const blogPosts = useGetAllPosts();
+  const router = useRouter();
 
   const filteredPosts = useMemo(
     () =>
@@ -50,6 +37,10 @@ export default function PostsPage() {
       }),
     [blogPosts, searchTerm]
   );
+
+  const refresh = () => {
+    router.refresh();
+  };
 
   return (
     <ContentLayout title="All Posts">

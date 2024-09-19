@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types";
-import { getApiUrl } from "@/lib/utils";
+// import { getApiUrl } from "@/lib/utils";
 
 interface BlogEditorProps {
   post: Post;
@@ -29,10 +29,10 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
     image: post.image,
   });
 
-  const url = getApiUrl();
+  // const url = getApiUrl();
   const savePost = async () => {
     if (process.env.NODE_ENV === "development") {
-      await fetch(`${url}/api/blog`, {
+      await fetch(`/api/blog`, {
         method: "POST",
         body: JSON.stringify({
           data: {
