@@ -20,5 +20,5 @@ export function ISOToDate(date: string) {
 
 export function getApiUrl() {
   if (process.env.NODE_ENV === "development") return "http://localhost:3000";
-  else return "https://pawandai-github.vercel.app";
+  else return "https://pawanawasthi.com.np";
 }
