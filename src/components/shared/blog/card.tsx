@@ -19,6 +19,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { getApiUrl } from "@/lib/utils";
 
 type BlogCardProps = {
   post?: Post;
@@ -37,9 +38,10 @@ export function BlogCard({
   post,
   refresh,
 }: BlogCardProps) {
+  const url = getApiUrl();
   async function handleDeletePost() {
     try {
-      await fetch("https://pawandai-github.vercel.app/api/blog", {
+      await fetch(`${url}/api/blog`, {
         method: "DELETE",
         body: JSON.stringify(slug),
       });

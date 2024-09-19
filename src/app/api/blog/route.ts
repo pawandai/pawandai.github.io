@@ -2,22 +2,28 @@ import matter from "gray-matter";
 import { NextResponse } from "next/server";
 import { join } from "path";
 import fs from "fs/promises";
+import { getApiUrl } from "@/lib/utils";
+import { fetchApi } from "@/lib/fetchApi";
 
 export async function GET() {
-  const slugs = await fetch(
-    "https://pawandai-github.vercel.app/api/blog/slugs"
-  ).then((res) => res.json());
-  const response = slugs.map(
-    async (slug: string) =>
-      await fetch("https://pawandai-github.vercel.app/api/blog/" + slug).then(
-        (res) => res.json()
-      )
-  );
+  const url = getApiUrl();
+  const slugs = await fetchApi(`${url}/api/slugs`);
+  const response = slugs.map(async (slug: string) => {
+    const postsDirectory = join(process.cwd(), "src", "_blogs");
+    const realSlug = slug.replace(/\.md$/, "");
+    const fullPath = join(postsDirectory, `${realSlug}.md`);
+    const fileContents = await fs.readFile(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
+
+    return { ...data, content };
+  });
   // sort posts by date in descending order
   const posts = await Promise.all(response);
+  console.log("this is the server response", posts);
   const sortedPosts = posts.sort((post1, post2) =>
     post1.createdAt > post2.createdAt ? -1 : 1
   );
+  console.log("this is the server response", sortedPosts);
   return NextResponse.json(sortedPosts);
 }
 

@@ -3,6 +3,8 @@ import fs from "fs/promises";
 import matter from "gray-matter";
 import { Post } from "@/types";
 import { NextResponse } from "next/server";
+import { getApiUrl } from "@/lib/utils";
+import { fetchApi } from "@/lib/fetchApi";
 
 export async function GET(
   request: Request,
@@ -19,12 +21,8 @@ export async function GET(
 }
 
 export async function generateStaticParams() {
-  const posts = await fetch("https://pawandai-github.vercel.app/api/blog", {
-    headers: {
-      "Content-Type": "application/json",
-      accept: "application/json",
-    },
-  }).then((res) => res.json());
+  const url = getApiUrl();
+  const posts = await fetchApi(`${url}/api/blog`);
 
   return posts.map((post: Post) => ({
     slug: post.slug,

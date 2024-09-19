@@ -16,15 +16,15 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Post } from "@/types";
 import { Input } from "@/components/ui/input";
 import Container from "@/components/ui/container";
+import { getApiUrl } from "@/lib/utils";
 
 export default function PostsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [blogPosts, setBlogPosts] = useState<Post[]>([]);
 
   async function fetchPosts() {
-    const response = await fetch(
-      "https://pawandai-github.vercel.app/api/blog"
-    ).then((res) => res.json());
+    const url = getApiUrl();
+    const response = await fetch(`${url}/api/blog`).then((res) => res.json());
     setBlogPosts(response);
   }
 

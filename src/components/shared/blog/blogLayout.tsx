@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { BlogCard } from "./card";
 import Container from "@/components/ui/container";
 import { Post } from "@/types";
+import { getApiUrl } from "@/lib/utils";
+import { fetchApi } from "@/lib/fetchApi";
 
 interface BlogFilterProps {
   searchTerm: string;
@@ -165,11 +167,12 @@ const BlogLayout = () => {
     return popularTags;
   }, [blogPosts]);
 
+  const url = getApiUrl();
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await fetch(
-        "https://pawandai-github.vercel.app/api/blog"
-      ).then((res) => res.json());
+      console.log("this is the server response");
+      const response = await fetchApi(`${url}/api/blog`);
+      console.log("this is the server response", response);
       setBlogPosts(response);
     };
 
