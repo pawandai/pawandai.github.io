@@ -17,6 +17,7 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
   const router = useRouter();
   const [currentTabs, setCurrentTabs] = useState("BLOGDETAILS");
   const [blogContent, setBlogContent] = useState(post.content);
+  const [slug, setSlug] = useState(post.slug);
   const [blogVariables, setBlogVariables] = useState({
     date: post.date,
     category: post.category,
@@ -37,7 +38,7 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
         body: JSON.stringify({
           data: {
             content: blogContent,
-            variables: blogVariables,
+            variables: { ...blogVariables, slug: slug },
           },
         }),
       });
@@ -94,9 +95,7 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
             <Input
               id="slug"
               value={blogVariables.slug}
-              onChange={(e) =>
-                setBlogVariables({ ...blogVariables, slug: e.target.value })
-              }
+              onChange={(e) => setSlug(e.target.value)}
               disabled={blogVariables.slug.length > 0}
               className="w-full mt-2 p-4 rounded-md border-2"
               type="text"

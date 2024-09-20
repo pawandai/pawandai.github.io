@@ -1,10 +1,6 @@
 import { Post } from "@/types";
-import { getApiUrl } from "./utils";
 
-export const getApi = (url: string) =>
-  fetch(url, {
-    method: "GET",
-  }).then((res) => res.json());
+export const getApi = (url: string) => fetch(url).then((res) => res.json());
 
 export const postApi = (url: string, data: Post) =>
   fetch(url, {
@@ -15,8 +11,8 @@ export const postApi = (url: string, data: Post) =>
     body: JSON.stringify(data),
   }).then((res) => res.json());
 
-export const deleteApi = async (id: string) => {
-  return fetch(getApiUrl(), {
+export const deleteApi = async (url: string, id: string) => {
+  return fetch(url, {
     method: "DELETE",
     body: JSON.stringify({ id }),
   }).then((res) => res.json());
