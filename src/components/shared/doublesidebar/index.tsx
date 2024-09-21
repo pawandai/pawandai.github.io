@@ -79,7 +79,7 @@ const DoubleSidebar = ({
 }: DoubleSidebarProps) => {
   const [activeSection, setActiveSection] = useState<string>("");
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
-  const SCROLL_OFFSET = 80;
+  const SCROLL_OFFSET = 85;
 
   const { data: blogPosts } = useGetAllPosts();
 
