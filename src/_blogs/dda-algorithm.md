@@ -8,8 +8,10 @@ topics: >-
   Introduction, Line with positive slope, Line with negative slope, Algorithm,
   Conclusion
 preview: >-
-  DDA line drawing algorithm is used to convert mathematical description of a
-  line into ...
+  It is an incremental scan-conversion method. It computes points along the line
+  incrementally in one direction either in
+
+  The slope-intercept form of...
 image: /projects/task_manager/tasks.jpeg
 createdAt: '2024-09-21T06:03:23.525Z'
 content: >

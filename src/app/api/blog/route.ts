@@ -25,3 +25,31 @@ export async function GET() {
 
   return NextResponse.json(sortedPosts);
 }
+export async function POST(req: Request) {
+  const data = await req.json();
+  const fileToBeWritten = join(
+    process.cwd(),
+    "src",
+    "_blogs",
+    `${data.slug}.md`
+  );
+  if (process.env.NODE_ENV === "development") {
+    const dataToBeWritten = matter.stringify(data.content, data);
+    try {
+      await fs.writeFile(fileToBeWritten, dataToBeWritten);
+      return NextResponse.json({ message: "Post saved successfully" });
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    return NextResponse.json({
+      name: "This route works in development mode only",
+    });
+  }
+}
+
+export async function DELETE(req: Request) {
+  const deletedFile = join(process.cwd(), "src", "_blogs", `${req.body}.md`);
+  fs.unlink(deletedFile);
+  return NextResponse.json({ message: "Post deleted successfully" });
+}

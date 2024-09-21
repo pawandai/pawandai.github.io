@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types";
-import { upsertBlog } from "@/actions/blog.action";
+import { getApiUrl } from "@/lib/utils";
 
 interface BlogEditorProps {
   post: Post;
@@ -17,7 +17,7 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
   const router = useRouter();
   const [currentTabs, setCurrentTabs] = useState("BLOGDETAILS");
   const [blogContent, setBlogContent] = useState(post.content);
-  const [slug, setSlug] = useState(post.slug);
+  const slug = post.slug;
   const [blogVariables, setBlogVariables] = useState({
     category: post.category,
     title: post.title,
@@ -30,25 +30,19 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
     createdAt: post.createdAt,
   });
 
-  // const url = getApiUrl();
+  const url = getApiUrl();
   const savePost = async () => {
     if (process.env.NODE_ENV === "development") {
       try {
-        // await fetch(`${url}/api/blog/${slug}`, {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     data: {
-        //       content: blogContent,
-        //       variables: { ...blogVariables, slug: slug },
-        //     },
-        //   }),
-        // });
-        await upsertBlog({
-          ...blogVariables,
-          content: blogContent,
-        });
+        const res = await fetch(`${url}/api/blog`, {
+          method: "POST",
+          body: JSON.stringify({
+            ...blogVariables,
+            content: blogContent,
+          }),
+        }).then((res) => res.json());
         router.push(`/blog/${post.slug}`);
-        alert("Post saved successfully");
+        alert(res.message);
       } catch (error) {
         console.error(error);
       }
@@ -104,8 +98,10 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
             <Input
               id="slug"
               value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-              disabled={blogVariables.slug.length > 0}
+              onChange={(e) =>
+                setBlogVariables({ ...blogVariables, slug: e.target.value })
+              }
+              disabled={slug === "" ? false : true}
               className="w-full mt-2 p-4 rounded-md border-2"
               type="text"
             />

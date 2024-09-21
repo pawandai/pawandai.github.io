@@ -2,7 +2,7 @@
 
 import Container from "@/components/ui/container";
 import Link from "next/link";
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import MenuOptions from "./menuoptions";
 import Header from "../header";
 import { Post } from "@/types";
@@ -14,6 +14,7 @@ import BlogEditor from "../blog/editor";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Tag from "@/components/ui/tag";
 import { useGetAllPosts } from "@/hooks/useSelector";
+import { useRouter } from "next/navigation"; // Import from next/navigation
 
 interface DoubleSidebarProps {
   children: ReactNode;
@@ -78,8 +79,50 @@ const DoubleSidebar = ({
   selectedPost,
 }: DoubleSidebarProps) => {
   const [activeSection, setActiveSection] = useState<string>("");
-
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map()); // Map to store refs for each section
   const { data: blogPosts } = useGetAllPosts();
+  const router = useRouter(); // Use next/navigation's router
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1); // Get the hash without "#"
+      if (hash && sectionRefs.current.has(hash)) {
+        sectionRefs.current.get(hash)?.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+
+    handleHashChange(); // Handle hash change on page load
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            setActiveSection(id);
+            router.replace(`#${id}`); // Update the URL using next/navigation's router.replace
+          }
+        });
+      },
+      { rootMargin: "0px 0px -50% 0px", threshold: 0.1 }
+    );
+
+    sectionRefs.current.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => {
+      sectionRefs.current.forEach((element) => {
+        observer.unobserve(element);
+      });
+    };
+  }, [router]);
 
   // Find similar posts based on category and tags
   const similarPosts = useMemo(() => {
@@ -127,16 +170,18 @@ const DoubleSidebar = ({
 
         {/* Blog Content */}
         <article className="prose prose-gray dark:prose-invert mb-8">
+          {/* Category */}
           <div className="flex gap-2 items-center justify-center mb-4">
             Category: <Tag label={selectedPost.category} className="w-fit" />
           </div>
           <div>{children}</div>
+          {/* Tags */}
           <div className="flex gap-2 items-center justify-center my-4 flex-wrap">
             {selectedPost.tags
               .split(",")
               .map((tag) => tag.trim())
               .map((tag) => (
-                <Tag key={selectedPost.slug} label={tag} className="w-fit" />
+                <Tag key={tag} label={tag} className="w-fit" />
               ))}
           </div>
         </article>
@@ -151,22 +196,25 @@ const DoubleSidebar = ({
                 selectedPost?.topics
                   .split(",")
                   .map((topic) => topic.trim())
-                  .map((topic) => (
-                    <Link
-                      key={topic}
-                      href={`#${topic.toLowerCase().replace(" ", "-")}`}
-                      className={`block ${
-                        activeSection === "introduction"
-                          ? "text-foreground font-semibold"
-                          : "text-muted-foreground"
-                      } hover:text-foreground transition-colors`}
-                      onClick={() => {
-                        setActiveSection("introduction");
-                      }}
-                    >
-                      {topic}
-                    </Link>
-                  ))
+                  .map((topic) => {
+                    const topicId = topic.toLowerCase().replace(" ", "-");
+                    return (
+                      <Link
+                        key={topicId}
+                        href={`#${topicId}`}
+                        className={`block ${
+                          activeSection === topicId
+                            ? "text-foreground font-semibold"
+                            : "text-muted-foreground"
+                        } hover:text-foreground transition-colors`}
+                        onClick={() => {
+                          setActiveSection(topicId);
+                        }}
+                      >
+                        {topic}
+                      </Link>
+                    );
+                  })
               ) : (
                 <div className="h-[60vh] flex flex-col items-center justify-center gap-2 text-muted-foreground">
                   <NotebookPen className="h-12 w-12" />
