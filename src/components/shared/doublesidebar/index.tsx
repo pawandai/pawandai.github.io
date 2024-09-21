@@ -37,7 +37,7 @@ const SimilarBlogs = ({ similarPosts }: { similarPosts: Post[] }) => {
       {similarPosts.length > 0 ? (
         <ul className="space-y-6">
           {similarPosts.map((post) => (
-            <li key={post.id} className="bg-card">
+            <li key={post.slug} className="bg-card">
               <Link
                 href={`/blog/${post.slug}`}
                 className="text-lg font-normal p-1 hover:underline"
@@ -79,7 +79,7 @@ const DoubleSidebar = ({
 }: DoubleSidebarProps) => {
   const [activeSection, setActiveSection] = useState<string>("");
 
-  const blogPosts = useGetAllPosts();
+  const { data: blogPosts } = useGetAllPosts();
 
   // Find similar posts based on category and tags
   const similarPosts = useMemo(() => {
@@ -130,7 +130,7 @@ const DoubleSidebar = ({
           <div className="flex gap-2 items-center justify-center mb-4">
             Category: <Tag label={selectedPost.category} className="w-fit" />
           </div>
-          {children}
+          <div>{children}</div>
           <div className="flex gap-2 items-center justify-center my-4 flex-wrap">
             {selectedPost.tags
               .split(",")

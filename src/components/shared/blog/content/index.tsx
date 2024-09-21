@@ -1,7 +1,11 @@
+"use client";
+
 import { ReactNode } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 interface CodeProps {
   node: unknown;
@@ -23,9 +27,9 @@ const CodeBlock = ({ inline, className, children, ...props }: CodeProps) => {
       {String(children).replace(/\n$/, "")}
     </SyntaxHighlighter>
   ) : (
-    <code className={className} {...props}>
+    <div className={className} {...props}>
       {children}
-    </code>
+    </div>
   );
 };
 
@@ -33,11 +37,13 @@ interface ContentSectionProps {
   content: string;
 }
 
-const ContentSection = async ({ content }: ContentSectionProps) => {
+const ContentSection = ({ content }: ContentSectionProps) => {
   return (
     <ReactMarkdown
       components={CodeBlock as Partial<Components>}
       className="markdown-body"
+      remarkPlugins={[remarkMath]}
+      rehypePlugins={[rehypeKatex]}
     >
       {content}
     </ReactMarkdown>

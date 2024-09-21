@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import MenuOptions from "../doublesidebar/menuoptions";
-import { Glasses, SearchIcon } from "lucide-react";
+import { Glasses, Loader2, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "./card";
@@ -18,6 +18,7 @@ interface BlogFilterProps {
   tags: string[];
   selectedTags: string[];
   setSelectedTags: (tags: string[]) => void;
+  loading?: boolean;
 }
 
 const BlogFilter = ({
@@ -29,6 +30,7 @@ const BlogFilter = ({
   tags,
   selectedTags,
   setSelectedTags,
+  loading,
 }: BlogFilterProps) => {
   return (
     <div className="bg-background p-2 pt-16 overflow-y-scroll">
@@ -51,24 +53,30 @@ const BlogFilter = ({
         <h3 className="text-lg font-semibold mb-2">Categories</h3>
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() =>
-                setSelectedCategory(
-                  selectedCategory === category ? null : category
-                )
-              }
-              className={`px-4 py-2 rounded-lg ${
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-muted/50"
-              }`}
-            >
-              {category}
-            </Button>
-          ))}
+          {loading ? (
+            <Loader2 className="h-5 w-5 animate-spin text-center" />
+          ) : categories.length > 0 ? (
+            categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                onClick={() =>
+                  setSelectedCategory(
+                    selectedCategory === category ? null : category
+                  )
+                }
+                className={`px-4 py-2 rounded-lg ${
+                  selectedCategory === category
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:bg-muted/50"
+                }`}
+              >
+                {category}
+              </Button>
+            ))
+          ) : (
+            <p>No Categories found...</p>
+          )}
         </div>
       </div>
 
@@ -76,26 +84,32 @@ const BlogFilter = ({
         <h3 className="text-lg font-semibold mb-2">Tags</h3>
         {/* Tags Filter */}
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <Button
-              key={tag}
-              variant={selectedTags.includes(tag) ? "default" : "outline"}
-              onClick={() => {
-                if (selectedTags.includes(tag)) {
-                  setSelectedTags(selectedTags.filter((t) => t !== tag));
-                } else {
-                  setSelectedTags([...selectedTags, tag]);
-                }
-              }}
-              className={`px-4 py-2 rounded-lg ${
-                selectedTags.includes(tag)
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-muted/50"
-              }`}
-            >
-              {tag}
-            </Button>
-          ))}
+          {loading ? (
+            <Loader2 className="h-5 w-5 animate-spin text-center" />
+          ) : tags.length > 0 ? (
+            tags.map((tag) => (
+              <Button
+                key={tag}
+                variant={selectedTags.includes(tag) ? "default" : "outline"}
+                onClick={() => {
+                  if (selectedTags.includes(tag)) {
+                    setSelectedTags(selectedTags.filter((t) => t !== tag));
+                  } else {
+                    setSelectedTags([...selectedTags, tag]);
+                  }
+                }}
+                className={`px-4 py-2 rounded-lg ${
+                  selectedTags.includes(tag)
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:bg-muted/50"
+                }`}
+              >
+                {tag}
+              </Button>
+            ))
+          ) : (
+            <p>No Tags Found...</p>
+          )}
         </div>
       </div>
     </div>
@@ -106,7 +120,7 @@ const BlogLayout = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const blogPosts = useGetAllPosts();
+  const { data: blogPosts, loading } = useGetAllPosts();
 
   const filteredPosts = useMemo(
     () =>
@@ -178,6 +192,7 @@ const BlogLayout = () => {
             setSelectedCategory={setSelectedCategory}
             setSelectedTags={setSelectedTags}
             tags={tags}
+            loading={loading}
           />
         </MenuOptions>
         <MenuOptions>
@@ -190,32 +205,41 @@ const BlogLayout = () => {
             setSelectedCategory={setSelectedCategory}
             setSelectedTags={setSelectedTags}
             tags={tags}
+            loading={loading}
           />
         </MenuOptions>
       </aside>
-      <section
-        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 ${
-          filteredPosts.length > 0 ? "lg:grid-cols-2" : ""
-        } gap-4 align-middle items-center`}
-      >
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
-            <BlogCard
-              post={post}
-              key={post.id}
-              preview={post.preview as string}
-              slug={post.slug}
-              thumbnail={post.image as string}
-              title={post.title}
-            />
-          ))
-        ) : (
-          <div className="text-muted-foreground flex flex-col gap-2 items-center justify-center h-[60vh] text-center">
-            <Glasses className="h-12 w-12" />
-            <span>No blog posts found.</span>
-          </div>
-        )}
-      </section>
+      {loading ? (
+        <div className="h-[75vh] w-full flex items-center justify-center">
+          <Loader2 className="h-10 w-10 animate-spin" />
+        </div>
+      ) : (
+        <section
+          className={`grid grid-cols-1 ${
+            filteredPosts.length > 0 && "sm:grid-cols-2"
+          } md:grid-cols-1 ${
+            filteredPosts.length > 0 ? "lg:grid-cols-2" : ""
+          } gap-4 align-middle items-center`}
+        >
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => (
+              <BlogCard
+                post={post}
+                key={post.slug}
+                preview={post.preview as string}
+                slug={post.slug}
+                thumbnail={post.image as string}
+                title={post.title}
+              />
+            ))
+          ) : (
+            <div className="text-muted-foreground flex flex-col gap-2 items-center justify-center h-[60vh] text-center">
+              <Glasses className="h-12 w-12" />
+              <span>No blog posts found.</span>
+            </div>
+          )}
+        </section>
+      )}
     </Container>
   );
 };

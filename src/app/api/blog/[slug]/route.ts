@@ -19,7 +19,7 @@ export async function GET(
 
 export async function POST(req: Request) {
   const { data } = await req.json();
-  const postsfolder = join(
+  const fileToBeWritten = join(
     process.cwd(),
     "src",
     "_blogs",
@@ -27,7 +27,11 @@ export async function POST(req: Request) {
   );
   if (process.env.NODE_ENV === "development") {
     const dataToBeWritten = matter.stringify(data.content, data.variables);
-    await fs.writeFile(postsfolder, dataToBeWritten);
+    try {
+      await fs.writeFile(fileToBeWritten, dataToBeWritten);
+    } catch (error) {
+      console.error(error);
+    }
     return NextResponse.json({ message: "Post saved successfully" });
   } else {
     return NextResponse.json({

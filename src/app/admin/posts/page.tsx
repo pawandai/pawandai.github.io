@@ -25,7 +25,7 @@ export default function PostsPage() {
 
   const filteredPosts = useMemo(
     () =>
-      blogPosts.filter((post) => {
+      blogPosts.data.filter((post) => {
         return (
           post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -77,7 +77,7 @@ export default function PostsPage() {
             filteredPosts.map((post) => (
               <BlogCard
                 post={post}
-                key={post.id}
+                key={post.slug}
                 preview={post.preview as string}
                 slug={post.slug}
                 thumbnail={post.image as string}
