@@ -6,6 +6,10 @@
 /* @import "./markdown-light.css"; */
 @import "./mark.css";
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
