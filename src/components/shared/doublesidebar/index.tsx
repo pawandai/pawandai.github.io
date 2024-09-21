@@ -14,7 +14,6 @@ import BlogEditor from "../blog/editor";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Tag from "@/components/ui/tag";
 import { useGetAllPosts } from "@/hooks/useSelector";
-import { useRouter } from "next/navigation"; // Import from next/navigation
 
 interface DoubleSidebarProps {
   children: ReactNode;
@@ -79,50 +78,59 @@ const DoubleSidebar = ({
   selectedPost,
 }: DoubleSidebarProps) => {
   const [activeSection, setActiveSection] = useState<string>("");
-  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map()); // Map to store refs for each section
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+  const SCROLL_OFFSET = 80;
+
   const { data: blogPosts } = useGetAllPosts();
-  const router = useRouter(); // Use next/navigation's router
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.substring(1); // Get the hash without "#"
-      if (hash && sectionRefs.current.has(hash)) {
-        sectionRefs.current.get(hash)?.scrollIntoView({ behavior: "smooth" });
-      }
-    };
-
-    handleHashChange(); // Handle hash change on page load
-
-    window.addEventListener("hashchange", handleHashChange);
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
-
+  // Set up IntersectionObserver to detect section visibility and update URL
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const id = entry.target.id;
-            setActiveSection(id);
-            router.replace(`#${id}`); // Update the URL using next/navigation's router.replace
+            setActiveSection(id); // Set active section for highlighting
+            window.history.replaceState(null, "", `#${id}`); // Update URL without reload
           }
         });
       },
-      { rootMargin: "0px 0px -50% 0px", threshold: 0.1 }
+      { rootMargin: `-${SCROLL_OFFSET}px 0px -50% 0px`, threshold: 0.1 }
     );
 
-    sectionRefs.current.forEach((element) => {
-      observer.observe(element);
+    // Observe all sections
+    sectionRefs.current.forEach((section) => {
+      observer.observe(section);
     });
 
     return () => {
-      sectionRefs.current.forEach((element) => {
-        observer.unobserve(element);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      sectionRefs.current.forEach((section) => {
+        observer.unobserve(section);
       });
     };
-  }, [router]);
+  }, []);
+
+  const handleScrollTo = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const yOffset = -SCROLL_OFFSET; // Offset for smooth scroll
+      const y =
+        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" }); // Smooth scroll with offset
+      setActiveSection(id); // Highlight the clicked section
+      window.history.replaceState(null, "", `#${id}`); // Update the URL without reloading
+    }
+  };
+
+  // Capture section references in markdown
+  useEffect(() => {
+    const sections = document.querySelectorAll("h1, h2, h3, h4, h5, h6"); // Query all heading tags
+    sections.forEach((section) => {
+      sectionRefs.current.set(section.id, section as HTMLElement);
+    });
+  }, [children]);
 
   // Find similar posts based on category and tags
   const similarPosts = useMemo(() => {
@@ -181,7 +189,7 @@ const DoubleSidebar = ({
               .split(",")
               .map((tag) => tag.trim())
               .map((tag) => (
-                <Tag key={tag} label={tag} className="w-fit" />
+                <Tag key={selectedPost.slug} label={tag} className="w-fit" />
               ))}
           </div>
         </article>
@@ -193,26 +201,23 @@ const DoubleSidebar = ({
             <Separator />
             <nav className="space-y-2">
               {selectedPost?.topics ? (
-                selectedPost?.topics
+                selectedPost.topics
                   .split(",")
                   .map((topic) => topic.trim())
                   .map((topic) => {
-                    const topicId = topic.toLowerCase().replace(" ", "-");
+                    const topicId = topic.toLowerCase().replace(/\s+/g, "-");
                     return (
-                      <Link
+                      <button
                         key={topicId}
-                        href={`#${topicId}`}
-                        className={`block ${
+                        onClick={() => handleScrollTo(topicId)} // Handle scroll to section
+                        className={`block text-left w-full ${
                           activeSection === topicId
                             ? "text-foreground font-semibold"
                             : "text-muted-foreground"
                         } hover:text-foreground transition-colors`}
-                        onClick={() => {
-                          setActiveSection(topicId);
-                        }}
                       >
                         {topic}
-                      </Link>
+                      </button>
                     );
                   })
               ) : (
