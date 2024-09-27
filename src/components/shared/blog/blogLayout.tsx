@@ -1,14 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import MenuOptions from "../doublesidebar/menuoptions";
 import { Glasses, Loader2, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "./card";
 import Container from "@/components/ui/container";
-import { getApiUrl } from "@/lib/utils";
-import { Post } from "@/types";
+import { useGetAllPosts } from "@/hooks/useSelector";
 
 interface BlogFilterProps {
   searchTerm: string;
@@ -121,27 +120,7 @@ const BlogLayout = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [blogPosts, setBlogPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      const url = getApiUrl();
-      try {
-        const response = (await fetch(`${url}/api/blog`).then((res) =>
-          res.json()
-        )) as Post[];
-        setBlogPosts(response);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.error("Error fetching blog posts: ", error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+  const { loading, data: blogPosts } = useGetAllPosts();
 
   const filteredPosts = useMemo(
     () =>
