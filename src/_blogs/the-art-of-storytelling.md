@@ -1,6 +1,6 @@
 ---
 category: Art
-title: 'The Art of Storytelling: Crafting Captivating Blog Posts'
+title: 'The Art of Storytelling: Crafting Captivating Blog'
 slug: the-art-of-storytelling
 tags: 'art, dummy'
 timeToRead: '5'

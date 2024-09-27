@@ -14,7 +14,9 @@ export const useGetAllPosts = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = (await getApi(`${url}/api/blog`)) as Post[];
+        const response = (await fetch(`${url}/api/blog`).then((res) =>
+          res.json()
+        )) as Post[];
         setData(response);
         setLoading(false);
       } catch (error) {

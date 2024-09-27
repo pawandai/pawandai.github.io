@@ -85,6 +85,7 @@ const DoubleSidebar = ({
 
   // Set up IntersectionObserver to detect section visibility and update URL
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
