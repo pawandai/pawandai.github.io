@@ -13,12 +13,18 @@ import Profile from "@/components/shared/image/profile";
 import Typography from "@/components/ui/typography";
 import { useIsomorphicLayoutEffect } from "@/lib/lib";
 import AboutMe from "@/components/shared/aboutMe";
+import Contact from "@/components/shared/contact";
+import Footer from "@/components/shared/footer";
+import { Separator } from "@/components/ui/separator";
+import ScrollToTop from "@/components/shared/scrollToTop";
+import Projects from "@/components/shared/projects";
 
 export default function Home() {
   // Refs
   const workRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
   const textOne = useRef<HTMLHeadingElement>(null);
   const textTwo = useRef<HTMLHeadingElement>(null);
   const textThree = useRef<HTMLHeadingElement>(null);
@@ -48,6 +54,14 @@ export default function Home() {
     });
   };
 
+  const handleProjectsScroll = () => {
+    window.scrollTo({
+      top: projectsRef?.current?.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   useIsomorphicLayoutEffect(() => {
     stagger(
       [textOne.current, textTwo.current],
@@ -62,6 +76,7 @@ export default function Home() {
         handleWorkScroll={handleWorkScroll}
         handleAboutScroll={handleAboutScroll}
         handleContactScroll={handleContactScroll}
+        handleProjectsScroll={handleProjectsScroll}
       />
       <Container className="relative">
         <div className="gradient-circle" />
@@ -115,18 +130,17 @@ export default function Home() {
             ref={workRef}
             className="relative py-8 mt-4 sm:py-4 md:mt-12 px-4"
           >
-            <div className="absolute inset-0 bg-muted/40 z-0 rounded-xl" />
             <div className="relative z-[5] grid gap-8">
               <div className="grid gap-8">
                 <Typography variant="h3">Work and Education</Typography>
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex flex-col md:flex-row justify-between border p-8 rounded-xl">
                   {/* Education */}
-                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-muted-foreground/40">
+                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-[2px] after:bg-muted-foreground/40">
                     <Typography variant="subtitle" className="font-semibold">
                       Education
                     </Typography>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-primary rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
                       <div className="font-medium">2019 - 2021</div>
                       <div className="font-medium">High School, ISc</div>
                       <div className="text-muted-foreground">
@@ -134,7 +148,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-primary rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
                       <div className="font-medium">2022 - 2026</div>
                       <div className="font-medium">
                         Bachelors in Engineering
@@ -145,12 +159,12 @@ export default function Home() {
                     </div>
                   </div>
                   {/* Work Experience */}
-                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-muted-foreground/40 mt-8 md:mt-0">
+                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-[2px] after:bg-muted-foreground/40 mt-8 md:mt-0">
                     <Typography variant="subtitle" className="font-semibold">
                       Work
                     </Typography>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-primary rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
                       <div className="font-medium">Oct 2023 - Jan 2024</div>
                       <div className="font-medium">Frontend Developer</div>
                       <div className="text-muted-foreground">
@@ -158,7 +172,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-primary rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
                       <div className="font-medium">Jul 2023 - Present</div>
                       <div className="font-medium">React Native Developer</div>
                       <div className="text-muted-foreground">
@@ -185,12 +199,21 @@ export default function Home() {
             <AboutMe />
           </Container>
 
+          {/* Projects Section */}
+          <Container ref={projectsRef} className="mt-16 mx-2 sm:mx-0">
+            <h2 className="text-center text-2xl font-semibold">Projects</h2>
+            <Projects />
+          </Container>
+
           {/* Contact Section */}
-          <div ref={contactRef} className="h-[100vh]">
-            This is contact section which will be added later
+          <div ref={contactRef} className="mt-12">
+            <Contact />
           </div>
         </div>
       </Container>
+      <Separator />
+      <Footer />
+      <ScrollToTop />
     </>
   );
 }

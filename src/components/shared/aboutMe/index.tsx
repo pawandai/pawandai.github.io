@@ -16,7 +16,13 @@ interface AboutMeProps {}
 
 const AboutMe: FC<AboutMeProps> = () => {
   const urls = useMemo(
-    () => ["/placeholder.png", "/projects/task_manager/tasks.jpeg"],
+    () => [
+      "/placeholder.png",
+      "/placeholder.png",
+      "/placeholder.png",
+      "/placeholder.png",
+      "/placeholder.png",
+    ],
     []
   );
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
@@ -38,7 +44,7 @@ const AboutMe: FC<AboutMeProps> = () => {
   }, [swiper, urls]);
 
   return (
-    <section className="bg-gray-100 py-10 mt-10 rounded-xl">
+    <section className="py-10 mt-10 rounded-xl border">
       <div className="max-w-6xl mx-auto px-6">
         <h3 className="text-2xl font-bold text-center mb-8">About Me</h3>
         <main className="flex flex-col lg:flex-row items-center justify-center gap-8">

@@ -20,6 +20,7 @@ interface HeaderProps {
   handleWorkScroll?: () => void;
   handleAboutScroll?: () => void;
   handleContactScroll?: () => void;
+  handleProjectsScroll?: () => void;
   isBlog?: boolean;
   page?: string;
   className?: string;
@@ -74,7 +75,9 @@ const Header = ({
             </Button>
             {showResume && (
               <Link
-                href="/resume"
+                href="/resume.pdf"
+                target="_blank"
+                download="Pawan_Awasthi_resume"
                 className={buttonVariants({ variant: "outline" })}
               >
                 Resume

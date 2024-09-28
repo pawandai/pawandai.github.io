@@ -13,9 +13,10 @@ import "swiper/css/pagination";
 
 interface ImageSliderProps {
   urls: string[];
+  className?: string;
 }
 
-const ImageSlider = ({ urls }: ImageSliderProps) => {
+const ImageSlider = ({ urls, className }: ImageSliderProps) => {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -39,7 +40,9 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
   const inActiveStyles = "hidden text-gray-400";
 
   return (
-    <div className="group relative bg-zinc-100 aspect-square overflow-hidden rounded-xl">
+    <div
+      className={`group relative aspect-square bg-zinc-100 overflow-hidden rounded-xl ${className}`}
+    >
       <div className="absolute z-10 inset-0 opacity-0 group-hover:opacity-100 transition">
         <button
           className={cn(activeStyles, "right-3 transition", {

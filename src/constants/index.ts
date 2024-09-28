@@ -175,3 +175,25 @@ export const blogPosts = [
     timeToRead: 5,
   },
 ];
+
+export const PROJECTS = [
+  {
+    id: 1,
+    title: "Task Manager App - Trello Clone",
+    imageUrls: [
+      "/projects/task_manager/tasks.jpeg",
+      "/projects/task_manager/tasks.jpeg",
+      "/projects/task_manager/tasks.jpeg",
+      "/projects/task_manager/tasks.jpeg",
+    ],
+    tags: ["Next.js", "Prisma", "PostgresQL", "Stripe", "Server-Actions"],
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie parturient et sem ipsum volutpat vel. Natoque sem et aliquam mauris egestas quam volutpat viverra. In pretium nec senectus erat. Et malesuada lobortis.",
+    createdBy: [
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
+    ],
+    createdAt: "2021-09-01",
+    liveDemoUrl: "https://tasks-saas.vercel.app/",
+    githubUrl: "https://github.com/pawandai/SaaS_Task_Manager",
+  },
+];
