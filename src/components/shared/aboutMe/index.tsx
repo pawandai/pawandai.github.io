@@ -1,7 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import type SwiperType from "swiper";
 
 import "swiper/css";
@@ -44,10 +44,10 @@ const AboutMe: FC<AboutMeProps> = () => {
   }, [swiper, urls]);
 
   return (
-    <section className="py-10 mt-10 rounded-xl border">
+    <section className="py-10 mt-10 rounded-xl border overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <h3 className="text-2xl font-bold text-center mb-8">About Me</h3>
-        <main className="flex flex-col lg:flex-row items-center justify-center gap-8">
+        <main className="flex flex-col lg:flex-row items-center justify-center group relative aspect-square gap-8">
           <div className="flex-1 text-center">
             <Swiper
               pagination={{
@@ -58,7 +58,7 @@ const AboutMe: FC<AboutMeProps> = () => {
               onSwiper={(swiper) => setSwiper(swiper)}
               spaceBetween={30}
               slidesPerView={1}
-              modules={[Pagination]}
+              modules={[Pagination, Navigation]}
               className="w-full max-w-md flex items-center justify-center"
             >
               {urls.map((url, i) => (

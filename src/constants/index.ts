@@ -188,12 +188,31 @@ export const PROJECTS = [
     ],
     tags: ["Next.js", "Prisma", "PostgresQL", "Stripe", "Server-Actions"],
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie parturient et sem ipsum volutpat vel. Natoque sem et aliquam mauris egestas quam volutpat viverra. In pretium nec senectus erat. Et malesuada lobortis.",
+      "The Task Manager is a Next.js app, similar to Trello, designed for managing tasks, lists, and boards. Users can perform actions such as creating, updating, and deleting tasks, with additional features like drag-and-drop functionality, user authentication, and subscription-based payments. Prisma serves as the ORM, while PostgreSQL is used for database management, and Stripe handles the payment processing. Server-side logic is implemented using server actions. The application follows best practices for both Next.js and server actions.",
     createdBy: [
       { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
     ],
-    createdAt: "2021-09-01",
+    createdAt: "24 Aug 2024",
     liveDemoUrl: "https://tasks-saas.vercel.app/",
     githubUrl: "https://github.com/pawandai/SaaS_Task_Manager",
+  },
+  {
+    id: 2,
+    title: "Destination Australia",
+    imageUrls: [
+      "/projects/destination_aus/dashboard.PNG",
+      "/projects/destination_aus/home.PNG",
+      "/projects/destination_aus/dashboard.PNG",
+      "/projects/destination_aus/home.PNG",
+    ],
+    tags: ["MongoDB", "Next.js", "Express", "Azure"],
+    description:
+      "Destination Australia is a web application that allows users to explore Australia. The application features a dashboard for managing blog posts, user authentication, and a user-friendly interface for browsing and reading blog posts. The backend is built with Express and MongoDB, while the frontend is developed using Next.js. Images are stored in Azure Blob Storage, and the application is deployed on Azure App Service. The project demonstrates best practices for building a full-stack web application with Next.js and Express. It is also social media platform for students to share their experiences in Australia and help each other.",
+    createdBy: [
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
+    ],
+    createdAt: "In Development",
+    liveDemoUrl: "https://destinationaus.com/",
+    githubUrl: "https://github.com/thestartek/DestinationAusWeb",
   },
 ];
