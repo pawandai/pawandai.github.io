@@ -45,8 +45,8 @@ const Header = ({
   return (
     <div
       className={`mt-6 py-4 backdrop-blur-md bg-transparent sticky ${
-        theme === "light" && "bg-white/90"
-      } dark:text-white top-0 z-20 ${className} border-b`}
+        theme === "light" ? "bg-white/90" : "bg-slate-800/90"
+      } dark:text-white top-0 z-20 ${className} border-b border-gray-200 dark:border-gray-700`}
     >
       {/* Desktop Navbar */}
       <div className="hidden md:flex items-center justify-center mx-auto">
@@ -154,7 +154,10 @@ const Header = ({
             <SheetTrigger asChild>
               <Menu className="h-6 w-6" />
             </SheetTrigger>
-            <SheetContent className="bg-white !z-[110]" side="left">
+            <SheetContent
+              className="bg-white dark:bg-gray-900 !z-[110]"
+              side="left"
+            >
               <SheetHeader>
                 <SheetTitle>{"<pawandai />"}</SheetTitle>
               </SheetHeader>

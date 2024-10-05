@@ -29,7 +29,7 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <div
-      className={`max-w-xl overflow-hidden bg-white rounded-lg border-2 dark:bg-gray-800 mx-2 ${className}`}
+      className={`max-w-xl overflow-hidden bg-white dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700 mx-2 ${className}`}
     >
       <ImageSlider urls={imageUrls} className="aspect-video rounded-none" />
 
@@ -42,7 +42,7 @@ const ProjectCard = ({
           </div>
           <Link
             href={githubUrl}
-            className="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline"
+            className="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-400 hover:underline"
             tabIndex={0}
             role="link"
             target="_blank"
@@ -76,11 +76,12 @@ const ProjectCard = ({
           <Link
             className={`${buttonVariants({
               variant: "outline",
-            })} flex items-center gap-2`}
+            })} flex items-center gap-2 text-gray-800 dark:text-gray-100 dark:border-gray-100`}
             href={liveDemoUrl || "#"}
             target="_blank"
           >
-            Live <LinkIcon className="h-5 w-5" />
+            Live{" "}
+            <LinkIcon className="h-5 w-5 text-gray-800 dark:text-gray-100" />
           </Link>
         </div>
       </div>

@@ -41,7 +41,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${urbanist.className} antialiased`}>
+      <body
+        className={`${urbanist.className} antialiased dark:bg-slate-800 dark:text-white`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>

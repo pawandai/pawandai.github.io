@@ -44,10 +44,13 @@ const AboutMe: FC<AboutMeProps> = () => {
   }, [swiper, urls]);
 
   return (
-    <section className="py-10 mt-10 rounded-xl border overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6">
-        <h3 className="text-2xl font-bold text-center mb-8">About Me</h3>
-        <main className="flex flex-col lg:flex-row items-center justify-center group relative aspect-square gap-8">
+    <section className="py-10 mt-10 rounded-xl border overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700">
+      <div className="max-w-6xl h-fit mx-auto px-6">
+        <h3 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-gray-100">
+          About Me
+        </h3>
+        <main className="flex flex-col lg:flex-row items-center justify-center group relative gap-8">
+          {/* Image Slider */}
           <div className="flex-1 text-center">
             <Swiper
               pagination={{
@@ -74,11 +77,13 @@ const AboutMe: FC<AboutMeProps> = () => {
               ))}
             </Swiper>
           </div>
+
+          {/* Navigation Buttons */}
           <div className="flex justify-center items-center space-x-4 lg:hidden">
             <Button
               size="icon"
               disabled={slideConfig.isBeginning}
-              className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 transition"
+              className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 transition"
               onClick={(event) => {
                 event.preventDefault();
                 swiper?.slidePrev();
@@ -87,7 +92,7 @@ const AboutMe: FC<AboutMeProps> = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
+                className="w-6 h-6 text-gray-900 dark:text-gray-100"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -103,7 +108,7 @@ const AboutMe: FC<AboutMeProps> = () => {
             <Button
               size="icon"
               disabled={slideConfig.isEnd}
-              className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 transition"
+              className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 transition"
               onClick={(event) => {
                 event.preventDefault();
                 swiper?.slideNext();
@@ -112,7 +117,7 @@ const AboutMe: FC<AboutMeProps> = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
+                className="w-6 h-6 text-gray-900 dark:text-gray-100"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -127,16 +132,19 @@ const AboutMe: FC<AboutMeProps> = () => {
             </Button>
           </div>
 
+          {/* Description */}
           <div className="flex-1 max-w-md">
             <Avatar></Avatar>
             <div className="mb-4">
-              <p className="text-xl font-semibold">Pawan Awasthi</p>
-              <p className="text-gray-500">
+              <p className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                Pawan Awasthi
+              </p>
+              <p className="text-gray-500 dark:text-gray-400">
                 Software Engineer | Full Stack Developer
               </p>
             </div>
 
-            <p className="text-lg text-gray-700 leading-relaxed text-center lg:text-left">
+            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed text-center lg:text-left">
               “I&apos;m an engineering student with a strong focus on building
               secure, efficient systems, particularly in Python, JavaScript, and
               C#. My recent project shows my strength in database management
@@ -149,7 +157,7 @@ const AboutMe: FC<AboutMeProps> = () => {
               <Button
                 size="icon"
                 disabled={slideConfig.isBeginning}
-                className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 transition"
+                className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 transition"
                 onClick={(event) => {
                   event.preventDefault();
                   swiper?.slidePrev();
@@ -158,7 +166,7 @@ const AboutMe: FC<AboutMeProps> = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
+                  className="w-6 h-6 text-gray-900 dark:text-gray-100"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -174,7 +182,7 @@ const AboutMe: FC<AboutMeProps> = () => {
               <Button
                 size="icon"
                 disabled={slideConfig.isEnd}
-                className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 transition"
+                className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 transition"
                 onClick={(event) => {
                   event.preventDefault();
                   swiper?.slideNext();
@@ -183,7 +191,7 @@ const AboutMe: FC<AboutMeProps> = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
+                  className="w-6 h-6 text-gray-900 dark:text-gray-100"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

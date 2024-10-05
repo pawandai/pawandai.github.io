@@ -2,7 +2,7 @@
 category: Computer Graphics
 title: Digital Differential Analyzer (DDA) Algorithm
 slug: dda-algorithm
-tags: 'computer graphics, dda, scan conversion'
+tags: 'graphics, dda, scan conversion'
 timeToRead: '5'
 topics: >-
   Introduction, Line with positive slope, Line with negative slope, Algorithm,
@@ -24,10 +24,10 @@ content: >
 
   The slope-intercept form of a straight line is:
 
-  ($$C_L$$)
+  ($$C_L^D$$)
 ---
 # Digital Differential Analyzer (DDA) Algorithm
 ## [Introduction](#introduction)
 It is an incremental scan-conversion method. It computes points along the line incrementally in one direction either in
 The slope-intercept form of a straight line is:
-($$C_L$$)
+($$C_L^D$$)

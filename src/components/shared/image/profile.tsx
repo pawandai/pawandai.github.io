@@ -2,10 +2,10 @@ import Image from "next/image";
 
 const Profile = () => {
   return (
-    <div className="card relative mt-12 md:mr-10">
-      <div className="circle" />
-      <div className="circle" />
-      <div className="card-inner" />
+    <div className="card relative mt-12 md:mr-10 dark:bg-gray-500 dark:text-white">
+      <div className="circle dark:bg-gray-700" />
+      <div className="circle dark:bg-gray-700" />
+      <div className="card-inner dark:bg-gray-600" />
       <Image
         src="/images/profile.jpg"
         alt="Profile Picture"

@@ -4,7 +4,7 @@ import ProjectCard from "./projectCard";
 const Projects = () => {
   return (
     <div
-      className={`grid gap-4 justify-center ${
+      className={`grid gap-4 justify-center mx-auto ${
         PROJECTS.length > 1 ? "lg:grid-cols-2" : ""
       }`}
     >

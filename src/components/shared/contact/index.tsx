@@ -64,14 +64,19 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900 py-12">
+    <section className="py-12">
       <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-6">Get in Touch</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">
+          Get in Touch
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-900 dark:text-gray-100"
+              >
                 Your Name
               </label>
               <input
@@ -81,12 +86,15 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full p-3 border rounded-lg bg-gray-100 dark:bg-gray-800"
+                className="mt-1 block w-full p-3 border rounded-lg bg-gray-100 dark:bg-gray-700/30 dark:text-gray-100"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-900 dark:text-gray-100"
+              >
                 Your Email
               </label>
               <input
@@ -96,13 +104,16 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full p-3 border rounded-lg bg-gray-100 dark:bg-gray-800"
+                className="mt-1 block w-full p-3 border rounded-lg bg-gray-100 dark:bg-gray-700/30 dark:text-gray-100"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-900 dark:text-gray-100"
+            >
               Your Message
             </label>
             <textarea
@@ -112,7 +123,7 @@ const Contact = () => {
               onChange={handleChange}
               required
               rows={5}
-              className="mt-1 block w-full p-3 border rounded-lg bg-gray-100 dark:bg-gray-800"
+              className="mt-1 block w-full p-3 border rounded-lg bg-gray-100 dark:bg-gray-700/30 dark:text-gray-100"
             />
           </div>
 
@@ -127,14 +138,19 @@ const Contact = () => {
             />
             <label
               htmlFor="subscribe"
-              className="ml-2 block text-sm font-medium"
+              className="ml-2 block text-sm font-medium text-gray-900 dark:text-gray-100"
             >
               Subscribe to my newsletter ?
             </label>
           </div>
 
           {/* Submit Button */}
-          <Button type="submit" disabled={loading} className="w-full">
+          <Button
+            variant="outline"
+            type="submit"
+            disabled={loading}
+            className="w-full bg-gray-100 dark:bg-gray-700/30 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700"
+          >
             {loading ? "Sending..." : "Send Message"}
           </Button>
 
@@ -149,7 +165,9 @@ const Contact = () => {
 
         {/* Schedule a Call */}
         <div className="mt-8 text-center">
-          <h3 className="text-xl font-semibold mb-4">Or</h3>
+          <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+            Or
+          </h3>
           <ScheduleCall />
         </div>
       </div>

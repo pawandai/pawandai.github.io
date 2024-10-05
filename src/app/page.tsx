@@ -89,24 +89,24 @@ export default function Home() {
               <div className="my-5">
                 <h1
                   ref={textOne}
-                  className="text-3xl md:text-4xl  xl:text-5xl p-1 md:p-2 text-bold w-4/5 sm:w-full lg:w-4/5"
+                  className="text-3xl md:text-4xl xl:text-5xl p-1 md:p-2 font-bold w-4/5 sm:w-full lg:w-4/5 text-gray-900 dark:text-gray-100"
                 >
                   {data.headerTaglineOne}
                 </h1>
                 <h1
                   ref={textTwo}
-                  className="text-3xl md:text-4xl  xl:text-5xl p-1 md:p-2 text-bold w-full lg:w-4/5"
+                  className="text-3xl md:text-4xl xl:text-5xl p-1 md:p-2 font-bold w-full lg:w-4/5 text-gray-900 dark:text-gray-100"
                 >
                   {data.headerTaglineTwo}
                 </h1>
                 <h1
                   ref={textThree}
-                  className="text-3xl md:text-4xl  xl:text-5xl p-1 md:p-2 text-bold w-full lg:w-4/5"
+                  className="text-3xl md:text-4xl xl:text-5xl p-1 md:p-2 font-bold w-full lg:w-4/5 text-gray-900 dark:text-gray-100"
                 >
                   {data.headerTaglineThree}
                 </h1>
               </div>
-              <p className="flex items-center gap-2">
+              <p className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                 <MapPin className="h-6 w-6" />
                 <span className="font-medium">{data.location}</span>
               </p>
@@ -119,7 +119,9 @@ export default function Home() {
                     <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
                   </span>
                 </div>
-                <Typography>Open To Offers</Typography>
+                <Typography className="text-gray-900 dark:text-gray-100">
+                  Open To Offers
+                </Typography>
               </div>
             </div>
             <Profile />
@@ -132,50 +134,75 @@ export default function Home() {
           >
             <div className="relative z-[5] grid gap-8">
               <div className="grid gap-8">
-                <Typography variant="h3">Work and Education</Typography>
-                <div className="flex flex-col md:flex-row justify-between border p-8 rounded-xl">
+                <Typography
+                  variant="h3"
+                  className="text-gray-900 dark:text-gray-100"
+                >
+                  Work and Education
+                </Typography>
+                <div className="flex flex-col md:flex-row justify-between border p-8 rounded-xl border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800">
                   {/* Education */}
-                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-[2px] after:bg-muted-foreground/40">
-                    <Typography variant="subtitle" className="font-semibold">
+                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-[2px] after:bg-gray-300 dark:after:bg-gray-700">
+                    <Typography
+                      variant="subtitle"
+                      className="font-semibold text-gray-900 dark:text-gray-100"
+                    >
                       Education
                     </Typography>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium">2019 - 2021</div>
-                      <div className="font-medium">High School, ISc</div>
-                      <div className="text-muted-foreground">
+                      <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                        2019 - 2021
+                      </div>
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                        High School, ISc
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-400">
                         National Academy of Science and Technology, Dhangadhi
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium">2022 - 2026</div>
-                      <div className="font-medium">
+                      <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                        2022 - 2026
+                      </div>
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
                         Bachelors in Engineering
                       </div>
-                      <div className="text-muted-foreground">
+                      <div className="text-gray-600 dark:text-gray-400">
                         IOE Purwanchal Campus, Dharan
                       </div>
                     </div>
                   </div>
                   {/* Work Experience */}
-                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-[2px] after:bg-muted-foreground/40 mt-8 md:mt-0">
-                    <Typography variant="subtitle" className="font-semibold">
+                  <div className="flex flex-auto flex-col gap-4 relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-[2px] after:bg-gray-300 dark:after:bg-gray-700 mt-8 md:mt-0">
+                    <Typography
+                      variant="subtitle"
+                      className="font-semibold text-gray-900 dark:text-gray-100"
+                    >
                       Work
                     </Typography>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium">Oct 2023 - Jan 2024</div>
-                      <div className="font-medium">Frontend Developer</div>
-                      <div className="text-muted-foreground">
+                      <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                        Oct 2023 - Jan 2024
+                      </div>
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                        Frontend Developer
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-400">
                         at Native Plug, Kathmandu
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 text-sm relative">
-                      <div className="aspect-square w-3 bg-muted-foreground rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium">Jul 2023 - Present</div>
-                      <div className="font-medium">React Native Developer</div>
-                      <div className="text-muted-foreground">
+                      <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                        Jul 2023 - Present
+                      </div>
+                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                        React Native Developer
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-400">
                         at Startek, Australia
                       </div>
                     </div>
@@ -201,7 +228,9 @@ export default function Home() {
 
           {/* Projects Section */}
           <Container ref={projectsRef} className="mt-16 mx-2 sm:mx-0">
-            <h2 className="text-center text-2xl font-semibold">Projects</h2>
+            <h2 className="text-center text-2xl font-semibold text-gray-900 dark:text-gray-100">
+              Projects
+            </h2>
             <Projects />
           </Container>
 

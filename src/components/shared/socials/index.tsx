@@ -9,9 +9,11 @@ const Socials = ({ className }: { className?: string }) => {
         <Link
           key={index}
           href={social.link}
-          className={buttonVariants({ variant: "outline" })}
+          className={`${buttonVariants({
+            variant: "outline",
+          })} dark:bg-gray-800 dark:text-white`}
         >
-          <social.icon className="w-5 h-5 mr-2" />
+          <social.icon className="w-5 h-5 mr-2 dark:text-white" />
           {social.title}
         </Link>
       ))}
