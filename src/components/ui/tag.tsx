@@ -12,7 +12,7 @@ const Tag = forwardRef<HTMLDivElement, TagProps>(
       <div
         ref={ref}
         className={cn(
-          "flex items-center justify-center rounded-xl bg-gray-200 dark:bg-gray-800 px-5 py-1",
+          "flex items-center justify-center rounded-xl bg-gray-200 dark:bg-gray-900 dark:border dark:border-black px-5 py-1",
           className
         )}
         {...props}

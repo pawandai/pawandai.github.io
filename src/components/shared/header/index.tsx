@@ -78,7 +78,9 @@ const Header = ({
                 href="/resume.pdf"
                 target="_blank"
                 download="Pawan_Awasthi_resume"
-                className={buttonVariants({ variant: "outline" })}
+                className={`${buttonVariants({
+                  variant: "outline",
+                })} dark:border dark:border-black`}
               >
                 Resume
               </Link>
@@ -105,8 +107,12 @@ const Header = ({
             </Link>
             {showResume && (
               <Link
-                href="/resume"
-                className={buttonVariants({ variant: "outline" })}
+                href="/resume.pdf"
+                target="_blank"
+                download="Pawan_Awasthi_resume"
+                className={`${buttonVariants({
+                  variant: "outline",
+                })} dark:border dark:border-black`}
               >
                 Resume
               </Link>
@@ -192,8 +198,12 @@ const Header = ({
                     {showResume && (
                       <SheetClose asChild>
                         <Link
-                          href="/resume"
-                          className={buttonVariants({ variant: "outline" })}
+                          href="/resume.pdf"
+                          target="_blank"
+                          download="Pawan_Awasthi_resume"
+                          className={`${buttonVariants({
+                            variant: "outline",
+                          })} dark:border dark:border-black`}
                         >
                           Resume
                         </Link>
@@ -231,8 +241,12 @@ const Header = ({
                     {showResume && (
                       <SheetClose asChild>
                         <Link
-                          href="/resume"
-                          className={buttonVariants({ variant: "outline" })}
+                          href="/resume.pdf"
+                          target="_blank"
+                          download="Pawan_Awasthi_resume"
+                          className={`${buttonVariants({
+                            variant: "outline",
+                          })} dark:border dark:border-black`}
                         >
                           Resume
                         </Link>

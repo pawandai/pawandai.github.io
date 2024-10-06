@@ -14,14 +14,13 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .markdown-body,
   [data-theme="dark"] {
     /*dark*/
     color-scheme: dark;
-    --focus-outlineColor: @apply text-slate-950;
+    --focus-outlineColor: #1f6feb;
     --fgColor-default: #e6edf3;
     --fgColor-muted: #8d96a0;
-    --fgColor-accent: @apply text-slate-950;
+    --fgColor-accent: #58a6ff;
     --fgColor-success: #3fb950;
     --fgColor-attention: #d29922;
     --fgColor-danger: #f85149;
@@ -72,14 +71,13 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .markdown-body,
   [data-theme="light"] {
     /*light*/
     color-scheme: light;
-    --focus-outlineColor: @apply text-slate-900;
+    --focus-outlineColor: #0969da;
     --fgColor-default: #1f2328;
     --fgColor-muted: #636c76;
-    --fgColor-accent: @apply text-slate-950;
+    --fgColor-accent: #0969da;
     --fgColor-success: #1a7f37;
     --fgColor-attention: #9a6700;
     --fgColor-danger: #d1242f;

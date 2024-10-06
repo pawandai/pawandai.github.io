@@ -165,7 +165,7 @@ const DoubleSidebar = ({
     <>
       <Header isBlog={true} />
       <Container
-        className={`grid lg:grid-cols-[240px_1fr_240px] md:grid-cols-[240px_1fr] grid-cols-1 gap-8 p-8 ${className}`}
+        className={`grid lg:grid-cols-[240px_1fr_240px] md:grid-cols-[240px_1fr] grid-cols-1 gap-8 p-4 md:p-8 ${className}`}
       >
         {/* Left Sidebar */}
         <div>
@@ -178,12 +178,12 @@ const DoubleSidebar = ({
         </div>
 
         {/* Blog Content */}
-        <article className="prose prose-gray dark:prose-invert mb-8">
+        <article className="mb-8">
           {/* Category */}
           <div className="flex gap-2 items-center justify-center mb-4">
             Category: <Tag label={selectedPost.category} className="w-fit" />
           </div>
-          <div>{children}</div>
+          <div className="dark:bg-slate-800">{children}</div>
           {/* Tags */}
           <div className="flex gap-2 items-center justify-center my-4 flex-wrap">
             {selectedPost.tags

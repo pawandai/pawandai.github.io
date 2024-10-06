@@ -11,7 +11,7 @@ const Socials = ({ className }: { className?: string }) => {
           href={social.link}
           className={`${buttonVariants({
             variant: "outline",
-          })} dark:bg-gray-800 dark:text-white`}
+          })} dark:bg-gray-800 dark:text-white dark:border dark:border-gray-700`}
         >
           <social.icon className="w-5 h-5 mr-2 dark:text-white" />
           {social.title}

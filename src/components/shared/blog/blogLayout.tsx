@@ -33,16 +33,15 @@ const BlogFilter = ({
   loading,
 }: BlogFilterProps) => {
   return (
-    <div className="bg-background p-2 pt-16 overflow-y-scroll">
+    <div className="bg-background p-2 pt-16 overflow-y-scroll dark:bg-dark-background">
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">Filter Blogs</h2>
         {/* Search Filter */}
         <div className="relative">
           <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
           <Input
             type="text"
             placeholder="Search blog posts..."
-            className="pl-10 pr-4 py-2 rounded-lg bg-muted w-full"
+            className="pl-10 pr-4 py-2 rounded-lg bg-muted w-full dark:bg-black"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -50,11 +49,13 @@ const BlogFilter = ({
       </div>
 
       <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-2">Categories</h3>
+        <h3 className="text-lg font-semibold mb-2 dark:text-dark-foreground">
+          Filter by categories
+        </h3>
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2">
           {loading ? (
-            <Loader2 className="h-5 w-5 animate-spin text-center" />
+            <Loader2 className="h-5 w-5 animate-spin text-center dark:text-dark-muted-foreground" />
           ) : categories.length > 0 ? (
             categories.map((category) => (
               <Button
@@ -65,27 +66,31 @@ const BlogFilter = ({
                     selectedCategory === category ? null : category
                   )
                 }
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-4 py-2 rounded-lg dark:border dark:border-black ${
                   selectedCategory === category
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-muted/50"
+                    ? "bg-primary text-primary-foreground dark:bg-black dark:text-white"
+                    : "text-muted-foreground hover:bg-muted/50 dark:hover:bg-dark-muted/70"
                 }`}
               >
                 {category}
               </Button>
             ))
           ) : (
-            <p>No Categories found...</p>
+            <p className="dark:text-dark-muted-foreground">
+              No Categories found...
+            </p>
           )}
         </div>
       </div>
 
       <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-2">Tags</h3>
+        <h3 className="text-lg font-semibold mb-2 dark:text-dark-foreground">
+          Filter by tags
+        </h3>
         {/* Tags Filter */}
         <div className="flex flex-wrap gap-2">
           {loading ? (
-            <Loader2 className="h-5 w-5 animate-spin text-center" />
+            <Loader2 className="h-5 w-5 animate-spin text-center dark:text-dark-muted-foreground" />
           ) : tags.length > 0 ? (
             tags.map((tag) => (
               <Button
@@ -98,17 +103,17 @@ const BlogFilter = ({
                     setSelectedTags([...selectedTags, tag]);
                   }
                 }}
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-4 py-2 rounded-lg dark:border dark:border-black ${
                   selectedTags.includes(tag)
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-muted/50"
+                    ? "bg-primary text-primary-foreground dark:bg-black dark:text-white"
+                    : "text-muted-foreground hover:bg-muted/50 dark:hover:bg-dark-muted/70"
                 }`}
               >
                 {tag}
               </Button>
             ))
           ) : (
-            <p>No Tags Found...</p>
+            <p className="dark:text-dark-muted-foreground">No Tags Found...</p>
           )}
         </div>
       </div>

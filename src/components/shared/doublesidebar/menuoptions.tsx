@@ -39,7 +39,7 @@ const MenuOptions = ({ defaultOpen, children, className }: Props) => {
         showX={!defaultOpen}
         side="left"
         className={clsx(
-          "bg-white !z-[110] fixed top-0 border-r-[1px] p-6 shadow-none overflow-y-scroll thin-scrollbar",
+          "bg-white dark:bg-gray-800 !z-[110] fixed top-0 border-r-[1px] dark:border-gray-700 p-6 shadow-none overflow-y-scroll thin-scrollbar",
           className,
           {
             "hidden md:inline-block z-0 w-[280px] xl:w-[300px] 2xl:w-[360px]":

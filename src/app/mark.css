@@ -64,7 +64,7 @@
 /* BlockQuote */
 
 .markdown-class blockquote {
-  @apply p-5 border-l-8 rounded-lg shadow-lg  text-sm bg-slate-200 text-black;
+  @apply p-5 border-l-8 rounded-lg shadow-lg text-sm bg-slate-200 text-black;
 }
 
 .markdown-class blockquote p {
@@ -75,4 +75,40 @@
 
 .markdown-class img {
   @apply max-h-96 w-full my-5 object-cover rounded-lg shadow-lg;
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+  .markdown-class {
+    @apply bg-gray-900 text-white;
+  }
+
+  .markdown-class a {
+    @apply text-blue-400;
+  }
+
+  .markdown-class p {
+    @apply text-gray-300;
+  }
+
+  .markdown-class strong {
+    @apply text-white;
+  }
+
+  .markdown-class hr {
+    @apply border-gray-700;
+  }
+
+  .markdown-class ol li,
+  .markdown-class ul li {
+    @apply text-gray-300;
+  }
+
+  .markdown-class blockquote {
+    @apply bg-gray-800 text-gray-300 border-gray-600;
+  }
+
+  .markdown-class blockquote p {
+    @apply text-gray-300;
+  }
 }
