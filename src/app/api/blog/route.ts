@@ -25,6 +25,7 @@ export async function GET() {
 
   return NextResponse.json(sortedPosts);
 }
+
 export async function POST(req: Request) {
   const data = await req.json();
   const fileToBeWritten = join(
@@ -46,10 +47,4 @@ export async function POST(req: Request) {
       name: "This route works in development mode only",
     });
   }
-}
-
-export async function DELETE(req: Request) {
-  const deletedFile = join(process.cwd(), "src", "_blogs", `${req.body}.md`);
-  fs.unlink(deletedFile);
-  return NextResponse.json({ message: "Post deleted successfully" });
 }

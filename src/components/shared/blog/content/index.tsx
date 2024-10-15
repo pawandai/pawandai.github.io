@@ -5,7 +5,10 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
-import remarkReferenceLinks from "remark-reference-links";
+import remarkHeaderId from "remark-heading-id";
+// import rehypeMathjax from "rehype-mathjax";
+// import rehypeParse from 'rehype-parse'
+// import rehypeStringify from 'rehype-stringify'
 import rehypeRaw from "rehype-raw";
 
 interface CodeProps {
@@ -30,7 +33,7 @@ export const CodeBlock = ({
       PreTag="div"
       {...props}
     >
-      {String(children).replace(/\n$/, "")}
+      {String(children)}
     </SyntaxHighlighter>
   ) : (
     <div className={`${className}`} {...props}>
@@ -48,9 +51,8 @@ const ContentSection = ({ content }: ContentSectionProps) => {
     <ReactMarkdown
       components={CodeBlock as Partial<Components>}
       className="markdown-body"
-      remarkPlugins={[remarkMath, remarkReferenceLinks, remarkGfm]}
-      rehypePlugins={[rehypeKatex, rehypeRaw]}
-      allowElement={(element) => element.tagName !== "script"}
+      remarkPlugins={[remarkMath, remarkGfm, remarkHeaderId]}
+      rehypePlugins={[rehypeRaw, rehypeKatex]}
     >
       {content}
     </ReactMarkdown>

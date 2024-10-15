@@ -36,6 +36,7 @@ export default function NewPostPage() {
         </BreadcrumbList>
       </Breadcrumb>
       <BlogEditor
+        type="new"
         post={{
           category: "",
           content: "",

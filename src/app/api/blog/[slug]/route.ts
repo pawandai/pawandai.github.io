@@ -17,6 +17,15 @@ export async function GET(
   return NextResponse.json(dataToBeSent);
 }
 
+export async function POST(
+  req: Request,
+  { params }: { params: { slug: string } }
+) {
+  const deletedFile = join(process.cwd(), "src", "_blogs", `${params.slug}.md`);
+  fs.unlink(deletedFile);
+  return NextResponse.json({ message: "Post deleted successfully" });
+}
+
 export async function generateStaticParams() {
   const postsDirectory = join(process.cwd(), "src", "_blogs");
   const slugs = await fs.readdir(postsDirectory);

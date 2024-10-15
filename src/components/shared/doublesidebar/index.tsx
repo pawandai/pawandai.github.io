@@ -210,7 +210,7 @@ const DoubleSidebar = ({
                     return (
                       <button
                         key={topicId}
-                        onClick={() => handleScrollTo(topicId)} // Handle scroll to section
+                        onClick={() => handleScrollTo(topicId)}
                         className={`block text-left w-full ${
                           activeSection === topicId
                             ? "text-foreground font-semibold"
@@ -240,7 +240,7 @@ const DoubleSidebar = ({
               </Button>
             </DialogTrigger>
             <DialogContent className="bg-white">
-              <BlogEditor post={selectedPost} />
+              <BlogEditor post={selectedPost} type="edit" />
             </DialogContent>
           </Dialog>
         )}

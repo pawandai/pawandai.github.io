@@ -11,13 +11,13 @@ import { getApiUrl } from "@/lib/utils";
 
 interface BlogEditorProps {
   post: Post;
+  type: "new" | "edit";
 }
 
-const BlogEditor = ({ post }: BlogEditorProps) => {
+const BlogEditor = ({ type, post }: BlogEditorProps) => {
   const router = useRouter();
   const [currentTabs, setCurrentTabs] = useState("BLOGDETAILS");
   const [blogContent, setBlogContent] = useState(post.content);
-  const slug = post.slug;
   const [blogVariables, setBlogVariables] = useState({
     category: post.category,
     title: post.title,
@@ -97,11 +97,11 @@ const BlogEditor = ({ post }: BlogEditorProps) => {
             </label>
             <Input
               id="slug"
-              value={slug}
+              value={blogVariables.slug}
               onChange={(e) =>
                 setBlogVariables({ ...blogVariables, slug: e.target.value })
               }
-              disabled={slug === "" ? false : true}
+              disabled={type === "edit"}
               className="w-full mt-2 p-4 rounded-md border-2"
               type="text"
             />

@@ -3,23 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ArrowRight, Edit, Trash2 } from "lucide-react";
+import { ArrowRight, Edit } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Post } from "@/types";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import BlogEditor from "./editor";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { getApiUrl } from "@/lib/utils";
 
 type BlogCardProps = {
   post?: Post;
@@ -27,7 +15,6 @@ type BlogCardProps = {
   title: string;
   slug: string;
   preview: string;
-  refresh?: () => void;
 };
 
 export function BlogCard({
@@ -36,21 +23,7 @@ export function BlogCard({
   slug,
   preview,
   post,
-  refresh,
 }: BlogCardProps) {
-  const url = getApiUrl();
-  async function handleDeletePost() {
-    try {
-      await fetch(`${url}/api/blog`, {
-        method: "DELETE",
-        body: JSON.stringify(slug),
-      });
-      if (refresh) refresh();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   return (
     <main className="group relative select-none rounded-lg border-2 dark:border-2 dark:border-black mx-2 group w-full p-2 flex flex-col justify-between">
       <div>
@@ -100,35 +73,9 @@ export function BlogCard({
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-white">
-            <BlogEditor post={post!} />
+            <BlogEditor post={post!} type="edit" />
           </DialogContent>
         </Dialog>
-      )}
-      {process.env.NODE_ENV === "development" && (
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button size="lg" variant="destructive">
-              <Trash2 className="h-6 w-6 mr-2" />
-              Delete
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent className="bg-white">
-            <AlertDialogHeader>
-              <AlertDialogTitle>Am I sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the
-                post.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDeletePost}>
-                <Trash2 className="h-6 w-6 mr-2" />
-                Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       )}
     </main>
   );
