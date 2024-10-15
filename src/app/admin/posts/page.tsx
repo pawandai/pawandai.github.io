@@ -16,12 +16,10 @@ import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import Container from "@/components/ui/container";
 import { useGetAllPosts } from "@/hooks/useSelector";
-import { useRouter } from "next/navigation";
 
 export default function PostsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const blogPosts = useGetAllPosts();
-  const router = useRouter();
 
   const filteredPosts = useMemo(
     () =>
@@ -37,10 +35,6 @@ export default function PostsPage() {
       }),
     [blogPosts, searchTerm]
   );
-
-  const refresh = () => {
-    router.refresh();
-  };
 
   return (
     <ContentLayout title="All Posts">
@@ -82,7 +76,6 @@ export default function PostsPage() {
                 slug={post.slug}
                 thumbnail={post.image as string}
                 title={post.title}
-                refresh={refresh}
               />
             ))
           ) : (
