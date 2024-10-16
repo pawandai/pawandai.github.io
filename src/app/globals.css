@@ -1,10 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import "katex/dist/katex.min.css";
 
 @import "./markdown.css";
-@import "./mark.css";
 
 html {
   scroll-behavior: smooth;

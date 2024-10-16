@@ -12,12 +12,13 @@ import Socials from "@/components/shared/socials";
 import Profile from "@/components/shared/image/profile";
 import Typography from "@/components/ui/typography";
 import { useIsomorphicLayoutEffect } from "@/lib/lib";
-import AboutMe from "@/components/shared/aboutMe";
 import Contact from "@/components/shared/contact";
 import Footer from "@/components/shared/footer";
 import { Separator } from "@/components/ui/separator";
 import ScrollToTop from "@/components/shared/scrollToTop";
 import Projects from "@/components/shared/projects";
+import Image from "next/image";
+import { SKILLS } from "@/constants";
 
 export default function Home() {
   // Refs
@@ -25,6 +26,7 @@ export default function Home() {
   const aboutRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
   const textOne = useRef<HTMLHeadingElement>(null);
   const textTwo = useRef<HTMLHeadingElement>(null);
   const textThree = useRef<HTMLHeadingElement>(null);
@@ -62,6 +64,14 @@ export default function Home() {
     });
   };
 
+  const handleSkillsScroll = () => {
+    window.scrollTo({
+      top: skillsRef?.current?.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   useIsomorphicLayoutEffect(() => {
     stagger(
       [textOne.current, textTwo.current],
@@ -77,6 +87,7 @@ export default function Home() {
         handleAboutScroll={handleAboutScroll}
         handleContactScroll={handleContactScroll}
         handleProjectsScroll={handleProjectsScroll}
+        handleSkillsScroll={handleSkillsScroll}
       />
       <Container className="relative">
         <div className="gradient-circle" />
@@ -151,10 +162,10 @@ export default function Home() {
                     </Typography>
                     <div className="flex flex-col gap-2 text-sm relative">
                       <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         2019 - 2021
                       </div>
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         High School, ISc
                       </div>
                       <div className="text-gray-600 dark:text-gray-400">
@@ -163,10 +174,10 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col gap-2 text-sm relative">
                       <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         2022 - 2026
                       </div>
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         Bachelors in Engineering
                       </div>
                       <div className="text-gray-600 dark:text-gray-400">
@@ -184,10 +195,10 @@ export default function Home() {
                     </Typography>
                     <div className="flex flex-col gap-2 text-sm relative">
                       <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         Oct 2023 - Jan 2024
                       </div>
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         Frontend Developer
                       </div>
                       <div className="text-gray-600 dark:text-gray-400">
@@ -196,10 +207,10 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col gap-2 text-sm relative">
                       <div className="aspect-square w-3 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1" />
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         Jul 2023 - Present
                       </div>
-                      <div className="font-medium text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         React Native Developer
                       </div>
                       <div className="text-gray-600 dark:text-gray-400">
@@ -209,6 +220,30 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </Container>
+
+          {/* Skills Section */}
+          <Container className="mt-16" ref={skillsRef}>
+            <h2 className="text-center text-2xl font-semibold text-gray-900 dark:text-gray-100">
+              Skills
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4 select-none">
+              {SKILLS.map((skill, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center gap-2 p-4 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 aspect-square group"
+                >
+                  <Image
+                    src={skill.icon}
+                    alt={skill.name.slice(0, 2).toUpperCase()}
+                    width={100}
+                    height={100}
+                    className="group-hover:scale-110 transition-all ease-in-out duration-300"
+                  />
+                  <Typography variant="subtitle">{skill.name}</Typography>
+                </div>
+              ))}
             </div>
           </Container>
 
@@ -222,9 +257,9 @@ export default function Home() {
           )}
 
           {/* About section */}
-          <Container ref={aboutRef}>
+          {/* <Container ref={aboutRef}>
             <AboutMe />
-          </Container>
+          </Container> */}
 
           {/* Projects Section */}
           <Container ref={projectsRef} className="mt-16 mx-2 sm:mx-0">

@@ -14,6 +14,7 @@ import BlogEditor from "../blog/editor";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Tag from "@/components/ui/tag";
 import { useGetAllPosts } from "@/hooks/useSelector";
+import Typography from "@/components/ui/typography";
 
 interface DoubleSidebarProps {
   children: ReactNode;
@@ -183,9 +184,16 @@ const DoubleSidebar = ({
           <div className="flex gap-2 items-center justify-center mb-4">
             Category: <Tag label={selectedPost.category} className="w-fit" />
           </div>
-          <div className="dark:bg-slate-800">{children}</div>
+          <Typography variant="h2" className="mb-2">
+            {selectedPost.title}
+          </Typography>
+          <Tag label={`${selectedPost.timeToRead} min read`} className="mb-4" />
+          <div className="dark:bg-slate-800 mb-16">{children}</div>
           {/* Tags */}
-          <div className="flex gap-2 items-center justify-center my-4 flex-wrap">
+          <Typography variant="subtitle" className="font-semibold">
+            Tags:
+          </Typography>
+          <div className="flex gap-2 items-center justify-center mb-4 mt-2 flex-wrap">
             {selectedPost.tags
               .split(",")
               .map((tag) => tag.trim())

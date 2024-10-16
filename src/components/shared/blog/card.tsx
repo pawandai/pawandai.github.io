@@ -27,7 +27,7 @@ export function BlogCard({
   return (
     <main className="group relative select-none rounded-lg border-2 dark:border-2 dark:border-black mx-2 group w-full p-2 flex flex-col justify-between">
       <div>
-        <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg">
+        <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg mb-2">
           <Image
             src={thumbnail}
             alt={title}
@@ -37,13 +37,11 @@ export function BlogCard({
         </AspectRatio>
         <Link
           href={`/blog/${slug}`}
-          className={`${buttonVariants({
-            variant: "link",
-          })} text-xl font-semibold my-2 px-1 text-clip`}
+          className={`text-xl font-semibold hover:underline ml-2`}
         >
           {title}
         </Link>
-        <p className="px-2 mb-2">{preview}...</p>
+        <p className="px-2 my-2">{preview}...</p>
       </div>
       <div className="flex items-center justify-between">
         <p className="text-muted-foreground text-sm px-2">

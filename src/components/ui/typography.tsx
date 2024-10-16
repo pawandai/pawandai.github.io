@@ -4,11 +4,11 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const typographyVariants = cva("text-gray-600 text-normal", {
+const typographyVariants = cva("text-gray-600 dark:text-gray-200 text-normal", {
   variants: {
     variant: {
       h1: "text-4xl font-semibold tablet:font-bold tablet:text-5xl tablet:tracking-[-0.02em] lg:text-6xl lg:leading-[72px] text-gray-900",
-      h2: "text-lg tablet:text-4xl font-semibold tracking-[-0.02em] text-gray-900",
+      h2: "text-3xl tablet:text-4xl font-semibold tracking-[-0.02em] text-gray-900",
       h3: "text-2xl tablet:text-3xl font-semibold tracking-[-0.02em] text-gray-900",
       subtitle: "text-lg tablet:text-xl",
       body1: "text-base tablet:text-lg",

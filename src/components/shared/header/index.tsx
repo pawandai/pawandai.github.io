@@ -21,6 +21,7 @@ interface HeaderProps {
   handleAboutScroll?: () => void;
   handleContactScroll?: () => void;
   handleProjectsScroll?: () => void;
+  handleSkillsScroll?: () => void;
   isBlog?: boolean;
   page?: string;
   className?: string;
@@ -28,8 +29,10 @@ interface HeaderProps {
 
 const Header = ({
   handleWorkScroll,
-  handleAboutScroll,
+  // handleAboutScroll,
   handleContactScroll,
+  handleProjectsScroll,
+  handleSkillsScroll,
   isBlog,
   className,
 }: HeaderProps) => {
@@ -58,9 +61,15 @@ const Header = ({
             <Button variant="ghost" onClick={handleWorkScroll}>
               Work
             </Button>
-            <Button variant="ghost" onClick={handleAboutScroll}>
-              About
+            <Button variant="ghost" onClick={handleSkillsScroll}>
+              Skills
             </Button>
+            <Button variant="ghost" onClick={handleProjectsScroll}>
+              Projects
+            </Button>
+            {/* <Button variant="ghost" onClick={handleAboutScroll}>
+              About
+            </Button> */}
             {showBlog && (
               <Link
                 href="/blog"
@@ -138,8 +147,8 @@ const Header = ({
 
       {/* Mobile Navbar */}
       <div className="md:hidden sm:px-10 px-2 flex items-center gap-2 justify-between">
-        <Button variant="outline" onClick={handleWorkScroll}>
-          Work
+        <Button variant="outline" onClick={handleContactScroll}>
+          Contact
         </Button>
         <div className="flex items-center justify-center gap-4">
           {mounted && theme && data.darkMode && (
@@ -176,10 +185,20 @@ const Header = ({
                       </Button>
                     </SheetClose>
                     <SheetClose asChild>
+                      <Button variant="ghost" onClick={handleSkillsScroll}>
+                        Skills
+                      </Button>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Button variant="ghost" onClick={handleProjectsScroll}>
+                        Projects
+                      </Button>
+                    </SheetClose>
+                    {/* <SheetClose asChild>
                       <Button variant="ghost" onClick={handleAboutScroll}>
                         About
                       </Button>
-                    </SheetClose>
+                    </SheetClose> */}
                     {showBlog && (
                       <SheetClose asChild>
                         <Link
