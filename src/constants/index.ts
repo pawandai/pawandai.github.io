@@ -119,36 +119,46 @@ export const SKILLS = [
   },
   {
     id: 11,
+    name: "Vue.js",
+    icon: "/skills/vue.svg",
+  },
+  {
+    id: 12,
+    name: "Nuxt.js",
+    icon: "/skills/nuxt.svg",
+  },
+  {
+    id: 13,
     name: "PostgreSQL",
     icon: "/skills/postgresql.svg",
   },
   {
-    id: 12,
+    id: 14,
     name: "Prisma",
     icon: "/skills/prisma.svg",
   },
   {
-    id: 13,
+    id: 15,
     name: "React",
     icon: "/skills/reactjs.svg",
   },
   {
-    id: 14,
+    id: 16,
     name: "Redux",
     icon: "/skills/redux.svg",
   },
   {
-    id: 15,
+    id: 17,
     name: "TypeScript",
     icon: "/skills/typescript.svg",
   },
   {
-    id: 16,
+    id: 18,
     name: "Python",
     icon: "/skills/python.svg",
   },
   {
-    id: 17,
+    id: 19,
     name: "Docker",
     icon: "/skills/docker.svg",
   },
