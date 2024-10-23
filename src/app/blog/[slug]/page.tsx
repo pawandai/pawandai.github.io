@@ -26,14 +26,14 @@ export async function generateMetadata({
   };
 }
 
-// export async function generateStaticParams() {
-//   const url = getApiUrl();
-//   const posts = await getApi(`${url}/api/blog`);
+export async function generateStaticParams() {
+  const url = getApiUrl();
+  const posts = await getApi(`${url}/api/blog`);
 
-//   return posts.map((post: Post) => ({
-//     slug: post.slug,
-//   }));
-// }
+  return posts.map((post: Post) => ({
+    slug: post.slug,
+  }));
+}
 
 const BlogDetailsPage = async ({ params }: BlogDetailsPageProps) => {
   const url = getApiUrl();

@@ -26,10 +26,10 @@ export async function POST(
   return NextResponse.json({ message: "Post deleted successfully" });
 }
 
-// export async function generateStaticParams() {
-//   const postsDirectory = join(process.cwd(), "src", "_blogs");
-//   const slugs = await fs.readdir(postsDirectory);
-//   return slugs.map((post: string) => ({
-//     slug: post.replace(/\.md$/, ""),
-//   }));
-// }
+export async function generateStaticParams() {
+  const postsDirectory = join(process.cwd(), "src", "_blogs");
+  const slugs = await fs.readdir(postsDirectory);
+  return slugs.map((post: string) => ({
+    slug: post.replace(/\.md$/, ""),
+  }));
+}
