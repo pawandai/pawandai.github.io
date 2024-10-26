@@ -32,7 +32,7 @@ const ScheduleCall = () => {
         // Initialize the Calendly popup widget once the script is loaded
         if (window.Calendly && window.Calendly.initPopupWidget) {
           window.Calendly.initPopupWidget({
-            url: "https://calendly.com/contactpawandai/30min",
+            url: "https://calendly.com/pawandai/30min",
           });
         }
       };
@@ -41,7 +41,7 @@ const ScheduleCall = () => {
       // If script already loaded, initialize Calendly widget
       if (window.Calendly && window.Calendly.initPopupWidget) {
         window.Calendly.initPopupWidget({
-          url: "https://calendly.com/contactpawandai/30min",
+          url: "https://calendly.com/pawandai/30min",
         });
       }
     }
