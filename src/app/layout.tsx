@@ -57,12 +57,7 @@ export default function RootLayout({
       <body
         className={`${urbanist.className} antialiased dark:bg-slate-800 dark:text-white`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>
