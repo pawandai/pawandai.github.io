@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import data from "@/data/index.json";
 import { Button, buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import {
@@ -35,14 +33,9 @@ const Header = ({
   handleSkillsScroll,
   className,
 }: HeaderProps) => {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
 
   const { showBlog, showResume } = data;
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <div
@@ -95,7 +88,7 @@ const Header = ({
               Resume
             </Link>
           )}
-          {mounted && theme && data.darkMode && (
+          {/* {mounted && theme && data.darkMode && (
             <Button
               variant="ghost"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -108,7 +101,7 @@ const Header = ({
                 width={500}
               ></Image>
             </Button>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -118,7 +111,7 @@ const Header = ({
           Contact
         </Button>
         <div className="flex items-center justify-center gap-4">
-          {mounted && theme && data.darkMode && (
+          {/* {mounted && theme && data.darkMode && (
             <Button
               variant="ghost"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -131,7 +124,7 @@ const Header = ({
                 width={500}
               ></Image>
             </Button>
-          )}
+          )} */}
           <Sheet>
             <SheetTrigger asChild>
               <Menu className="h-6 w-6" />
@@ -195,7 +188,7 @@ const Header = ({
                       </Link>
                     </SheetClose>
                   )}
-                  {mounted && theme && data.darkMode && (
+                  {/* {mounted && theme && data.darkMode && (
                     <Button
                       variant="ghost"
                       onClick={() =>
@@ -212,7 +205,7 @@ const Header = ({
                         width={500}
                       ></Image>
                     </Button>
-                  )}
+                  )} */}
                 </div>
               </div>
             </SheetContent>

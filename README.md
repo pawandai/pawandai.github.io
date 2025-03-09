@@ -16,6 +16,6 @@ I am a passionate engineer with experience in various technologies. My goal is t
 
 ## Contact
 
-Feel free to reach out to me via [contactpawandai@gmail.com](mailto:contactpawandai@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/pawan-awasthi-5a1a6b244/).
+Feel free to reach out to me via [contactpawandai@gmail.com](mailto:contactpawandai@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/pawandai).
 
 Thank you for visiting my portfolio!
