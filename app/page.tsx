@@ -323,11 +323,12 @@ export default function Portfolio() {
     <motion.div
       layoutId={`${section}-header`}
       className={`
-        flex justify-between items-center backdrop-blur-lg bg-gray-800/20 
-        ${section === "about" ? "z-[150]" : "z-[100]"}
+        flex justify-between items-center backdrop-blur-lg ${
+          section === "about" ? "z-[150]" : "z-[100]"
+        }
         ${
           isExpanded(section)
-            ? "sticky top-0 p-6 border-b border-gray-200 dark:border-gray-800"
+            ? "sticky top-0 p-6 border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-black/80"
             : "mb-4"
         }
         ${className}
@@ -489,7 +490,7 @@ export default function Portfolio() {
             animate={{ opacity: 1, backdropFilter: "blur(5px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 bg-black/60 z-[50]"
+            className="fixed inset-0 bg-black/40 z-[50]"
             onClick={() => setExpandedSection(null)}
           />
         )}
@@ -612,12 +613,9 @@ export default function Portfolio() {
               className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
             >
               Hello, I'm Pawan Awasthi, a passionate Software Engineer and
-              Content Creator currently focused on AI, ML and Data Science. I
-              love working on projects involving real world problems. I'm
+              Content Creator currently focused on AI, ML and Data Science. I'm
               constantly iterating on my craft, whether it's optimizing code,
-              designing user experiences, or creating engaging content. I
-              believe in the power of technology to transform lives and I'm
-              excited to be a part of that journey.
+              designing user experiences, or creating engaging content.
             </motion.p>
             <div className="flex items-center gap-4">
               <Button
@@ -724,17 +722,18 @@ export default function Portfolio() {
           >
             <ExpandedSectionContainer
               section="projects"
-              className={
-                isExpanded("projects") ? "" : "sm:p-6 dark:bg-transparent"
-              }
+              className={isExpanded("projects") ? "" : "sm:p-6"}
             >
               <ExpandedSectionHeader section="projects" title="My Projects" />
 
               <motion.div
                 layoutId="projects-grid"
                 className={`
-                  grid grid-cols-1 
-                  ${isExpanded("projects") ? "sm:p-6 pt-4" : ""}
+                  grid grid-cols-1 ${
+                    isExpanded("projects")
+                      ? "sm:p-6 pt-4 bg-white/95 dark:bg-black/80"
+                      : ""
+                  }
                   ${
                     isExpanded("projects")
                       ? "sm:grid-cols-1 lg:grid-cols-2 gap-6"
@@ -805,7 +804,11 @@ export default function Portfolio() {
           >
             <ExpandedSectionContainer
               section="experience"
-              className={isExpanded("experience") ? "" : "p-2 sm:p-6"}
+              className={`${
+                isExpanded("experience")
+                  ? "bg-white/95 dark:bg-black/80"
+                  : "p-2 sm:p-6"
+              }`}
             >
               <ExpandedSectionHeader
                 section="experience"
@@ -1042,7 +1045,7 @@ export default function Portfolio() {
 
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                          <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -1129,7 +1132,7 @@ export default function Portfolio() {
                               name="name"
                               value={contactForm.name}
                               onChange={handleInputChange}
-                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md"
+                              className="w-full p-2 rounded-md outline-none border border-gray-300 dark:border-gray-700 bg-white dark:bg-black/30"
                             />
                           </div>
 
@@ -1142,7 +1145,7 @@ export default function Portfolio() {
                               name="email"
                               value={contactForm.email}
                               onChange={handleInputChange}
-                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md"
+                              className="w-full p-2 rounded-md outline-none border border-gray-300 dark:border-gray-700 bg-white dark:bg-black/30"
                             />
                           </div>
 
@@ -1155,7 +1158,7 @@ export default function Portfolio() {
                               value={contactForm.message}
                               onChange={handleInputChange}
                               rows={4}
-                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md"
+                              className="w-full p-2 rounded-md outline-none border border-gray-300 dark:border-gray-700 bg-white dark:bg-black/30"
                             />
                           </div>
 
@@ -1198,9 +1201,9 @@ export default function Portfolio() {
               pointerEvents: "auto"
             }}
           >
-            <motion.div className="bg-white dark:bg-purple-900/40 rounded-xl overflow-hidden max-h-[85vh] w-full max-w-6xl mx-auto overflow-y-auto shadow-2xl shadow-black/30 z-[300]">
+            <motion.div className="bg-white dark:bg-gray-900/60 rounded-xl overflow-hidden max-h-[85vh] w-full max-w-6xl mx-auto overflow-y-auto shadow-2xl shadow-black/30 z-[300]">
               {/* About Header */}
-              <div className="sticky top-0 z-[310] flex justify-between items-center bg-transparent dark:bg-purple-900/30 p-6 border-b border-gray-200 dark:border-gray-800 backdrop-blur-lg">
+              <div className="sticky top-0 z-[310] flex justify-between items-center bg-transparent dark:bg-gray-900/30 p-6 border-b border-gray-200 dark:border-gray-800 backdrop-blur-lg">
                 <h2 className="text-2xl font-mono">About Me</h2>
                 <Button
                   variant="ghost"
@@ -1262,8 +1265,7 @@ export default function Portfolio() {
                       <h3 className="text-xl font-bold mb-3">My Journey</h3>
                       <p className="text-gray-700 dark:text-gray-300 mb-4">
                         I'm a passionate Software Engineer and Content Creator
-                        currently focused on AI, ML and Data Science. I love
-                        working on projects involving real world problems. I'm
+                        currently focused on AI, ML and Data Science. I'm
                         constantly iterating on my craft, whether it's
                         optimizing code, designing user experiences, or creating
                         engaging content.
