@@ -29,7 +29,7 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <div
-      className={`overflow-hidden bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col ${className}`}
+      className={`overflow-hidden bg-purple-100/30 dark:bg-purple-800/20 rounded-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col ${className}`}
     >
       <div className="relative w-full">
         <ImageSlider urls={imageUrls} className="aspect-video rounded-none" />

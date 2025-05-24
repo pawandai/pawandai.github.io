@@ -115,16 +115,6 @@ type ExpandedSection =
   | "contact"
   | null;
 
-// Add missing rotation animation
-const rotateIn = {
-  hidden: { opacity: 0, rotate: -15 },
-  visible: {
-    opacity: 1,
-    rotate: 0,
-    transition: { duration: 0.5, ease: "easeOut" }
-  }
-};
-
 export default function Portfolio() {
   const [theme, setTheme] = useState("dark");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -333,7 +323,7 @@ export default function Portfolio() {
     <motion.div
       layoutId={`${section}-header`}
       className={`
-        flex justify-between items-center bg-transparent 
+        flex justify-between items-center backdrop-blur-lg bg-gray-800/20 
         ${section === "about" ? "z-[150]" : "z-[100]"}
         ${
           isExpanded(section)
@@ -387,7 +377,7 @@ export default function Portfolio() {
       layoutId={`${section}-container`}
       ref={section ? contentRefs[section] : undefined}
       className={`
-        bg-white dark:bg-gray-900 rounded-xl overflow-hidden transition-shadow
+        bg-transparent rounded-xl overflow-hidden transition-shadow
         ${
           isExpanded(section)
             ? "max-h-[85vh] w-full max-w-6xl mx-auto overflow-y-auto shadow-2xl"
@@ -545,7 +535,7 @@ export default function Portfolio() {
               className="rounded-full"
             />
           </motion.div>
-          <div>
+          <div className="hidden lg:block">
             <motion.h1 variants={fadeInUp} className="text-2xl font-mono">
               PAWAN AWASTHI
             </motion.h1>
@@ -621,15 +611,15 @@ export default function Portfolio() {
               variants={fadeInUp}
               className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
             >
-              I'm a passionate Software Engineer and Content Creator currently
-              focused on AI, ML and Data Science. I love working on projects
-              involving real world problems. I'm constantly iterating on my
-              craft, whether it's optimizing code, designing user experiences,
-              or creating engaging content. I believe in the power of technology
-              to transform lives and I'm excited to be a part of that journey.
+              Hello, I'm Pawan Awasthi, a passionate Software Engineer and
+              Content Creator currently focused on AI, ML and Data Science. I
+              love working on projects involving real world problems. I'm
+              constantly iterating on my craft, whether it's optimizing code,
+              designing user experiences, or creating engaging content. I
+              believe in the power of technology to transform lives and I'm
+              excited to be a part of that journey.
             </motion.p>
-            <div className="flex items-center gap-4"
-            >
+            <div className="flex items-center gap-4">
               <Button
                 variant="outline"
                 onClick={toggleAbout}
@@ -638,10 +628,12 @@ export default function Portfolio() {
                 More about Me
               </Button>
               <Link
-              href="/resume.pdf"
-              target="_blank"
-              download="Pawan_Awasthi_resume"
-                className={`${buttonVariants({variant: "default"})} rounded-3xl border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/50`}
+                href="/resume.pdf"
+                target="_blank"
+                download="Pawan_Awasthi_resume"
+                className={`${buttonVariants({
+                  variant: "default"
+                })} rounded-3xl border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/50`}
               >
                 Resume <Paperclip />
               </Link>
@@ -733,7 +725,7 @@ export default function Portfolio() {
             <ExpandedSectionContainer
               section="projects"
               className={
-                isExpanded("projects") ? "" : "p-6 dark:bg-transparent"
+                isExpanded("projects") ? "" : "sm:p-6 dark:bg-transparent"
               }
             >
               <ExpandedSectionHeader section="projects" title="My Projects" />
@@ -742,7 +734,7 @@ export default function Portfolio() {
                 layoutId="projects-grid"
                 className={`
                   grid grid-cols-1 
-                  ${isExpanded("projects") ? "p-6 pt-4" : ""}
+                  ${isExpanded("projects") ? "sm:p-6 pt-4" : ""}
                   ${
                     isExpanded("projects")
                       ? "sm:grid-cols-1 lg:grid-cols-2 gap-6"
@@ -776,7 +768,11 @@ export default function Portfolio() {
                       title={project.title}
                       createdAt={project.createdAt}
                       createdBy={project.createdBy}
-                      description={isExpanded("projects") ? project.description : project.description.substring(0, 150) + "..."}
+                      description={
+                        isExpanded("projects")
+                          ? project.description
+                          : project.description.substring(0, 150) + "..."
+                      }
                       githubUrl={project.githubUrl}
                       imageUrls={project.imageUrls}
                       tags={project.tags}
@@ -809,7 +805,7 @@ export default function Portfolio() {
           >
             <ExpandedSectionContainer
               section="experience"
-              className={isExpanded("experience") ? "" : "p-6"}
+              className={isExpanded("experience") ? "" : "p-2 sm:p-6"}
             >
               <ExpandedSectionHeader
                 section="experience"
@@ -902,7 +898,7 @@ export default function Portfolio() {
                 { name: "Django", src: "/skills/django.svg" },
                 { name: "Docker", src: "/skills/docker.svg" },
                 { name: "PostgresQL", src: "/skills/postgresql.svg" },
-                { name: "Angular", src: "/skills/angular.svg" },
+                { name: "Angular", src: "/skills/angular.svg" }
               ].map((tool, i) => (
                 <div
                   key={i}
@@ -915,7 +911,10 @@ export default function Portfolio() {
                     height={100}
                     className="group-hover:scale-110 transition-all ease-in-out duration-300"
                   />
-                  <Typography variant="subtitle" className="text-gray-700 dark:text-white">
+                  <Typography
+                    variant="subtitle"
+                    className="text-gray-700 dark:text-white"
+                  >
                     {tool.name}
                   </Typography>
                 </div>
@@ -923,12 +922,16 @@ export default function Portfolio() {
             </div>
 
             {/* Additional content - Hidden in collapsed state */}
-            <div 
+            <div
               className={`
                 overflow-hidden transition-all duration-300 ease-in-out
-                ${expandedStack ? 'max-h-[2000px] opacity-100 mt-8' : 'max-h-0 opacity-0 mt-0'}
+                ${
+                  expandedStack
+                    ? "max-h-[2000px] opacity-100 mt-8"
+                    : "max-h-0 opacity-0 mt-0"
+                }
               `}
-            >              
+            >
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 select-none">
                 {[
                   { name: "Azure", src: "/skills/azure.svg" },
@@ -942,7 +945,7 @@ export default function Portfolio() {
                   { name: "Vue", src: "/skills/vue.svg" },
                   { name: "Nuxt", src: "/skills/nuxt.svg" },
                   { name: "Typescript", src: "/skills/typescript.svg" },
-                  { name: "Redux", src: "/skills/redux.svg" },
+                  { name: "Redux", src: "/skills/redux.svg" }
                 ].map((tool, i) => (
                   <div
                     key={i}
@@ -955,14 +958,15 @@ export default function Portfolio() {
                       height={80}
                       className="group-hover:scale-110 transition-all ease-in-out duration-300"
                     />
-                    <Typography variant="subtitle" className="text-gray-700 dark:text-white">
+                    <Typography
+                      variant="subtitle"
+                      className="text-gray-700 dark:text-white"
+                    >
                       {tool.name}
                     </Typography>
                   </div>
                 ))}
               </div>
-
-              
             </div>
           </div>
 
@@ -1095,7 +1099,7 @@ export default function Portfolio() {
                       </div>
                     </div>
 
-                    <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
+                    <div>
                       <h3 className="text-xl font-bold mb-4">Send a Message</h3>
 
                       {submitStatus === "success" ? (
@@ -1125,7 +1129,7 @@ export default function Portfolio() {
                               name="name"
                               value={contactForm.name}
                               onChange={handleInputChange}
-                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700"
+                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md"
                             />
                           </div>
 
@@ -1138,7 +1142,7 @@ export default function Portfolio() {
                               name="email"
                               value={contactForm.email}
                               onChange={handleInputChange}
-                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700"
+                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md"
                             />
                           </div>
 
@@ -1151,7 +1155,7 @@ export default function Portfolio() {
                               value={contactForm.message}
                               onChange={handleInputChange}
                               rows={4}
-                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700"
+                              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md"
                             />
                           </div>
 
@@ -1194,9 +1198,9 @@ export default function Portfolio() {
               pointerEvents: "auto"
             }}
           >
-            <motion.div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden max-h-[85vh] w-full max-w-6xl mx-auto overflow-y-auto shadow-2xl shadow-black/30 z-[300]">
+            <motion.div className="bg-white dark:bg-purple-900/40 rounded-xl overflow-hidden max-h-[85vh] w-full max-w-6xl mx-auto overflow-y-auto shadow-2xl shadow-black/30 z-[300]">
               {/* About Header */}
-              <div className="sticky top-0 z-[310] flex justify-between items-center bg-white dark:bg-gray-900 p-6 border-b border-gray-200 dark:border-gray-800">
+              <div className="sticky top-0 z-[310] flex justify-between items-center bg-transparent dark:bg-purple-900/30 p-6 border-b border-gray-200 dark:border-gray-800 backdrop-blur-lg">
                 <h2 className="text-2xl font-mono">About Me</h2>
                 <Button
                   variant="ghost"
@@ -1279,7 +1283,8 @@ export default function Portfolio() {
                         <div>
                           <div className="flex justify-between">
                             <h4 className="font-bold">
-                              Bachelor in Electronics and Information Engineering
+                              Bachelor in Electronics and Information
+                              Engineering
                             </h4>
                             <span className="text-sm text-gray-600 dark:text-gray-400">
                               2022 - 2026
@@ -1289,7 +1294,6 @@ export default function Portfolio() {
                             IOE, Tribhuwan University
                           </p>
                         </div>
-                        
                       </div>
                     </div>
 
