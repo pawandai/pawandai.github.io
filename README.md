@@ -1,18 +1,18 @@
 # Pawan Awasthi
 
-Welcome to my portfolio! This website showcases my skills, projects, and achievements. Below you will find an overview of the contents and how to navigate through the portfolio.
+Welcome to my portfolio!
 
 ## About Me
 
-I am a passionate engineer with experience in various technologies. My goal is to create impactful and efficient solutions.
+I am a passionate engineer with experience in hardware and software technologies. My goal is to create impactful and efficient solutions.
 
 ## Skills
 
-- **Programming Languages:** Python, JavaScript, C#
-- **Web Development:** HTML, CSS, React, Node.js
+- **Programming Languages:** Python, JavaScript, C++
+- **Application Development:** Mobile, Web
 - **Databases:** MySQL, MongoDB
-- **Tools:** Git, Docker, AWS
-- **Engineering**
+- **Tools:** Git, Docker, Google Cloud
+- **Engineering**, **Machine Learning (DL, RL, DQL)**, **Big Data and Distributed Systems**, **Data Structures and Algorithms**, **System Architecture**
 
 ## Contact
 
