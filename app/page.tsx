@@ -13,7 +13,7 @@ import {
   X,
   Loader2,
   MapPin,
-  Paperclip
+  Paperclip,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useState, useEffect, useCallback, useRef } from "react";
@@ -24,7 +24,7 @@ import {
   staggerContainer,
   slideInLeft,
   slideInRight,
-  springScale
+  springScale,
 } from "@/utils/animations";
 import ProjectCard from "@/components/ProjectCard";
 import Typography from "@/components/ui/typography";
@@ -32,39 +32,54 @@ import Typography from "@/components/ui/typography";
 const projectsData = [
   {
     id: 1,
-    title: "Task Manager App - Trello Clone",
+    title: "Stock Price Prediction with LSTM",
     imageUrls: [
-      "/projects/task_manager/tasks.jpeg",
-      "/projects/task_manager/landing.PNG",
-      "/projects/task_manager/dashboard.PNG"
+      "/projects/stock_prediction/stock_price_1.png",
+      "/projects/stock_prediction/stock_price_2.jpeg",
     ],
-    tags: ["Next.js", "Prisma", "PostgresQL", "Stripe", "Server-Actions"],
+    tags: ["Data Scraping", "Deep Learning", "LSTM", "NLP"],
     description:
-      "The Task Manager is a Next.js app, similar to Trello, designed for managing tasks, lists, and boards. Users can perform actions such as creating, updating, and deleting tasks, with additional features like drag-and-drop functionality, user authentication, and subscription-based payments. Prisma serves as the ORM, while PostgreSQL is used for database management, and Stripe handles the payment processing. Server-side logic is implemented using server actions. The application follows best practices for both Next.js and server actions.",
+      "This research project aims to predict stock prices for select companies by combining historical financial data with sentiment analysis derived from news headlines. Leveraging a Long Short-Term Memory (LSTM) neural network and natural language processing (NLP), the application forecasts the next day's closing price while providing insights into model performance through error metrics and visualizations.",
     createdBy: [
-      { id: 1, name: "pawandai", link: "https://github.com/pawandai" }
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
     ],
-    createdAt: "24 Aug 2024",
-    liveDemoUrl: "https://tasks-saas.vercel.app/",
-    githubUrl: "https://github.com/pawandai/SaaS_Task_Manager"
+    createdAt: "6 Mar 2025",
+    liveDemoUrl: "https://github.com/pawandai/stock-price-prediction",
+    githubUrl: "https://github.com/pawandai/stock-price-prediction",
   },
   {
     id: 2,
     title: "Destination Australia",
-    imageUrls: [
-      "/projects/destination_aus/dashboard.PNG",
-      "/projects/destination_aus/home.PNG"
-    ],
-    tags: ["MongoDB", "Next.js", "Express", "Azure"],
+    imageUrls: ["/projects/destination_aus/destination_aus.png"],
+    tags: ["React", "React Native", "Google Cloud"],
     description:
-      "Destination Australia is a web application that allows users to explore Australia. The application features a dashboard for managing blog posts, user authentication, and a user-friendly interface for browsing and reading blog posts. The backend is built with Express and MongoDB, while the frontend is developed using Next.js. Images are stored in Azure Blob Storage, and the application is deployed on Azure App Service. The project demonstrates best practices for building a full-stack web application with Next.js and Express. It is also social media platform for students to share their experiences in Australia and help each other.",
+      "This project's main goal is to help students from Nepal in Australia.",
     createdBy: [
-      { id: 1, name: "pawandai", link: "https://github.com/pawandai" }
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
     ],
     createdAt: "In Development",
     liveDemoUrl: "https://destinationaus.com/",
-    githubUrl: "https://github.com/thestartek/DestinationAusWeb"
-  }
+    githubUrl: "https://destinationaus.com/",
+  },
+  {
+    id: 3,
+    title: "Autonomous Navigation with Deep Q Learning",
+    imageUrls: [
+      "/projects/autonomous_nav_bot/autonomous_nav_1.png",
+      "/projects/autonomous_nav_bot/autonomous_nav_2.jpg",
+      "/projects/autonomous_nav_bot/autonomous_nav_3.jpg",
+      "/projects/autonomous_nav_bot/autonomous_nav_4.jpg",
+    ],
+    tags: ["DQL", "Simulation", "Python"],
+    description:
+      "This research project aims to development a simulation of an autonomous navigation bot using Deep Q Learning (DQL) that can navigate through unknown indoor environments while avoiding obstacles and reaching designated goals.",
+    createdBy: [
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
+    ],
+    createdAt: "12 Aug 2025",
+    liveDemoUrl: "https://github.com/BEI078/autonomous-navigation-bot",
+    githubUrl: "https://github.com/BEI078/autonomous-navigation-bot",
+  },
 ];
 
 const experienceData = [
@@ -72,17 +87,17 @@ const experienceData = [
     id: 1,
     role: "Application Developer",
     company: "Startek Australia",
-    period: "2023 - Present",
+    period: "2024 - Present",
     description:
-      "Developed the “Destination Australia” mobile application, ensuring smooth user experiences and performance. Built Web Blog pages and tools like PR Points Calculator, Explore Australia, University Finder, and English Class Tests. Utilized Firebase for database and authentication in React Native Application. Helped hundreds of foreign students and individuals living in Australia settle in Australia."
+      "Developed the “Destination Australia” mobile application, ensuring smooth user experiences and performance. Built Web Blog pages and tools like PR Points Calculator, Explore Australia, University Finder, and English Class Tests. Utilized Firebase for database and authentication in React Native Application. Helped hundreds of foreign students and individuals living in Australia settle in Australia.",
   },
   {
     id: 2,
     role: "Software Developer",
     company: "Dev Distruct Pvt. Ltd.",
-    period: "Feb 2025 - Present",
+    period: "Jan 2025 - Apr 2025",
     description:
-      "Developed a fast and scalable backend in Flask and MongoDB. Ensuring the responsiveness and performance of frontend in React and Typescript. Developed an AI-powered coding Platform using Python and Typescript. Collaborated with cross-functional teams of Senior Engineers and learned a lot from them."
+      "Developed a fast and scalable backend in Flask and MongoDB. Ensuring the responsiveness and performance of frontend in React and Typescript. Developed an AI-powered coding Platform using Python and Typescript. Collaborated with cross-functional teams of Senior Engineers and learned a lot from them.",
   },
   {
     id: 3,
@@ -90,8 +105,8 @@ const experienceData = [
     company: "Native Plug",
     period: "Oct 2023 - Jan 2024",
     description:
-      "As a React Developer Intern at Native Plug, I involved in implementing UI components using React.js and Tailwind CSS"
-  }
+      "As a React Developer Intern at Native Plug, I involved in implementing UI components using React.js and Tailwind CSS",
+  },
 ];
 
 const stackData = [
@@ -103,7 +118,7 @@ const smoothTransition = {
   type: "spring",
   stiffness: 150,
   damping: 25,
-  duration: 0.3
+  duration: 0.3,
 };
 
 // Define section types for expanded state
@@ -130,7 +145,7 @@ export default function Portfolio() {
     projects: useRef<HTMLDivElement>(null),
     experience: useRef<HTMLDivElement>(null),
     stack: useRef<HTMLDivElement>(null),
-    contact: useRef<HTMLDivElement>(null)
+    contact: useRef<HTMLDivElement>(null),
   };
 
   const contentRefs = {
@@ -138,14 +153,14 @@ export default function Portfolio() {
     projects: useRef<HTMLDivElement>(null),
     experience: useRef<HTMLDivElement>(null),
     stack: useRef<HTMLDivElement>(null),
-    contact: useRef<HTMLDivElement>(null)
+    contact: useRef<HTMLDivElement>(null),
   };
 
   // Contact form state
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
-    message: ""
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
@@ -155,7 +170,7 @@ export default function Portfolio() {
 
   // Handle form input changes
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setContactForm((prev) => ({ ...prev, [name]: value }));
@@ -179,13 +194,13 @@ export default function Portfolio() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: contactForm.name,
           email: contactForm.email,
-          message: contactForm.message
-        })
+          message: contactForm.message,
+        }),
       });
 
       if (!response.ok) {
@@ -288,7 +303,7 @@ export default function Portfolio() {
         setExpandedSection(null);
       }
     },
-    [expandedSection, sectionRefs]
+    [expandedSection, sectionRefs],
   );
 
   // Initialize theme from localStorage
@@ -314,7 +329,7 @@ export default function Portfolio() {
   const ExpandedSectionHeader = ({
     section,
     title,
-    className = ""
+    className = "",
   }: {
     section: ExpandedSection;
     title: string;
@@ -368,7 +383,7 @@ export default function Portfolio() {
   const ExpandedSectionContainer = ({
     section,
     children,
-    className = ""
+    className = "",
   }: {
     section: ExpandedSection;
     children: React.ReactNode;
@@ -475,7 +490,7 @@ export default function Portfolio() {
                       {item.charAt(0).toUpperCase() + item.slice(1)}
                     </Link>
                   </motion.div>
-                )
+                ),
               )}
             </motion.nav>
           </motion.div>
@@ -582,7 +597,7 @@ export default function Portfolio() {
             <Link
               className={`${buttonVariants({
                 variant: "outline",
-                size: "lg"
+                size: "lg",
               })} hover:bg-purple-100 dark:hover:bg-purple-900/50 border-2 border-purple-900 dark:border-purple-700 ml-2`}
               href="https://blog.pawanawasthi.com.np"
               target="_blank"
@@ -612,8 +627,8 @@ export default function Portfolio() {
               variants={fadeInUp}
               className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
             >
-              Hello, I'm Pawan Awasthi, a passionate Software Engineer and
-              Content Creator currently focused on AI, ML and Data Science. I'm
+              Hello, I'm Pawan Awasthi, a passionate Software Engineer currently
+              focused on AI, ML, Data Science, and Database Systems. I'm
               constantly iterating on my craft, whether it's optimizing code,
               designing user experiences, or creating engaging content.
             </motion.p>
@@ -626,11 +641,11 @@ export default function Portfolio() {
                 More about Me
               </Button>
               <Link
-                href="/resume.pdf"
+                href="/updated_cv.pdf"
                 target="_blank"
                 download="Pawan_Awasthi_resume"
                 className={`${buttonVariants({
-                  variant: "default"
+                  variant: "default",
                 })} rounded-3xl border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/50`}
               >
                 Resume <Paperclip />
@@ -659,16 +674,16 @@ export default function Portfolio() {
               {[
                 {
                   icon: <Twitter className="w-5 h-5" />,
-                  href: "https://x.com/paw1awasthi"
+                  href: "https://x.com/paw1awasthi",
                 },
                 {
                   icon: <Linkedin className="w-5 h-5" />,
-                  href: "https://www.linkedin.com/in/pawandai/"
+                  href: "https://www.linkedin.com/in/pawandai/",
                 },
                 {
                   icon: <Github className="w-5 h-5" />,
-                  href: "https://github.com/pawandai"
-                }
+                  href: "https://github.com/pawandai",
+                },
               ].map((social, i) => (
                 <motion.div
                   key={i}
@@ -795,8 +810,8 @@ export default function Portfolio() {
                 isExpanded("experience")
                   ? "fixed inset-0 z-[100] p-4 md:p-8 flex items-center justify-center pointer-events-auto"
                   : expandedSection
-                  ? "opacity-0 pointer-events-none"
-                  : "opacity-100 relative"
+                    ? "opacity-0 pointer-events-none"
+                    : "opacity-100 relative"
               }
             `}
             style={{ pointerEvents: "auto" }}
@@ -901,7 +916,7 @@ export default function Portfolio() {
                 { name: "Django", src: "/skills/django.svg" },
                 { name: "Docker", src: "/skills/docker.svg" },
                 { name: "PostgresQL", src: "/skills/postgresql.svg" },
-                { name: "Angular", src: "/skills/angular.svg" }
+                { name: "Angular", src: "/skills/angular.svg" },
               ].map((tool, i) => (
                 <div
                   key={i}
@@ -937,18 +952,15 @@ export default function Portfolio() {
             >
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 select-none">
                 {[
+                  { name: "MySQL", src: "/skills/mysql.svg" },
+                  { name: "MongoDB", src: "/skills/mongodb.svg" },
                   { name: "Azure", src: "/skills/azure.svg" },
                   { name: "Git", src: "/skills/git.svg" },
                   { name: "GraphQL", src: "/skills/graphql.svg" },
-                  { name: "MongoDB", src: "/skills/mongodb.svg" },
-                  { name: "MySQL", src: "/skills/mysql.svg" },
                   { name: "Node.js", src: "/skills/nodejs.svg" },
                   { name: "Prisma", src: "/skills/prisma.svg" },
                   { name: "Python", src: "/skills/python.svg" },
-                  { name: "Vue", src: "/skills/vue.svg" },
-                  { name: "Nuxt", src: "/skills/nuxt.svg" },
                   { name: "Typescript", src: "/skills/typescript.svg" },
-                  { name: "Redux", src: "/skills/redux.svg" }
                 ].map((tool, i) => (
                   <div
                     key={i}
@@ -1198,7 +1210,7 @@ export default function Portfolio() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[250] flex items-center justify-center p-4 pointer-events-auto"
             style={{
-              pointerEvents: "auto"
+              pointerEvents: "auto",
             }}
           >
             <motion.div className="bg-white dark:bg-gray-900/60 rounded-xl overflow-hidden max-h-[85vh] w-full max-w-6xl mx-auto overflow-y-auto shadow-2xl shadow-black/30 z-[300]">
@@ -1236,16 +1248,16 @@ export default function Portfolio() {
                       {[
                         {
                           icon: <Twitter className="w-5 h-5" />,
-                          href: "https://x.com/paw1awasthi"
+                          href: "https://x.com/paw1awasthi",
                         },
                         {
                           icon: <Linkedin className="w-5 h-5" />,
-                          href: "https://www.linkedin.com/in/pawandai/"
+                          href: "https://www.linkedin.com/in/pawandai/",
                         },
                         {
                           icon: <Github className="w-5 h-5" />,
-                          href: "https://github.com/pawandai"
-                        }
+                          href: "https://github.com/pawandai",
+                        },
                       ].map((social, i) => (
                         <Button
                           key={i}
@@ -1312,7 +1324,7 @@ export default function Portfolio() {
                           "React",
                           "Next.js",
                           "UI/UX Design",
-                          "Content Creation"
+                          "Content Creation",
                         ].map((skill, i) => (
                           <span
                             key={i}
