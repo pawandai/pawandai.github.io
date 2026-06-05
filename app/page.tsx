@@ -1032,6 +1032,12 @@ export default function Portfolio() {
               collaborations or just a friendly hello.
             </motion.p>
 
+            <motion.p className="font-medium mb-2">
+              awasthipawan175@gmail.com
+            </motion.p>
+
+            <motion.p className="font-medium mb-2">+91 8951972399</motion.p>
+
             <AnimatePresence>
               {expandedContact && (
                 <motion.div
