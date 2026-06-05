@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Transition } from "framer-motion";
 import {
   fadeIn,
   fadeInUp,
@@ -87,7 +87,7 @@ const experienceData = [
     id: 1,
     role: "Application Developer",
     company: "Startek Australia",
-    period: "2024 - Present",
+    period: "2025 - Present",
     description:
       "Developed the “Destination Australia” mobile application, ensuring smooth user experiences and performance. Built Web Blog pages and tools like PR Points Calculator, Explore Australia, University Finder, and English Class Tests. Utilized Firebase for database and authentication in React Native Application. Helped hundreds of foreign students and individuals living in Australia settle in Australia.",
   },
@@ -95,7 +95,7 @@ const experienceData = [
     id: 2,
     role: "Software Developer",
     company: "Dev Distruct Pvt. Ltd.",
-    period: "Jan 2025 - Apr 2025",
+    period: "Apr 2025 - Jul 2025",
     description:
       "Developed a fast and scalable backend in Flask and MongoDB. Ensuring the responsiveness and performance of frontend in React and Typescript. Developed an AI-powered coding Platform using Python and Typescript. Collaborated with cross-functional teams of Senior Engineers and learned a lot from them.",
   },
@@ -114,7 +114,7 @@ const stackData = [
 ];
 
 // Smooth animation settings
-const smoothTransition = {
+const smoothTransition: Transition = {
   type: "spring",
   stiffness: 150,
   damping: 25,
@@ -627,10 +627,10 @@ export default function Portfolio() {
               variants={fadeInUp}
               className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
             >
-              Hello, I'm Pawan Awasthi, a passionate Software Engineer currently
-              focused on AI, ML, Data Science, and Database Systems. I'm
-              constantly iterating on my craft, whether it's optimizing code,
-              designing user experiences, or creating engaging content.
+              Hello, I'm Pawan Awasthi, a passionate Engineer focused on AI, ML,
+              Data Science, and Software Systems. I'm constantly iterating on my
+              craft, whether it's optimizing code, designing user experiences,
+              or creating engaging content.
             </motion.p>
             <div className="flex items-center gap-4">
               <Button
@@ -661,7 +661,7 @@ export default function Portfolio() {
           >
             <p className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <MapPin className="h-6 w-6" />
-              <span className="font-medium">Nepal</span>
+              <span className="font-medium">India</span>
             </p>
           </motion.div>
           <motion.div
@@ -706,7 +706,7 @@ export default function Portfolio() {
               variants={fadeInUp}
               className="text-gray-600 dark:text-gray-400 text-sm"
             >
-              <p>&copy; {new Date().getFullYear()} Pawan Dai.</p>
+              <p>&copy; {new Date().getFullYear()} Pawan Awasthi.</p>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -1032,10 +1032,6 @@ export default function Portfolio() {
               collaborations or just a friendly hello.
             </motion.p>
 
-            <motion.p className="font-medium mb-2">
-              contactpawandai@gmail.com
-            </motion.p>
-
             <AnimatePresence>
               {expandedContact && (
                 <motion.div
@@ -1077,7 +1073,7 @@ export default function Portfolio() {
                             <p className="text-sm text-gray-500 dark:text-gray-400">
                               Email
                             </p>
-                            <p>contactpawandai@gmail.com</p>
+                            <p>awasthipawan175@gmail.com</p>
                           </div>
                         </div>
 
@@ -1108,7 +1104,7 @@ export default function Portfolio() {
                             <p className="text-sm text-gray-500 dark:text-gray-400">
                               Location
                             </p>
-                            <p>Kathmandu, Nepal</p>
+                            <p>Bengaluru, India</p>
                           </div>
                         </div>
                       </div>

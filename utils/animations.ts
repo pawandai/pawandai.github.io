@@ -2,8 +2,8 @@ export const fadeIn = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.6 }
-  }
+    transition: { duration: 0.6 },
+  },
 };
 
 export const fadeInUp = {
@@ -11,8 +11,8 @@ export const fadeInUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6 }
-  }
+    transition: { duration: 0.6 },
+  },
 };
 
 export const staggerContainer = {
@@ -21,17 +21,17 @@ export const staggerContainer = {
     opacity: 1,
     transition: {
       staggerChildren: 0.2,
-      delayChildren: 0.1
-    }
-  }
+      delayChildren: 0.1,
+    },
+  },
 };
 
 export const scaleOnHover = {
   initial: { scale: 1 },
   hover: {
     scale: 1.05,
-    transition: { duration: 0.3, ease: "easeInOut" }
-  }
+    transition: { duration: 0.3, ease: "easeInOut" as const },
+  },
 };
 
 export const slideInLeft = {
@@ -39,8 +39,8 @@ export const slideInLeft = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6 }
-  }
+    transition: { duration: 0.6 },
+  },
 };
 
 export const slideInRight = {
@@ -48,8 +48,8 @@ export const slideInRight = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6 }
-  }
+    transition: { duration: 0.6 },
+  },
 };
 
 export const springScale = {
@@ -57,11 +57,11 @@ export const springScale = {
   animate: {
     scale: 1,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
-      damping: 20
-    }
-  }
+      damping: 20,
+    },
+  },
 };
 
 export const rotateIn = {
@@ -69,6 +69,6 @@ export const rotateIn = {
   visible: {
     opacity: 1,
     rotate: 0,
-    transition: { duration: 0.5 }
-  }
+    transition: { duration: 0.5 },
+  },
 };
