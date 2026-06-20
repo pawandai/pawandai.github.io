@@ -661,7 +661,7 @@ export default function Portfolio() {
           >
             <p className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <MapPin className="h-6 w-6" />
-              <span className="font-medium">India</span>
+              <span className="font-medium">Bengaluru, India</span>
             </p>
           </motion.div>
           <motion.div
