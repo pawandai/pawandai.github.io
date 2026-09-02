@@ -32,6 +32,38 @@ import Typography from "@/components/ui/typography";
 const projectsData = [
   {
     id: 1,
+    title: "Autonomous Maze Solving Bot",
+    imageUrls: [""],
+    tags: ["Floodfill", "Hardware Engineering", "C++"],
+    description: "This research project aims to develop an autonomous maze-solving robot that can navigate through complex grid mazes using the Floodfill algorithm. The robot is equipped with sensors and actuators to detect walls, make decisions, and find the optimal path to reach the goal.",
+    createdBy: [
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" }
+    ],
+    createdAt: "2 Mar 2026",
+    liveDemoUrl: "",
+    githubUrl: ""
+  },
+  {
+    id: 2,
+    title: "Autonomous Navigation with Deep Q Learning",
+    imageUrls: [
+      "/projects/autonomous_nav_bot/autonomous_nav_4.jpg",
+      "/projects/autonomous_nav_bot/autonomous_nav_1.png",
+      "/projects/autonomous_nav_bot/autonomous_nav_2.jpg",
+      "/projects/autonomous_nav_bot/autonomous_nav_3.jpg",
+    ],
+    tags: ["DQL", "Simulation", "ROS2"],
+    description:
+      "This research project aims to development a simulation of an autonomous navigation bot using Deep Q Learning (DQL) that can navigate through unknown indoor environments while avoiding obstacles and reaching designated goals.",
+    createdBy: [
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
+    ],
+    createdAt: "12 Aug 2025",
+    liveDemoUrl: "https://github.com/BEI078/autonomous-navigation-bot",
+    githubUrl: "https://github.com/BEI078/autonomous-navigation-bot",
+  },
+  {
+    id: 3,
     title: "Stock Price Prediction with LSTM",
     imageUrls: [
       "/projects/stock_prediction/stock_price_1.png",
@@ -48,7 +80,7 @@ const projectsData = [
     githubUrl: "https://github.com/pawandai/stock-price-prediction",
   },
   {
-    id: 2,
+    id: 4,
     title: "Destination Australia",
     imageUrls: ["/projects/destination_aus/destination_aus.png"],
     tags: ["React", "React Native", "Google Cloud"],
@@ -61,35 +93,17 @@ const projectsData = [
     liveDemoUrl: "https://destinationaus.com/",
     githubUrl: "https://destinationaus.com/",
   },
-  {
-    id: 3,
-    title: "Autonomous Navigation with Deep Q Learning",
-    imageUrls: [
-      "/projects/autonomous_nav_bot/autonomous_nav_1.png",
-      "/projects/autonomous_nav_bot/autonomous_nav_2.jpg",
-      "/projects/autonomous_nav_bot/autonomous_nav_3.jpg",
-      "/projects/autonomous_nav_bot/autonomous_nav_4.jpg",
-    ],
-    tags: ["DQL", "Simulation", "Python"],
-    description:
-      "This research project aims to development a simulation of an autonomous navigation bot using Deep Q Learning (DQL) that can navigate through unknown indoor environments while avoiding obstacles and reaching designated goals.",
-    createdBy: [
-      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
-    ],
-    createdAt: "12 Aug 2025",
-    liveDemoUrl: "https://github.com/BEI078/autonomous-navigation-bot",
-    githubUrl: "https://github.com/BEI078/autonomous-navigation-bot",
-  },
+  
 ];
 
 const experienceData = [
   {
     id: 1,
     role: "Application Developer",
-    company: "Startek Australia",
+    company: "Destination Australia",
     period: "2025 - Present",
     description:
-      "Developed the “Destination Australia” mobile application, ensuring smooth user experiences and performance. Built Web Blog pages and tools like PR Points Calculator, Explore Australia, University Finder, and English Class Tests. Utilized Firebase for database and authentication in React Native Application. Helped hundreds of foreign students and individuals living in Australia settle in Australia.",
+      "Developing the “Destination Australia” mobile application, ensuring smooth user experiences and performance. Built Web Blog pages and tools like PR Points Calculator, Explore Australia, University Finder, and English Class Tests. Utilized Firebase for database and authentication in React Native Application. Helped hundreds of foreign students and individuals living in Australia settle in Australia.",
   },
   {
     id: 2,
@@ -559,7 +573,7 @@ export default function Portfolio() {
               variants={fadeInUp}
               className="text-gray-600 dark:text-gray-400"
             >
-              SOFTWARE ENGINEER
+              ELECTRONICS ENGINEER
             </motion.p>
           </div>
         </motion.div>
@@ -628,7 +642,7 @@ export default function Portfolio() {
               className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
             >
               Hello, I'm Pawan Awasthi, a passionate Engineer focused on AI, ML,
-              Data Science, and Software Systems. I'm constantly iterating on my
+              Data Science, and Software & Hardware Systems. I'm constantly iterating on my
               craft, whether it's optimizing code, designing user experiences,
               or creating engaging content.
             </motion.p>
@@ -641,7 +655,7 @@ export default function Portfolio() {
                 More about Me
               </Button>
               <Link
-                href="/updated_cv.pdf"
+                href="/resume.pdf"
                 target="_blank"
                 download="Pawan_Awasthi_resume"
                 className={`${buttonVariants({
@@ -661,7 +675,7 @@ export default function Portfolio() {
           >
             <p className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <MapPin className="h-6 w-6" />
-              <span className="font-medium">Bengaluru, India</span>
+              <span className="font-medium">Kathmandu, Nepal</span>
             </p>
           </motion.div>
           <motion.div
@@ -1036,7 +1050,7 @@ export default function Portfolio() {
               awasthipawan175@gmail.com
             </motion.p>
 
-            <motion.p className="font-medium mb-2">+91 8951972399</motion.p>
+            <motion.p className="font-medium mb-2">+977 9866107599</motion.p>
 
             <AnimatePresence>
               {expandedContact && (
@@ -1110,7 +1124,7 @@ export default function Portfolio() {
                             <p className="text-sm text-gray-500 dark:text-gray-400">
                               Location
                             </p>
-                            <p>Bengaluru, India</p>
+                            <p>Kathmandu, Nepal</p>
                           </div>
                         </div>
                       </div>
@@ -1243,7 +1257,7 @@ export default function Portfolio() {
                     </div>
                     <h3 className="text-xl font-bold mb-2">Pawan Awasthi</h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">
-                      SOFTWARE ENGINEER
+                      ELECTRONICS ENGINEER
                     </p>
 
                     <div className="flex gap-4 mb-6">
@@ -1277,17 +1291,10 @@ export default function Portfolio() {
                   <div className="md:w-2/3 space-y-6">
                     <div>
                       <h3 className="text-xl font-bold mb-3">My Journey</h3>
-                      <p className="text-gray-700 dark:text-gray-300 mb-4">
-                        I'm a passionate Software Engineer and Content Creator
-                        currently focused on AI, ML and Data Science. I'm
-                        constantly iterating on my craft, whether it's
-                        optimizing code, designing user experiences, or creating
-                        engaging content.
-                      </p>
                       <p className="text-gray-700 dark:text-gray-300">
                         I believe in the power of technology to transform lives
                         and I'm excited to be a part of that journey. With a
-                        background in computer science and a keen interest in
+                        background in computer science and electronics and a keen interest in
                         emerging technologies, I approach each project with
                         curiosity and dedication.
                       </p>
@@ -1299,7 +1306,7 @@ export default function Portfolio() {
                         <div>
                           <div className="flex justify-between">
                             <h4 className="font-bold">
-                              Bachelor in Electronics and Information
+                              Bachelor in Electronics, Communication and Information
                               Engineering
                             </h4>
                             <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -1321,11 +1328,9 @@ export default function Portfolio() {
                         {[
                           "AI/ML",
                           "Data Science",
-                          "Python",
-                          "JavaScript",
-                          "React",
-                          "Next.js",
-                          "UI/UX Design",
+                          "ROS",
+                          "Engineering",
+                          "Research",
                           "Content Creation",
                         ].map((skill, i) => (
                           <span
