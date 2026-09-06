@@ -14,6 +14,7 @@ interface ProjectCardProps {
   createdAt: string;
   liveDemoUrl?: string;
   githubUrl: string;
+  detailsUrl?: string;
 }
 
 const ProjectCard = ({
@@ -25,7 +26,8 @@ const ProjectCard = ({
   tags,
   title,
   className,
-  liveDemoUrl
+  liveDemoUrl,
+  detailsUrl,
 }: ProjectCardProps) => {
   return (
     <div
@@ -43,11 +45,11 @@ const ProjectCard = ({
             ))}
           </div>
           <Link
-            href={githubUrl}
+            href={detailsUrl || githubUrl}
             className="block mb-3 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-400 hover:underline"
+            target={detailsUrl ? undefined : "_blank"}
             tabIndex={0}
             role="link"
-            target="_blank"
           >
             {title}
           </Link>
@@ -78,7 +80,7 @@ const ProjectCard = ({
           <Link
             className={`${buttonVariants({
               variant: "outline",
-              size: "sm"
+              size: "sm",
             })} flex items-center gap-2 text-gray-800 dark:text-gray-100 dark:border-gray-500`}
             href={liveDemoUrl || "#"}
             target="_blank"

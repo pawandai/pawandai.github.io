@@ -33,15 +33,21 @@ const projectsData = [
   {
     id: 1,
     title: "Autonomous Maze Solving Bot",
-    imageUrls: [""],
+    imageUrls: [
+      "/projects/autonomous-maze-solving-bot/bot.jpeg",
+      "/projects/autonomous-maze-solving-bot/circuit.jpg",
+      "/projects/autonomous-maze-solving-bot/maze.jpeg",
+    ],
     tags: ["Floodfill", "Hardware Engineering", "C++"],
-    description: "This research project aims to develop an autonomous maze-solving robot that can navigate through complex grid mazes using the Floodfill algorithm. The robot is equipped with sensors and actuators to detect walls, make decisions, and find the optimal path to reach the goal.",
+    description:
+      "This research project aims to develop an autonomous maze-solving robot that can navigate through complex grid mazes using the Floodfill algorithm. The robot is equipped with sensors and actuators to detect walls, make decisions, and find the optimal path to reach the goal.",
     createdBy: [
-      { id: 1, name: "pawandai", link: "https://github.com/pawandai" }
+      { id: 1, name: "pawandai", link: "https://github.com/pawandai" },
     ],
     createdAt: "2 Mar 2026",
-    liveDemoUrl: "",
-    githubUrl: ""
+    liveDemoUrl: "/projects/autonomous-maze-solving-bot",
+    githubUrl: "https://github.com/pawandai",
+    detailsUrl: "/projects/autonomous-maze-solving-bot",
   },
   {
     id: 2,
@@ -61,6 +67,7 @@ const projectsData = [
     createdAt: "12 Aug 2025",
     liveDemoUrl: "https://github.com/BEI078/autonomous-navigation-bot",
     githubUrl: "https://github.com/BEI078/autonomous-navigation-bot",
+    detailsUrl: "/projects/autonomous-navigation-bot",
   },
   {
     id: 3,
@@ -78,6 +85,7 @@ const projectsData = [
     createdAt: "6 Mar 2025",
     liveDemoUrl: "https://github.com/pawandai/stock-price-prediction",
     githubUrl: "https://github.com/pawandai/stock-price-prediction",
+    detailsUrl: "/projects/stock-price-prediction",
   },
   {
     id: 4,
@@ -92,8 +100,8 @@ const projectsData = [
     createdAt: "In Development",
     liveDemoUrl: "https://destinationaus.com/",
     githubUrl: "https://destinationaus.com/",
+    detailsUrl: "/projects/destination-aus",
   },
-  
 ];
 
 const experienceData = [
@@ -642,9 +650,9 @@ export default function Portfolio() {
               className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
             >
               Hello, I'm Pawan Awasthi, a passionate Engineer focused on AI, ML,
-              Data Science, and Software & Hardware Systems. I'm constantly iterating on my
-              craft, whether it's optimizing code, designing user experiences,
-              or creating engaging content.
+              Data Science, and Software & Hardware Systems. I'm constantly
+              iterating on my craft, whether it's optimizing code, designing
+              user experiences, or creating engaging content.
             </motion.p>
             <div className="flex items-center gap-4">
               <Button
@@ -803,6 +811,7 @@ export default function Portfolio() {
                       }
                       githubUrl={project.githubUrl}
                       imageUrls={project.imageUrls}
+                      detailsUrl={project.detailsUrl}
                       tags={project.tags}
                       liveDemoUrl={project.liveDemoUrl}
                       className={isExpanded("projects") ? "" : "h-full"}
@@ -1294,9 +1303,9 @@ export default function Portfolio() {
                       <p className="text-gray-700 dark:text-gray-300">
                         I believe in the power of technology to transform lives
                         and I'm excited to be a part of that journey. With a
-                        background in computer science and electronics and a keen interest in
-                        emerging technologies, I approach each project with
-                        curiosity and dedication.
+                        background in computer science and electronics and a
+                        keen interest in emerging technologies, I approach each
+                        project with curiosity and dedication.
                       </p>
                     </div>
 
@@ -1306,8 +1315,8 @@ export default function Portfolio() {
                         <div>
                           <div className="flex justify-between">
                             <h4 className="font-bold">
-                              Bachelor in Electronics, Communication and Information
-                              Engineering
+                              Bachelor in Electronics, Communication and
+                              Information Engineering
                             </h4>
                             <span className="text-sm text-gray-600 dark:text-gray-400">
                               2022 - 2026
